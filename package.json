@@ -4,6 +4,8 @@
   "description": "Zapp is an app to manage issues during the software development lifecycle",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build:client",
+    "build:client": "cd client && npm i --only=dev && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
