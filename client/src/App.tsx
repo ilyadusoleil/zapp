@@ -2,25 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {
-  useQuery,
-  useMutation,
-  useQueryCache,
   QueryCache,
   ReactQueryCacheProvider,
 } from 'react-query';
 
-import { Router, Link } from '@reach/router';
+import { Router } from '@reach/router';
 
-import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+
+const queryCache = new QueryCache();
 
 const App = () => {
   return (
     <React.StrictMode>
-      <Router>
-        <Login path="/" />
-        <Dashboard path="dashboard" />
-      </Router>
+      <ReactQueryCacheProvider queryCache={queryCache}>
+        <Router>
+          <Login path="/" />
+          <Dashboard path="dashboard" />
+        </Router>
+      </ReactQueryCacheProvider>
     </React.StrictMode>
   );
 };

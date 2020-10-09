@@ -1,0 +1,19 @@
+{
+  "project": [
+    {
+      "id": 1,
+      "title": "Fix bug 1",
+      "priority": "High"
+    },
+    {
+      "id": 2,
+      "title": "Fix bug 2",
+      "priority": "Medium"
+    },
+    {
+      "id": 3,
+      "title": "Fix bug 3",
+      "priority": "Low"
+    }
+  ]
+}
