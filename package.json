@@ -1,0 +1,19 @@
+{
+  "name": "zapp",
+  "version": "1.0.0",
+  "description": "Zapp is an app to manage issues during the software development lifecycle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilyadusoleil/zapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilyadusoleil/zapp/issues"
+  },
+  "homepage": "https://github.com/ilyadusoleil/zapp#readme"
+}
