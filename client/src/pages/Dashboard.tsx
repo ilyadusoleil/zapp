@@ -1,4 +1,5 @@
 import React from 'react';
+import data from '../../db.json';
 
 import { RouteComponentProps } from '@reach/router';
 
@@ -12,13 +13,13 @@ import {
 
 import { getBugs } from '../services/ProjectService';
 
-import Bug from '../types/Bug'
+import Bug from '../types/Bug';
 
 const Dashboard = (_props: RouteComponentProps) => {
   const cache = useQueryCache();
 
   // Queries
-  const { isLoading , isError, data, error } = useQuery('bugs', getBugs);
+  const { isLoading, isError, data, error } = useQuery('bugs', getBugs);
   // const bugsQuery = useQuery('bugs', getBugs);
 
   // Mutations
@@ -30,11 +31,11 @@ const Dashboard = (_props: RouteComponentProps) => {
   // })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <span>Loading...</span>;
   }
 
   if (isError) {
-    return <span>Error: </span>
+    return <span>Error: </span>;
   }
 
   return (
@@ -42,7 +43,9 @@ const Dashboard = (_props: RouteComponentProps) => {
       <h1>Dashboard</h1>
       <ul>
         {data.map((bug: Bug) => (
-          <li key={bug.id}>{bug.title}</li>
+          <li className="m-6" key={bug.id}>
+            {bug.title}
+          </li>
         ))}
       </ul>
     </>
