@@ -1,40 +1,19 @@
 import React from 'react';
 
-import { RouteComponentProps } from '@reach/router';
+import { Link, RouteComponentProps } from '@reach/router';
 
-import {
-  useQuery,
-  useMutation,
-  useQueryCache,
-  QueryCache,
-  ReactQueryCacheProvider,
-} from 'react-query';
-
-import { getBugs } from '../services/ProjectService';
-
-import Bug from '../types/Bug'
+import { Bug } from '../types/Bug';
+import useBugs from '../hooks/useBugs';
 
 const Dashboard = (_props: RouteComponentProps) => {
-  const cache = useQueryCache();
-
-  // Queries
-  const { isLoading , isError, data, error } = useQuery('bugs', getBugs);
-  // const bugsQuery = useQuery('bugs', getBugs);
-
-  // Mutations
-  // const [addTodo] = useMutation(postBug, {
-  //   onSuccess: () => {
-  //     // Query Invalidations
-  //     cache.invalidateQueries('bugs')
-  //   },
-  // })
+  const { isLoading, isError, data } = useBugs();
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <span>Loading...</span>;
   }
 
   if (isError) {
-    return <span>Error: </span>
+    return <span>Error: </span>;
   }
 
   return (
@@ -45,6 +24,7 @@ const Dashboard = (_props: RouteComponentProps) => {
           <li key={bug.id}>{bug.title}</li>
         ))}
       </ul>
+      <Link to="/new">New Issue</Link>
     </>
   );
 };
