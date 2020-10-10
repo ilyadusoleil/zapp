@@ -1,21 +1,23 @@
+import { navigate } from '@reach/router';
 import React from 'react';
 import { MutateFunction } from 'react-query';
-import { BugInput, Bug } from '../types/Bug';
+import { Bug } from '../types/Bug';
 
 const defaultFormValues = {
+  id: 0,
   title: '',
   description: '',
   priority: 'medium',
 };
 
-const BugForm = ({
+const BugEditForm = ({
   onSubmit,
   submitText,
   initialValues = defaultFormValues,
 }: {
-  onSubmit: MutateFunction<Bug, unknown, { bug: BugInput }, unknown>;
+  onSubmit: MutateFunction<Bug, unknown, Bug, unknown>;
   submitText: string;
-  initialValues: BugInput;
+  initialValues: Bug;
 }) => {
   const [values, setValues] = React.useState(initialValues);
 
@@ -25,7 +27,8 @@ const BugForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    onSubmit({ bug: values });
+    onSubmit(values);
+    navigate('/dashboard');
   };
 
   React.useEffect(() => {
@@ -71,4 +74,4 @@ const BugForm = ({
   );
 };
 
-export default BugForm;
+export default BugEditForm;
