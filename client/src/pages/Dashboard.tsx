@@ -12,7 +12,7 @@ const Dashboard = (_props: RouteComponentProps) => {
     return <span>Loading...</span>;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return <span>Error: </span>;
   }
 

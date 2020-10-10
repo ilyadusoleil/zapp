@@ -1,8 +1,8 @@
 import { useQuery, QueryResult } from 'react-query';
 import fetchRequest from '../services/ApiService';
-import { BugInput } from '../types/Bug';
+import { Bug } from '../types/Bug';
 
-const useBugs = (): QueryResult<BugInput[]> => {
+const useBugs = (): QueryResult<Bug[]> => {
   return useQuery('project', () => fetchRequest('/project'));
 }
 
