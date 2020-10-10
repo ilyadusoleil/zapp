@@ -3,7 +3,7 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "target": "es5",
+    "target": "esnext",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
