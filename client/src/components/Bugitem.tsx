@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
+import { Bug } from '../types/Bug';
 
-function Bugitem({ bug, index: number }) {
+function Bugitem({ bug }: { bug: Bug }) {
   const [isOpened, setisOpened] = useState(false);
 
   return (
@@ -15,7 +16,7 @@ function Bugitem({ bug, index: number }) {
       <Collapse isOpened={isOpened}>
         <div className="p-2">
           <p>{bug.id}</p>
-          <p>{bug.category}</p>
+          <p>{bug.description}</p>
           <p>{bug.priority}</p>
         </div>
       </Collapse>
