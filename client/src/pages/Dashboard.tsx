@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState} from 'react';
 import data from '../../db.json';
-
 import { RouteComponentProps } from '@reach/router';
+
 
 import {
   useQuery,
@@ -12,8 +12,8 @@ import {
 } from 'react-query';
 
 import { getBugs } from '../services/ProjectService';
-
 import Bug from '../types/Bug';
+import Bugitem from '../components/Bugitem'
 
 const Dashboard = (_props: RouteComponentProps) => {
   const cache = useQueryCache();
@@ -39,17 +39,11 @@ const Dashboard = (_props: RouteComponentProps) => {
   }
 
   return (
-    <>
-      <h1>Dashboard</h1>
-      <ul>
-        {data.map((bug: Bug) => (
-          <li className="m-6" key={bug.id}>
-            {bug.title}
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+      data.map((bug, index) => ( 
+            <Bugitem key={index} bug={bug} index={index}/>
+        )
+        
+
 };
 
 export default Dashboard;

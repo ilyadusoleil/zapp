@@ -3,16 +3,19 @@
     {
       "id": 1,
       "title": "Fix bug 1",
+      "category": "Production",
       "priority": "High"
     },
     {
       "id": 2,
       "title": "Fix bug 2",
+      "category": "Production",
       "priority": "Medium"
     },
     {
       "id": 3,
       "title": "Fix bug 3",
+      "category": "Production",
       "priority": "Low"
     }
   ]
