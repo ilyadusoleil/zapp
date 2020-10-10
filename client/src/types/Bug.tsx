@@ -1,8 +1,8 @@
-type Bug = {
+export type Bug = {
   id: number;
   title: string;
+  description: string;
   priority: string;
 };
 
-
-export default Bug;
+export type BugInput = Omit<Bug, 'id'>;

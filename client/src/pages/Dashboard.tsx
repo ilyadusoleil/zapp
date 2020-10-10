@@ -1,49 +1,39 @@
-import React, { useState} from 'react';
-import data from '../../db.json';
-import { RouteComponentProps } from '@reach/router';
+import React from 'react';
+import { Link, navigate, RouteComponentProps } from '@reach/router';
 
+import { Bug } from '../types/Bug';
+import useBugs from '../hooks/useBugs';
 
-import {
-  useQuery,
-  useMutation,
-  useQueryCache,
-  QueryCache,
-  ReactQueryCacheProvider,
-} from 'react-query';
-
-import { getBugs } from '../services/ProjectService';
-import Bug from '../types/Bug';
-import Bugitem from '../components/Bugitem'
-
+import Bugitem from '../components/Bugitem';
 const Dashboard = (_props: RouteComponentProps) => {
-  const cache = useQueryCache();
-
-  // Queries
-  const { isLoading, isError, data, error } = useQuery('bugs', getBugs);
-  // const bugsQuery = useQuery('bugs', getBugs);
-
-  // Mutations
-  // const [addTodo] = useMutation(postBug, {
-  //   onSuccess: () => {
-  //     // Query Invalidations
-  //     cache.invalidateQueries('bugs')
-  //   },
-  // })
+  const { isLoading, isError, data } = useBugs();
 
   if (isLoading) {
     return <span>Loading...</span>;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return <span>Error: </span>;
   }
 
   return (
-      data.map((bug, index) => ( 
-            <Bugitem key={index} bug={bug} index={index}/>
-        )
-        
+    <>
+      <h1>Dashboard</h1>
 
+      {data.map((bug: Bug, index) => (
+        <Bugitem key={index} bug={bug} index={index} />
+      ))}
+
+      <Link to="/new">New Issue</Link>
+    </>
+  );
 };
 
 export default Dashboard;
+
+// TODO: add back into Bug Item
+{
+  /* onClick={() => {
+              navigate(`/details/${bug.id}`);
+            }} */
+}
