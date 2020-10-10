@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'ProjectUser',
+      modelName: 'projectuser',
     }
   );
-  return ProjectUser;
+  return projectuser;
 };
