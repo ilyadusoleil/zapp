@@ -1,3 +1,22 @@
+module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
+  purge: [
+    './src/**/*.html',
+    './src/**/*.tsx',
+    './src/**/*.jsx',
+  ],
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+}
+
+// TODO: update config styles to suit below
+
 // module.exports = {
 //     prefix: '',
 //     important: false,

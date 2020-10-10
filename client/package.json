@@ -44,6 +44,6 @@
     "parcel-bundler": "^1.12.4",
     "postcss-modules": "^3.2.2",
     "prettier": "^2.1.2",
-    "tailwindcss": "^1.8.12"
+    "tailwindcss": "^1.8.13"
   }
 }
