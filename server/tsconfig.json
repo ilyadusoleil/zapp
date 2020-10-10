@@ -24,11 +24,5 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": [
-    "./controllers",
-    "./middleware",
-    "./models",
-    "index.ts",
-    "routes.ts"
-  ]
+  "include": ["./controllers", "./middleware", "./db", "index.ts", "routes.ts"]
 }
