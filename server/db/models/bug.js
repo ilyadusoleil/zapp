@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class bug extends Model {
     /**
@@ -12,15 +10,30 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  bug.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    state: DataTypes.STRING,
-    priority: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'bug',
-  });
+  }
+  bug.init(
+    {
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      priority: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'bug',
+    }
+  );
   return bug;
 };
