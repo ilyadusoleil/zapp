@@ -27,8 +27,6 @@ const Dashboard = (_props: RouteComponentProps) => {
         {data.map((bug: Bug, index) => (
           <Bugitem key={index} bug={bug} />
         ))}
-
-        <Link to="/new">New Issue</Link>
       </div>
     </>
   );
