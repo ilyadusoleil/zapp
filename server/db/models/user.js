@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       user.hasMany(models.bug, {
         foreignKey: 'userId',
       });
+      user.hasMany(models.comment, {
+        foreignKey: 'commentId',
+      });
     }
   }
   user.init(

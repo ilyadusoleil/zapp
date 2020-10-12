@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: true,
         },
       });
+      bug.hasMany(models.comment, {
+        foreignKey: 'commentId',
+      });
     }
   }
   bug.init(
