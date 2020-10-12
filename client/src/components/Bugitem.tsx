@@ -34,7 +34,7 @@ function Bugitem({ bug }: { bug: Bug }) {
         <div className="p-5 divide-y divide-gray-400 text-gray-800">
             <div className='flex'>
                 <p>{bug.id}</p>
-                <p className='ml-auto'>Due date: 12/10/2020</p>
+                <p className='ml-auto'>Due date: placeholder</p>
           </div>
           <p className="mt-2 py-6">{bug.description}</p>
         </div>
