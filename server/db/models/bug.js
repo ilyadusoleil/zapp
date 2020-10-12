@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
       state: DataTypes.STRING,
-      priority: DataTypes.STRING,
+      priority: DataTypes.INTEGER,
     },
     {
       sequelize,
