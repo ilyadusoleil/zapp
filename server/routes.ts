@@ -3,6 +3,7 @@ import projectsCtrl from './controllers/projects';
 import bugsCtrl from './controllers/bugs';
 import commentsCtrl from './controllers/comments';
 import detailsCtrl from './controllers/details';
+import commentMiddleware from './middleware/getComments';
 
 const router = express.Router();
 
@@ -36,6 +37,6 @@ router.post('/comments', commentsCtrl.createComment);
 // DETAILS
 //=============
 
-router.get('/details', detailsCtrl.getDetails); //TODO middleware that adds comments to response
+router.get('/details', commentMiddleware.getComments, detailsCtrl.getDetails);
 
 export default router;
