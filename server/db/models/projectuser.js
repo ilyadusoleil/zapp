@@ -11,26 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      projectuser.hasMany(models.user, {
+        foreignKey: 'user_id',
+      });
+
+      projectuser.hasMany(models.project, {
+        foreignKey: 'project_id',
+      });
     }
   }
   projectuser.init(
     {
-      projectId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: project,
-          key: 'id',
-        },
-        allowNull: false,
-      },
-      userId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: user,
-          key: 'id',
-        },
-        allowNull: false,
-      },
       authorization: {
         type: DataTypes.STRING,
         allowNull: false,
