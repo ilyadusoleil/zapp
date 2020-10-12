@@ -3,7 +3,7 @@ import fetchRequest from '../services/ApiService';
 import { Bug } from '../types/Bug';
 
 // Get all bugs for one project
-const useBugs = (projectId: string): QueryResult<Bug[]> => {
+const useBugs = (projectId: number): QueryResult<Bug[]> => {
   return useQuery(projectId && ['projectbugs', projectId], () => fetchRequest(`/bugs?projectId=${projectId}`));
 }
 

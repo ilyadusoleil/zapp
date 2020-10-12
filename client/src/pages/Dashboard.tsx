@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
 
 import { Bug } from '../types/Bug';
@@ -9,9 +9,12 @@ import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
 import ProjectHeader from '../components/ProjectHeader';
 
+import Context from '../Context';
+
 const Dashboard = (_props: RouteComponentProps) => {
-  const [projectId, setProjectId] = useState('0');
-  const { isLoading, isError, data } = useBugs(projectId); //TODO: change hard coding of projectId
+  const ctx = useContext(Context);
+  // const [projectId, setProjectId] = useState('0');
+  const { isLoading, isError, data } = useBugs(ctx.state.currentProjectId); //TODO: change hard coding of projectId
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -31,8 +34,6 @@ const Dashboard = (_props: RouteComponentProps) => {
         {data.map((bug: Bug, index) => (
           <Bugitem key={index} bug={bug} />
         ))}
-
-        <Link to="/new">New Issue</Link>
       </div>
     </>
   );

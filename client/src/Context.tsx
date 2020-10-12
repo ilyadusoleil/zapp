@@ -1,11 +1,11 @@
 import { createContext } from 'react';
 
 type State = {
-  currentProjectIdx: number;
+  currentProjectId: number;
 };
 
 const initialState: State = {
-  currentProjectIdx: 0,
+  currentProjectId: 0,
 };
 
 const Context = createContext<{
@@ -20,7 +20,7 @@ const reducer = (state: State, action: any) => {
   switch (action.type) {
     case 'updateCurrentProject':
       return Object.assign({}, state, {
-        currentProjectIdx: action.payload,
+        currentProjectId: action.payload,
       });
 
     default:
