@@ -6,7 +6,7 @@ import useCreateBug from '../hooks/useCreateBug';
 
 import BugForm from '../components/BugForm';
 
-const Dashboard = (_props: RouteComponentProps) => {
+const BugCreate = (_props: RouteComponentProps) => {
   const [createBug, { status: createBugStatus }] = useCreateBug();
 
   return (
@@ -34,4 +34,4 @@ const Dashboard = (_props: RouteComponentProps) => {
   );
 };
 
-export default Dashboard;
+export default BugCreate;

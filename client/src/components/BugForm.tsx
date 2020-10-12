@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { MutateFunction } from 'react-query';
 import { BugInput, Bug } from '../types/Bug';
+import Context from '../Context';
 
 const defaultFormValues = {
   title: '',
+  projectId: -1,
   description: '',
-  priority: 'medium',
+  priority: 'Medium',
 };
 
 const BugForm = ({
@@ -13,11 +15,12 @@ const BugForm = ({
   submitText,
   initialValues = defaultFormValues,
 }: {
-  onSubmit: MutateFunction<Bug, unknown, { bug: BugInput }, unknown>;
+  onSubmit: MutateFunction<Bug, unknown, BugInput, unknown>;
   submitText: string;
   initialValues: BugInput;
 }) => {
-  const [values, setValues] = React.useState(initialValues);
+  const ctx = useContext(Context);
+  const [values, setValues] = useState(initialValues);
 
   const setValue = (field: string, value: string) =>
     setValues((old) => ({ ...old, [field]: value }));
@@ -25,10 +28,11 @@ const BugForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    onSubmit({ bug: values });
+    const valuesCopy = Object.assign({}, values, { projectId: ctx.state.currentProjectId });
+    onSubmit(valuesCopy);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValues(initialValues);
   }, [initialValues]);
 
