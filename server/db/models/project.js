@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'projectId',
       });
 
-      project.belongsToMany(models.user, { through: models.projectuser });
+      project.belongsToMany(models.user, {
+        through: models.projectuser,
+        foreignKey: 'projectId',
+      });
     }
   }
   project.init(
