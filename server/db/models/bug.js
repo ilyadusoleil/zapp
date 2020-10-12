@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       bug.belongsTo(models.user, {
         foreignKey: {
-          allowNull: false,
+          allowNull: true,
         },
       });
     }
