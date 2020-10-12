@@ -5,6 +5,8 @@ import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
 
 import Bugitem from '../components/Bugitem';
+import Sidebar from '../components/Sidebar';
+
 const Dashboard = (_props: RouteComponentProps) => {
   const { isLoading, isError, data } = useBugs();
 
@@ -18,13 +20,16 @@ const Dashboard = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <h1>Dashboard</h1>
+      <Sidebar />
+      <div className="mx-16">
+        <h1>Dashboard</h1>
 
-      {data.map((bug: Bug, index) => (
-        <Bugitem key={index} bug={bug} />
-      ))}
+        {data.map((bug: Bug, index) => (
+          <Bugitem key={index} bug={bug} />
+        ))}
 
-      <Link to="/new">New Issue</Link>
+        <Link to="/new">New Issue</Link>
+      </div>
     </>
   );
 };

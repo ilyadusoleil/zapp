@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Fix bug 1",
-      "description": "ohh",
+      "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.",
       "priority": "High"
     },
     {
@@ -21,7 +21,7 @@
     {
       "title": "Bug 4",
       "description": "This is bug 4",
-      "priority": "medium",
+      "priority": "Medium",
       "id": 4
     }
   ]
