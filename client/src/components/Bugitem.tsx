@@ -8,23 +8,23 @@ function Bugitem({ bug }: { bug: Bug }) {
 
   function priority(level: string) {
     return level === 'High'
-      ? 'bg-indigo-600'
+      ? 'bg-teal-500'
       : level === 'Medium'
-      ? 'bg-indigo-400'
-      : 'bg-indigo-200';
+      ? 'bg-teal-400'
+      : 'bg-teal-200';
   }
 
   return (
-    <div className=" m-2 bg-gray-100 w-2/5 border-2 border-indigo-200 ">
+    <div className=" m-1 bg-gray-100 w-72 border b-gray-200 ">
       <div
         onClick={() => setisOpened(!isOpened)}
-        className="bg-gray-100 ml-2 p-1 flex justify-items cursor-pointer"
+        className="bg-gray-200  p-1 flex justify-items cursor-pointer"
       >
-        <h1>{bug.title}</h1>
+        <h1 className='uppercase text-xs'>{bug.title}</h1>
         <p
           className={`ml-auto ${priority(
             bug.priority
-          )} rounded-full text-xs w-16 pt-1 flex justify-center text-gray-200`}
+          )} rounded-full text-xs w-16 flex justify-center text-gray-200`}
         >
           {bug.priority}
         </p>
