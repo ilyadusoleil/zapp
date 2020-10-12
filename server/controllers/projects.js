@@ -2,11 +2,18 @@ const db = require('../db/models/index');
 
 const getProjects = async function (req, res) {
   try {
-    const projects = await db.projects.findAll({
+    const projects = await db.projectusers.findAll({
+      attributes: [],
       where: {
-        projectId: req.query.project_id,
+        userId: req.query.user_id,
+      },
+      include: {
+        model: db.projects,
+        required: true,
+        attributes: ['projectId', 'name'],
       },
     });
+    console.log(projects);
     res.staus(200);
     res.send(projects);
   } catch (err) {
