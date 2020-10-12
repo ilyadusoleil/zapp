@@ -14,6 +14,11 @@
       "id": 3,
       "userId": 1,
       "title": "Project Three"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Project Fourr"
     }
   ],
 
@@ -41,7 +46,7 @@
     },
     {
       "title": "Bug 4",
-      "projectId": 2,
+      "projectId": 3,
       "description": "This is bug 4",
       "priority": "Medium",
       "id": 4

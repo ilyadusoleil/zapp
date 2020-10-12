@@ -10,7 +10,7 @@ import Sidebar from '../components/Sidebar';
 import ProjectHeader from '../components/ProjectHeader';
 
 const Dashboard = (_props: RouteComponentProps) => {
-  const [projectId, setProjectId] = useState('1');
+  const [projectId, setProjectId] = useState('0');
   const { isLoading, isError, data } = useBugs(projectId); //TODO: change hard coding of projectId
 
   if (isLoading) {
