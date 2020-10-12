@@ -2,19 +2,19 @@ const db = require('../db/models/index');
 
 const getProjects = async function (req, res) {
   try {
-    const projects = await db.projectusers.findAll({
+    const projects = await db.projectuser.findAll({
+      //TODO improve this query
       attributes: [],
       where: {
-        userId: req.query.user_id,
+        userId: req.query.user_Id,
       },
       include: {
-        model: db.projects,
+        model: db.project,
         required: true,
-        attributes: ['projectId', 'name'],
+        attributes: ['id', 'name'],
       },
     });
-    console.log(projects);
-    res.staus(200);
+    res.status(200);
     res.send(projects);
   } catch (err) {
     console.log('---> error retrieving projects from the database', err.stack);
@@ -25,7 +25,7 @@ const getProjects = async function (req, res) {
 
 const createProject = async function (req, res) {
   try {
-    db.projects
+    db.project
       .create({
         name: req.body.name,
         description: req.body.description,
@@ -33,8 +33,8 @@ const createProject = async function (req, res) {
         updatedAt: new Date(),
       })
       .then((newProject) => {
-        db.projectusers.create({
-          userId: req.body.user_id,
+        db.projectuser.create({
+          userId: req.body.user_Id,
           projectId: newProject.id,
           authorization: 'Owner',
           createdAt: new Date(),
