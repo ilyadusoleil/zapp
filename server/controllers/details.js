@@ -2,12 +2,12 @@ const db = require('../db/models/index');
 
 const getDetails = async function (req, res) {
   try {
-    const details = await db.bugs.findOne({
+    const details = await db.bug.findOne({
       where: {
-        id: req.body.bug_Id,
+        id: req.query.bug_Id,
       },
     });
-    details.comments = req.body.comments;
+    details.dataValues.comments = req.body.comments;
     res.status(200);
     res.send(details);
   } catch (err) {

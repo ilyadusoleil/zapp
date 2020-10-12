@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
       bug.hasMany(models.comment, {
-        foreignKey: 'commentId',
+        foreignKey: 'id',
       });
     }
   }

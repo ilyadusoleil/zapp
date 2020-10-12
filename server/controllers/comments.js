@@ -2,7 +2,7 @@ const db = require('../db/models/index');
 
 const createComment = async function (req, res) {
   try {
-    db.comments
+    db.comment
       .create({
         content: req.body.content,
         createdAt: new Date(),

@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       projectuser.hasMany(models.user, {
-        foreignKey: 'user_id',
+        foreignKey: 'id',
       });
 
       projectuser.hasMany(models.project, {
-        foreignKey: 'project_id',
+        foreignKey: 'id',
       });
     }
   }
