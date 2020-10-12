@@ -8,10 +8,10 @@ module.exports = {
 
     //user belongs to many projects through projectuser
     return queryInterface
-      .addColumn('projectuser', 'userId', {
+      .addColumn('projectusers', 'userId', {
         type: Sequelize.INTEGER,
         references: {
-          model: 'user',
+          model: 'users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -19,10 +19,10 @@ module.exports = {
       })
       .then(() => {
         //project has many users through projectuser
-        return queryInterface.addColumn('projectuser', 'projectId', {
+        return queryInterface.addColumn('projectusers', 'projectId', {
           type: Sequelize.INTEGER,
           references: {
-            model: 'project',
+            model: 'projects',
             key: 'id',
           },
           onUpdate: 'CASCADE',
@@ -31,34 +31,34 @@ module.exports = {
       })
       .then(() => {
         //bug belongs to project
-        return queryInterface.addColumn('bug', 'projectId', {
+        return queryInterface.addColumn('bugs', 'projectId', {
           type: Sequelize.INTEGER,
           references: {
-            model: 'project',
+            model: 'projects',
             key: 'id',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'SET NULL', // TODO
+          onDelete: 'SET NULL',
         });
       })
       .then(() => {
         //bug belongs to user
-        return queryInterface.addColumn('bug', 'userId', {
+        return queryInterface.addColumn('bugs', 'userId', {
           type: Sequelize.INTEGER,
           references: {
-            model: 'user',
+            model: 'users',
             key: 'id',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'SET NULL', // TODO
+          onDelete: 'SET NULL',
         });
       })
       .then(() => {
         //comment belongs to bug
-        return queryInterface.addColumn('comment', 'bugId', {
+        return queryInterface.addColumn('comments', 'bugId', {
           type: Sequelize.INTEGER,
           references: {
-            model: 'bug',
+            model: 'bugs',
             key: 'id',
           },
           onUpdate: 'CASCADE',
@@ -67,10 +67,10 @@ module.exports = {
       })
       .then(() => {
         //comment belongs to user
-        return queryInterface.addColumn('comment', 'userId', {
+        return queryInterface.addColumn('comments', 'userId', {
           type: Sequelize.INTEGER,
           references: {
-            model: 'user',
+            model: 'users',
             key: 'id',
           },
           onUpdate: 'CASCADE',
@@ -84,26 +84,26 @@ module.exports = {
 
     //remove user belongs to many projects through projectuser
     return queryInterface
-      .removeColumn('projectuser', 'userId')
+      .removeColumn('projectusers', 'userId')
       .then(() => {
         //remove project has many users through projectuser
-        return queryInterface.removeColumn('projectuser', 'projectId');
+        return queryInterface.removeColumn('projectusers', 'projectId');
       })
       .then(() => {
         //remove bug belongs to project
-        return queryInterface.removeColumn('bug', 'projectId');
+        return queryInterface.removeColumn('bugs', 'projectId');
       })
       .then(() => {
         //remove bug belongs to user
-        return queryInterface.removeColumn('bug', 'userId');
+        return queryInterface.removeColumn('bugs', 'userId');
       })
       .then(() => {
         //remove comment belongs to bug
-        return queryInterface.removeColumn('comment', 'bugId');
+        return queryInterface.removeColumn('comments', 'bugId');
       })
       .then(() => {
         //remove comment belongs to user
-        return queryInterface.removeColumn('comment', 'userId');
+        return queryInterface.removeColumn('comments', 'userId');
       });
   },
 };
