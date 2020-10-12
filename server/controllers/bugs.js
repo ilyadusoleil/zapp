@@ -2,7 +2,7 @@ const db = require('../db/models/index');
 
 const getBugs = async function (req, res) {
   try {
-    const bugs = await db.bugs.findAll({
+    const bugs = await db.bug.findAll({
       where: {
         projectId: req.query.project_Id,
       },
@@ -18,7 +18,7 @@ const getBugs = async function (req, res) {
 
 const createBug = async function (req, res) {
   try {
-    db.bugs
+    db.bug
       .create({
         title: req.body.title,
         description: req.body.description,
@@ -39,23 +39,25 @@ const createBug = async function (req, res) {
 
 const editBug = async function (req, res) {
   try {
-    db.bugs.update(
-      {
-        title: req.body.title,
-        description: req.body.description,
-        state: req.body.state,
-        priority: req.body.priority,
-        createdAt: req.body.created_At,
-        updatedAt: new Date(),
-        projectId: req.body.project_Id,
-        userId: req.body.user_Id,
-      },
-      {
-        where: {
-          id: req.bug_Id,
+    db.bug
+      .update(
+        {
+          title: req.body.title,
+          description: req.body.description,
+          state: req.body.state,
+          priority: req.body.priority,
+          createdAt: req.body.created_At,
+          updatedAt: new Date(),
+          projectId: req.body.project_Id,
+          userId: req.body.user_Id,
         },
-      }
-    );
+        {
+          where: {
+            id: req.body.bug_Id,
+          },
+        }
+      )
+      .then(() => res.sendStatus(200));
   } catch (err) {
     console.log('---> error editing bug in database', err.stack);
     res.status(500);
