@@ -1,0 +1,4 @@
+.ReactCollapse--collapse {
+    transition: height 400ms;
+    border-bottom-right-radius: 50%;
+  }
