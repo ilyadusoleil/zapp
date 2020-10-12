@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Collapse } from 'react-collapse';
-
+import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import {
@@ -48,27 +48,31 @@ const ProjectHeader = () => {
       </div>
 
       <Collapse isOpened={isOpened}>
-        {data
-          .map(
-            (project) =>
-              project.id != ctx.state.currentProjectId && (
-                <div
-                  key={project.id}
-                  className="h-10 flex items-center"
-                  onClick={() => {
-                    ctx.dispatch({
-                      type: 'updateCurrentProject',
-                      payload: project.id,
-                    });
-                    setIsOpened(false);
-                  }}
-                >
-                  <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
-                  <p>{project.title}</p>
-                </div>
-              )
-          )}
-        <div className="h-10 flex items-center">
+        {data.map(
+          (project) =>
+            project.id != ctx.state.currentProjectId && (
+              <div
+                key={project.id}
+                className="h-10 flex items-center"
+                onClick={() => {
+                  ctx.dispatch({
+                    type: 'updateCurrentProject',
+                    payload: project.id,
+                  });
+                  setIsOpened(false);
+                }}
+              >
+                <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
+                <p>{project.title}</p>
+              </div>
+            )
+        )}
+        <div
+          className="h-10 flex items-center"
+          onClick={() => {
+            navigate('/newProject');
+          }}
+        >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
           <p>New Project</p>
         </div>
