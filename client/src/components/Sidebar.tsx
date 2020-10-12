@@ -27,17 +27,17 @@ const SidebarButton = ({
       className="self-stretch hover:bg-white cursor-pointer flex flex-col items-center"
       onClick={handleClick}
     >
-      <FontAwesomeIcon icon={icon} size={'2x'} className="m-3" />
+      <FontAwesomeIcon icon={icon} size={'2x'} className="m-2" />
     </div>
   );
 };
 
 const Sidebar = () => {
   return (
-    <div className="inset-y-0 left-0 bg-blue-300 h-screen w-14 fixed flex flex-col">
+    <div className="inset-y-0 left-0 bg-indigo-200 h-screen w-14 fixed flex flex-col">
       <SidebarButton icon={faBars} />
       <SidebarButton icon={faHome} />
-      <SidebarButton icon={faPlus} route="/new"/>
+      <SidebarButton icon={faPlus} route="/new" />
       <SidebarButton icon={faListAlt} />
     </div>
   );
