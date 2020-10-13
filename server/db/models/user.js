@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   user.init(
     {
+      email: {
+        type: DataTypes.STRING, //only required field. Allows invitations to projects and users can complete sign up later
+        allowNull: false,
+      },
       googleId: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -28,10 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       image: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
-      email: {
-        type: DataTypes.STRING, //only required field. Allows invitations to projects and users can complete sign up later
-        allowNull: false,
       },
       firstName: {
         type: DataTypes.STRING,
