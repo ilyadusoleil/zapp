@@ -2,10 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Collapse } from 'react-collapse';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import {
   faBuilding as icon,
   faPlus as plus,
+  faChevronDown as down,
+  faChevronUp as up,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Context from '../Context';
@@ -45,6 +46,11 @@ const ProjectHeader = () => {
         <div className="text-lg">
           {data[getIndexFromId(ctx.state.currentProjectId)].title}
         </div>
+        <FontAwesomeIcon
+          icon={isOpened ? up : down}
+          size={'lg'}
+          className="ml-3"
+        />
       </div>
 
       <Collapse isOpened={isOpened}>
