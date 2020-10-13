@@ -1,7 +1,7 @@
-import express from 'express';
-import router from './routes';
+const express = require('express');
+const router = require('./routes');
 
-import json from 'body-parser';
+const json = require('body-parser');
 
 const app = express();
 
