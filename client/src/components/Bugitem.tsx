@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { Bug } from '../types/Bug';
-import './Bugitem.css';
+import React, { useState, useContext } from 'react';
 
-function Bugitem({ bug }: { bug: Bug }) {
+import { Collapse } from 'react-collapse';
+
+import { Bug } from '../types/Bug';
+
+import './Bugitem.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
+import Context from '../Context';
+
+type Props = {
+  bug: Bug;
+  // setModalIsOpen: (isModalOpen: boolean) => void
+};
+
+function Bugitem({ bug }: Props) {
+  const ctx = useContext(Context);
   const [isOpened, setisOpened] = useState(false);
 
   function priority(level: string) {
@@ -20,21 +33,29 @@ function Bugitem({ bug }: { bug: Bug }) {
         onClick={() => setisOpened(!isOpened)}
         className="bg-gray-200  p-1 flex justify-items cursor-pointer"
       >
-        <h1 className='uppercase text-xs'>{bug.title}</h1>
-        <p
-          className={`ml-auto ${priority(
-            bug.priority
-          )} rounded-full text-xs w-16 flex justify-center text-gray-200`}
-        >
-          {bug.priority}
-        </p>
+        <h1 className="uppercase text-xs">{bug.title}</h1>
+        <div className="flex ml-auto">
+          <FontAwesomeIcon
+            onClick={() => ctx.dispatch({ type: 'openModal', payload: bug.id })}
+            icon={faEdit}
+            size={'sm'}
+            className="mr-10 text-gray-900"
+          />
+          <p
+            className={` ${priority(
+              bug.priority
+            )} rounded-full text-xs w-16 flex justify-center text-gray-200`}
+          >
+            {bug.priority}
+          </p>
+        </div>
       </div>
 
-      <Collapse  isOpened={isOpened}>
+      <Collapse isOpened={isOpened}>
         <div className="p-5 divide-y divide-gray-400 text-gray-800">
-            <div className='flex'>
-                <p>{bug.id}</p>
-                <p className='ml-auto'>Due date: placeholder</p>
+          <div className="flex">
+            <p>{bug.id}</p>
+            <p className="ml-auto">Due date: placeholder</p>
           </div>
           <p className="mt-2 py-6">{bug.description}</p>
         </div>
