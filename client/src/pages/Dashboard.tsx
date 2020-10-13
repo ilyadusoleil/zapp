@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
-import Modal from 'react-modal';
+import Modal, { Styles } from 'react-modal';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
@@ -26,7 +26,7 @@ const Dashboard = (_props: RouteComponentProps) => {
     return <span>Error: </span>;
   }
 
-  const customStyles = {
+  const modalStyle: Styles = {
     content: {
       position: 'absolute',
       top: '5%',
@@ -41,7 +41,13 @@ const Dashboard = (_props: RouteComponentProps) => {
   return (
     <>
       <Sidebar currentPath="/dashboard" />
-      <Modal isOpen={ctx.state.isModalOpen} style={customStyles}>
+      <Modal
+        isOpen={ctx.state.isModalOpen}
+        style={modalStyle}
+        onRequestClose={() => {
+          ctx.dispatch({ type: 'closeModal' });
+        }}
+      >
         <BugDetails />
       </Modal>
       <div className="mx-16">
