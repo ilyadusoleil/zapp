@@ -43,7 +43,10 @@ const createProject = async function (req, res) {
           updatedAt: new Date(),
         });
       })
-      .then(() => res.sendStatus(201));
+      .then((newProject) => {
+        res.status(201);
+        res.send(newProject);
+      });
   } catch (err) {
     console.log('---> error creating project in database', err.stack);
     res.status(500);
