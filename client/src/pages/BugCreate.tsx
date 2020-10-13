@@ -5,13 +5,15 @@ import { Link, RouteComponentProps } from '@reach/router';
 import useCreateBug from '../hooks/useCreateBug';
 
 import BugForm from '../components/BugForm';
+import Sidebar from '../components/Sidebar';
 
-const Dashboard = (_props: RouteComponentProps) => {
+const BugCreate = (_props: RouteComponentProps) => {
   const [createBug, { status: createBugStatus }] = useCreateBug();
 
   return (
     <>
-      <h1>New Issue</h1>
+      <Sidebar />
+      <div className='ml-16'>
       <BugForm
         onSubmit={createBug}
         submitText={
@@ -27,11 +29,13 @@ const Dashboard = (_props: RouteComponentProps) => {
           title: '',
           description: '',
           priority: 'medium',
+          projectId: 0
         }}
       />
       <Link to="/dashboard">Home</Link>
+      </div>
     </>
   );
 };
 
-export default Dashboard;
+export default BugCreate;

@@ -2,8 +2,9 @@ import { useQuery, QueryResult } from 'react-query';
 import fetchRequest from '../services/ApiService';
 import { Bug } from '../types/Bug';
 
-const useBug = (id: string): QueryResult<Bug> => {
-  return useQuery(id && ['issue', id], () => fetchRequest(`/project/${id}`));
+// Get details about one bug (in the edit/details screen)
+const useBug = (bugId: number): QueryResult<Bug> => {
+  return useQuery(bugId && ['bug', bugId], () => fetchRequest(`/bugs/${bugId}`));
 };
 
 export default useBug;

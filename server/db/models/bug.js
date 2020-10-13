@@ -8,7 +8,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      bug.belongsTo(models.project, {
+        foreignKey: {
+          allowNull: false,
+        },
+      });
+      bug.belongsTo(models.user, {
+        foreignKey: {
+          allowNull: true,
+        },
+      });
+      bug.hasMany(models.comment, {
+        foreignKey: 'id',
+      });
     }
   }
   bug.init(

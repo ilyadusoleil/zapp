@@ -8,11 +8,32 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      user.belongsToMany(models.project, {
+        through: models.projectuser,
+        foreignKey: 'userId',
+      });
+      user.hasMany(models.bug, {
+        foreignKey: 'userId', //TODO verify userId is correct column
+      });
+      user.hasMany(models.comment, {
+        foreignKey: 'id',
+      });
     }
   }
   user.init(
     {
+      googleId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      displayName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,

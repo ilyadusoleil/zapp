@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { MutateFunction } from 'react-query';
 import { BugInput, Bug } from '../types/Bug';
+import Context from '../Context';
 
 const defaultFormValues = {
   title: '',
+  projectId: -1,
   description: '',
-  priority: 'medium',
+  priority: '',
 };
 
 const BugForm = ({
@@ -13,11 +15,12 @@ const BugForm = ({
   submitText,
   initialValues = defaultFormValues,
 }: {
-  onSubmit: MutateFunction<Bug, unknown, { bug: BugInput }, unknown>;
+  onSubmit: MutateFunction<Bug, unknown, BugInput, unknown>;
   submitText: string;
   initialValues: BugInput;
 }) => {
-  const [values, setValues] = React.useState(initialValues);
+  const ctx = useContext(Context);
+  const [values, setValues] = useState(initialValues);
 
   const setValue = (field: string, value: string) =>
     setValues((old) => ({ ...old, [field]: value }));
@@ -25,18 +28,19 @@ const BugForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    onSubmit({ bug: values });
+    const valuesCopy = Object.assign({}, values, { projectId: ctx.state.currentProjectId });
+    onSubmit(valuesCopy);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValues(initialValues);
   }, [initialValues]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="title">Title</label>
+    <form className='w-3/12 max-w-l border-2 border-indigo-200 rounded-lg bg-gray-100 p-10 ' onSubmit={handleSubmit}>
+      <label className='mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold' htmlFor="title">Title</label>
       <div>
-        <input
+        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           type="text"
           name="title"
           value={values.title}
@@ -45,9 +49,9 @@ const BugForm = ({
         />
       </div>
       <br />
-      <label htmlFor="description">Content</label>
+      <label className='mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' htmlFor="description">Description</label>
       <div>
-        <textarea
+        <textarea className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           name="description"
           value={values.description}
           onChange={(e) => setValue('description', e.target.value)}
@@ -55,18 +59,29 @@ const BugForm = ({
         />
       </div>
 
-      <label htmlFor="priority">Title</label>
-      <div>
-        <input
-          type="text"
+      <label className='mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' htmlFor="priority">Priority</label>
+      <div className='inline-block relative w-32'>
+        <select
+        className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+       
           name="priority"
           value={values.priority}
           onChange={(e) => setValue('priority', e.target.value)}
           required
-        />
+        > 
+        <option></option>
+        <option>High</option>
+        <option>Medium</option>
+        <option>Low</option>
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
       </div>
       <br />
-      <button type="submit">{submitText}</button>
+      <div className='flex'>
+      <button className='mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' type="submit">{submitText}</button>
+      </div>
     </form>
   );
 };
