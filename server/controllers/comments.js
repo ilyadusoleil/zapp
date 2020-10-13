@@ -10,8 +10,9 @@ const createComment = async function (req, res) {
         bugId: req.body.bug_Id,
         userId: req.body.user_Id,
       })
-      .then(() => {
-        res.sendStatus(201);
+      .then((newComment) => {
+        res.status(201);
+        res.send(newComment);
       });
   } catch (err) {
     console.log('---> error creating comment in database', err.stack);

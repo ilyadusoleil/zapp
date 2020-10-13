@@ -5,9 +5,10 @@ import Context from '../Context';
 
 const defaultFormValues = {
   title: '',
-  projectId: -1,
+  project_Id: -1,
   description: '',
-  priority: '',
+  priority: 2,
+  state: 0
 };
 
 const BugForm = ({
@@ -17,7 +18,7 @@ const BugForm = ({
 }: {
   onSubmit: MutateFunction<Bug, unknown, BugInput, unknown>;
   submitText: string;
-  initialValues: BugInput;
+  initialValues?: BugInput;
 }) => {
   const ctx = useContext(Context);
   const [values, setValues] = useState(initialValues);
@@ -28,7 +29,8 @@ const BugForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    const valuesCopy = Object.assign({}, values, { projectId: ctx.state.currentProjectId });
+    const valuesCopy = Object.assign({}, values, { project_Id: ctx.state.currentProjectId });
+    console.log('CREATE BUG: ', valuesCopy)
     onSubmit(valuesCopy);
   };
 
@@ -70,9 +72,9 @@ const BugForm = ({
           required
         > 
         <option></option>
-        <option>High</option>
-        <option>Medium</option>
-        <option>Low</option>
+        <option value={1}>High</option>
+        <option value={2}>Medium</option>
+        <option value={3}>Low</option>
         </select>
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>

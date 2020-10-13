@@ -25,12 +25,6 @@ const BugCreate = (_props: RouteComponentProps) => {
             ? 'Saved!'
             : 'New Issue'
         }
-        initialValues={{
-          title: '',
-          description: '',
-          priority: 'medium',
-          projectId: 0
-        }}
       />
       <Link to="/dashboard">Home</Link>
       </div>

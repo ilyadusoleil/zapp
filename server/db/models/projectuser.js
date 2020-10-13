@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   projectuser.init(
     {
       authorization: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },

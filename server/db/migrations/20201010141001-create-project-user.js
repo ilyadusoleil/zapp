@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       authorization: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

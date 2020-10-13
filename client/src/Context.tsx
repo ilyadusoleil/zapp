@@ -37,18 +37,18 @@ const reducer = (state: State, action: any) => {
         bugModalId: action.payload,
       });
 
-      case 'closeBugModal':
-        return Object.assign({}, state, {
-          isBugModalOpen: false,
-          bugModalId: 0,
-        });
+    case 'closeBugModal':
+      return Object.assign({}, state, {
+        isBugModalOpen: false,
+        bugModalId: 0,
+      });
 
-      case 'openProjectModal':
+    case 'openProjectModal':
       return Object.assign({}, state, {
         isProjectOpen: true,
       });
 
-      case 'closeProjectModal':
+    case 'closeProjectModal':
       return Object.assign({}, state, {
         isProjectOpen: false,
       });
