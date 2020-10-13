@@ -12,7 +12,7 @@ const BugCreate = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar currentPath="/new"/>
       <div className='ml-16'>
       <BugForm
         onSubmit={createBug}

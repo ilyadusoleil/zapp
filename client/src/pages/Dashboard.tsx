@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
 import Modal from 'react-modal';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
-import useProjects from '../hooks/useProjects';
 
 import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
@@ -28,23 +27,23 @@ const Dashboard = (_props: RouteComponentProps) => {
   }
 
   const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
+    content: {
+      position: 'absolute',
+      top: '5%',
+      left: '5%',
+      right: '5%',
+      bottom: '5%',
+    },
   };
+
+  Modal.setAppElement('body'); // Prevents React: App element is not defined warning
 
   return (
     <>
-    
-      <Sidebar />
+      <Sidebar currentPath="/dashboard" />
       <Modal isOpen={ctx.state.isModalOpen} style={customStyles}>
-          <BugDetails/>
-      </Modal >
+        <BugDetails />
+      </Modal>
       <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
