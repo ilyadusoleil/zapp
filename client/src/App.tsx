@@ -18,7 +18,7 @@ const queryCache = new QueryCache();
 const App = () => {
   const initialState = {
     currentProjectId: 0,
-    userId: '1',
+    userId: '3', // TODO: no longer hard code this one user authenitcation is working
     isBugModalOpen: false,
     isProjectOpen: false,
     bugModalId: 0,

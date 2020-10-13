@@ -5,7 +5,7 @@ import { Bug } from '../types/Bug';
 // Get all bugs for one project
 const useBugs = (projectId: number): QueryResult<Bug[]> => {
   return useQuery(projectId && ['projectbugs', projectId], () =>
-    fetchRequest(`/bugs?projectId=${projectId}`)
+    fetchRequest(`/bugs?project_Id=${projectId}`)
   );
 };
 
