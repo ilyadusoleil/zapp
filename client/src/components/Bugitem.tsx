@@ -12,19 +12,26 @@ import Context from '../Context';
 
 type Props = {
   bug: Bug;
-  // setModalIsOpen: (isModalOpen: boolean) => void
 };
 
 function Bugitem({ bug }: Props) {
   const ctx = useContext(Context);
   const [isOpened, setisOpened] = useState(false);
 
-  function priority(level: string) {
-    return level === 'High'
+
+  // FIXME: Update all equality checks to === below once server returns number??
+  function priority(level: number) {
+    return level == 0
       ? 'bg-teal-500'
-      : level === 'Medium'
+      : level == 1
       ? 'bg-teal-400'
       : 'bg-teal-200';
+  }
+
+  const mapPriorityToString = (level: number) => {
+    if (level == 0) return 'High';
+    if (level == 1) return 'Medium';
+    return 'Low';
   }
 
   return (
@@ -46,7 +53,7 @@ function Bugitem({ bug }: Props) {
               bug.priority
             )} rounded-full text-xs w-16 flex justify-center text-gray-200`}
           >
-            {bug.priority}
+            {mapPriorityToString(bug.priority)}
           </p>
         </div>
       </div>

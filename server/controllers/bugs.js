@@ -53,7 +53,7 @@ const editBug = async function (req, res) {
         },
         {
           where: {
-            id: req.body.bug_Id,
+            id: req.body.id,
           },
         }
       )

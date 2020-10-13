@@ -26,7 +26,7 @@ router.post('/projects', projectsCtrl.createProject);
 
 router.get('/bugs', bugsCtrl.getBugs);
 router.post('/bugs', bugsCtrl.createBug);
-router.patch('/bugs', bugsCtrl.editBug); // TODO change to put
+router.put('/bugs', bugsCtrl.editBug);
 
 //=============
 // COMMENTS

@@ -5,7 +5,7 @@ import { Bug } from '../types/Bug';
 
 export default function useSavePost() {
   const editBug = async (bug: Bug): Promise<Bug> => {
-    return fetchRequest(`/bugs/${bug.id}`, {
+    return fetchRequest(`/bugs`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bug),
@@ -25,9 +25,12 @@ export default function useSavePost() {
       return () => queryCache.setQueryData<Bug>(['bug', values.id], oldIssue);
     },
     onError: (_error, _values, rollback) => (rollback as () => void)(),
-    onSuccess: async (values) => {
-      queryCache.refetchQueries(['projectbugs', values.projectId]);
-      await queryCache.refetchQueries(['bug', values.id]);
+    onSuccess: async (/*values*/) => {
+      // FIXME: revert to commented code once server returns new value
+      queryCache.refetchQueries(['projectbugs']);
+      await queryCache.refetchQueries(['bug']);
+      // queryCache.refetchQueries(['projectbugs', values.project_Id]);
+      // await queryCache.refetchQueries(['bug', values.id]);
     },
   });
 }
