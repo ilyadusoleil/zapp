@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
       });
       user.hasMany(models.bug, {
-        foreignKey: 'userId',
+        foreignKey: 'userId', //TODO verify userId is correct column
       });
       user.hasMany(models.comment, {
-        foreignKey: 'commentId',
+        foreignKey: 'id',
       });
     }
   }

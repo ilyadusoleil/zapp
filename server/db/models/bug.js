@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
       bug.hasMany(models.comment, {
-        foreignKey: 'commentId',
+        foreignKey: 'id',
       });
     }
   }
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
       state: DataTypes.STRING,
-      priority: DataTypes.STRING,
+      priority: DataTypes.INTEGER,
     },
     {
       sequelize,
