@@ -2,10 +2,12 @@ import { createContext } from 'react';
 
 type State = {
   currentProjectId: number;
+  userId: string;
 };
 
 const initialState: State = {
   currentProjectId: 0,
+  userId: '1',
 };
 
 const Context = createContext<{

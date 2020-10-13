@@ -10,8 +10,8 @@ import fetchRequest from '../services/ApiService';
 import { Bug, BugInput } from '../types/Bug';
 
 function useCreateBug() {
-  const createBug = async ({ bug }: { bug: BugInput }): Promise<Bug> => {
-    return fetchRequest('/project', {
+  const createBug = async (bug: BugInput): Promise<Bug> => {
+    return fetchRequest('/bugs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bug),
@@ -19,8 +19,8 @@ function useCreateBug() {
   };
 
   return useMutation(createBug, {
-    onSuccess: () => {
-      queryCache.refetchQueries('project'); //TODO compare with invalidateQueries(['project', bug.id]);
+    onSuccess: (bug) => {
+      queryCache.refetchQueries(['projectbugs', bug.projectId]); //TODO compare with invalidateQueries(['project', bug.id]);
     },
   });
 }
