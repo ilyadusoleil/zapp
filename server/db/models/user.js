@@ -24,27 +24,27 @@ module.exports = (sequelize, DataTypes) => {
     {
       googleId: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       displayName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, //only required field. Allows invitations to projects and users can complete sign up later
         allowNull: false,
       },
       firstName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
