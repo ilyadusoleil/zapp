@@ -17,7 +17,8 @@ const queryCache = new QueryCache();
 
 const App = () => {
   const initialState = {
-    currentProjectId: 0
+    currentProjectId: 0,
+    userId: '1'
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
