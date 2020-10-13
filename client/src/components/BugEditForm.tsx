@@ -75,12 +75,7 @@ const BugEditForm = ({
           {submitText}
         </button>
       </form>
-      <FontAwesomeIcon
-        onClick={() => ctx.dispatch({ type: 'closeModal' })}
-        icon={faTimesCircle}
-        size={'lg'}
-        className="mr-10 text-gray-900"
-      />
+      <FontAwesomeIcon onClick={() => ctx.dispatch({type: 'closeBugModal'})} icon={faTimesCircle} size={'lg'} className="mr-10 text-gray-900" />
     </div>
   );
 };

@@ -75,7 +75,7 @@ const ProjectHeader = () => {
         <div
           className="h-10 flex items-center"
           onClick={() => {
-            navigate('/newProject');
+            ctx.dispatch({ type: 'openProjectModal'});
           }}
         >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
