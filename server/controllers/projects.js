@@ -14,7 +14,7 @@ const getProjects = async function (req, res) {
         attributes: ['id', 'name', 'description'],
       },
     });
-    const processedProjects = projects.map(el => el.projects[0])
+    const processedProjects = projects.map((el) => el.projects[0]);
 
     res.status(200);
     res.send(processedProjects);
@@ -38,7 +38,7 @@ const createProject = async function (req, res) {
         db.projectuser.create({
           userId: req.body.user_Id,
           projectId: newProject.id,
-          authorization: 'Owner',
+          authorization: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
