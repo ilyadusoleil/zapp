@@ -9,7 +9,7 @@ import useProjects from '../hooks/useProjects';
 import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
 
-import BugEditForm from '../components/BugEditForm';
+import BugDetails from '../pages/BugDetails';
 
 import ProjectHeader from '../components/ProjectHeader';
 
@@ -17,9 +17,7 @@ import Context from '../Context';
 
 const Dashboard = (_props: RouteComponentProps) => {
   const ctx = useContext(Context);
-  // const [projectId, setProjectId] = useState('0');
   const { isLoading, isError, data } = useBugs(ctx.state.currentProjectId); //TODO: change hard coding of projectId
-  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -40,20 +38,19 @@ const Dashboard = (_props: RouteComponentProps) => {
     }
   };
 
-
   return (
     <>
     
       <Sidebar />
-      <Modal isOpen={modalIsOpen} style={customStyles}>
-          <BugEditForm setModalIsOpen={setModalIsOpen}/>
+      <Modal isOpen={ctx.state.isModalOpen} style={customStyles}>
+          <BugDetails/>
       </Modal >
       <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
 
         {data.map((bug: Bug, index) => (
-          <Bugitem setModalIsOpen={setModalIsOpen} key={index} bug={bug} />
+          <Bugitem key={index} bug={bug} />
         ))}
       </div>
     </>
