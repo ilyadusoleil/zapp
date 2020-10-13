@@ -1,25 +1,29 @@
+import React, {useContext} from 'react';
 import { navigate } from '@reach/router';
-import React from 'react';
 import { MutateFunction } from 'react-query';
 import { Bug } from '../types/Bug';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { createTextChangeRange } from 'typescript';
+
+import Context from '../Context';
 
 const defaultFormValues = {
   id: 0,
+  projectId: 0, // TOOD: get correct type
   title: '',
   description: '',
   priority: 'medium',
 };
 
-type Props = {
-  setModalIsOpen: (isModalOpen: boolean) => void;
-};
+// type Props = {
+//   setModalIsOpen: (isModalOpen: boolean) => void;
+// };
 
 const BugEditForm = (
-  { setModalIsOpen }: Props,
+  // { setModalIsOpen }: Props,
   {
     onSubmit,
     submitText,
@@ -30,6 +34,7 @@ const BugEditForm = (
     initialValues: Bug;
   }
 ) => {
+  const ctx = useContext(Context);
   const [values, setValues] = React.useState(initialValues);
 
   const setValue = (field: string, value: string) =>
@@ -83,7 +88,7 @@ const BugEditForm = (
         <br />
         <button type="submit">{submitText}</button>
       </form>
-      <FontAwesomeIcon onClick={() => setModalIsOpen(false)} icon={faTimesCircle} size={'lg'} className="mr-10 text-gray-900" />
+      <FontAwesomeIcon onClick={() => ctx.dispatch({type: 'closeModal'})} icon={faTimesCircle} size={'lg'} className="mr-10 text-gray-900" />
     </div>
   );
 };
