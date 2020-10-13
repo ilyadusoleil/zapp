@@ -19,7 +19,8 @@ const App = () => {
   const initialState = {
     currentProjectId: 0,
     userId: '1',
-    isModalOpen: false,
+    isBugOpen: false,
+    isProjectOpen: false,
     bugModalId: 0,
   };
 

@@ -3,14 +3,16 @@ import { createContext } from 'react';
 type State = {
   currentProjectId: number;
   userId: string;
-  isModalOpen: boolean;
+  isBugOpen: boolean;
+  isProjectOpen: boolean;
   bugModalId: number;
 };
 
 const initialState: State = {
   currentProjectId: 0,
   userId: '1',
-  isModalOpen: false,
+  isBugOpen: false,
+  isProjectOpen: false,
   bugModalId: 0,
 };
 
@@ -29,16 +31,21 @@ const reducer = (state: State, action: any) => {
         currentProjectId: action.payload,
       });
 
-    case 'openModal':
+    case 'openBugModal':
       return Object.assign({}, state, {
-        isModalOpen: true,
+        isBugOpen: true,
         bugModalId: action.payload,
       });
 
-    case 'closeModal':
+      case 'closeBugModal':
+        return Object.assign({}, state, {
+          isBugOpen: false,
+          bugModalId: 0,
+        });
+
+      case 'openProjectModal':
       return Object.assign({}, state, {
-        isModalOpen: false,
-        bugModalId: 0,
+        isProjectOpen: true,
       });
 
     default:

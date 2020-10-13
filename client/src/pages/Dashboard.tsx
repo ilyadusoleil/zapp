@@ -10,6 +10,7 @@ import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
 
 import BugDetails from '../pages/BugDetails';
+import ProjectCreate from '../pages/ProjectCreate';
 
 import ProjectHeader from '../components/ProjectHeader';
 
@@ -42,8 +43,11 @@ const Dashboard = (_props: RouteComponentProps) => {
     <>
     
       <Sidebar />
-      <Modal isOpen={ctx.state.isModalOpen} style={customStyles}>
+      <Modal isOpen={ctx.state.isBugOpen} style={customStyles}>
           <BugDetails/>
+      </Modal >
+      <Modal isOpen={ctx.state.isProjectOpen} style={customStyles}>
+          <ProjectCreate/>
       </Modal >
       <div className="mx-16">
         <ProjectHeader />
