@@ -1,16 +1,24 @@
-import React, { useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
 import Modal from 'react-modal';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
+import useProjects from '../hooks/useProjects';
 
 import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
+
 import BugEditForm from '../components/BugEditForm';
 
+import ProjectHeader from '../components/ProjectHeader';
+
+import Context from '../Context';
+
 const Dashboard = (_props: RouteComponentProps) => {
-  const { isLoading, isError, data } = useBugs();
+  const ctx = useContext(Context);
+  // const [projectId, setProjectId] = useState('0');
+  const { isLoading, isError, data } = useBugs(ctx.state.currentProjectId); //TODO: change hard coding of projectId
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   if (isLoading) {
@@ -41,8 +49,9 @@ const Dashboard = (_props: RouteComponentProps) => {
           <BugEditForm setModalIsOpen={setModalIsOpen}/>
       </Modal >
       <div className="mx-16">
-        <h1>Dashboard</h1
->
+        <ProjectHeader />
+        <h1>Dashboard</h1>
+
         {data.map((bug: Bug, index) => (
           <Bugitem setModalIsOpen={setModalIsOpen} key={index} bug={bug} />
         ))}
