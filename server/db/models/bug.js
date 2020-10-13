@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       priority: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER, //can have values 1 - 3. '1' highest priority and '3' lowest priority
         allowNull: false,
       },
     },
