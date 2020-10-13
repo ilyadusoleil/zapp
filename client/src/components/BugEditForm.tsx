@@ -9,10 +9,12 @@ import Context from '../Context';
 
 const defaultFormValues = {
   id: 0,
-  projectId: 0, // TOOD: get correct type
+  project_Id: 0, // TOOD: get correct type
   title: '',
   description: '',
-  priority: 'medium',
+  priority: 1,
+  state: 0,
+  created_At: new Date()
 };
 
 const BugEditForm = ({
@@ -33,8 +35,21 @@ const BugEditForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    onSubmit(values);
-    navigate('/dashboard');
+    console.log('EDIT', values)
+
+    const processedValues = {
+      title: values.title,
+      description: values.description,
+      state: values.state,
+      priority: values.priority,
+      created_At: values.created_At,
+      project_Id: values.project_Id,
+      // user_Id: values.,
+      id: values.id
+    }
+
+    onSubmit(processedValues);
+    ctx.dispatch({type: 'closeBugModal'})
   };
 
   React.useEffect(() => {

@@ -8,6 +8,7 @@ const defaultFormValues = {
   project_Id: -1,
   description: '',
   priority: 2,
+  state: 0
 };
 
 const BugForm = ({
@@ -17,7 +18,7 @@ const BugForm = ({
 }: {
   onSubmit: MutateFunction<Bug, unknown, BugInput, unknown>;
   submitText: string;
-  initialValues: BugInput;
+  initialValues?: BugInput;
 }) => {
   const ctx = useContext(Context);
   const [values, setValues] = useState(initialValues);

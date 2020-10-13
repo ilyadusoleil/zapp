@@ -4,6 +4,8 @@ export type Bug = {
   title: string;
   description: string;
   priority: number;
+  created_At: Date;
+  state: any; // TODO update this once finalised on server
 };
 
-export type BugInput = Omit<Bug, 'id'>;
+export type BugInput = Omit<Bug, 'id' | 'created_At'>;
