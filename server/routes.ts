@@ -18,6 +18,7 @@ router.post('/projects', projectsCtrl.createProject);
 //=============
 
 // TODO create user or use OAUTH??
+// TODO end point for adding user to project
 
 //=============
 // BUGS
@@ -25,7 +26,7 @@ router.post('/projects', projectsCtrl.createProject);
 
 router.get('/bugs', bugsCtrl.getBugs);
 router.post('/bugs', bugsCtrl.createBug);
-router.patch('/bugs', bugsCtrl.editBug);
+router.patch('/bugs', bugsCtrl.editBug); // TODO change to put
 
 //=============
 // COMMENTS
