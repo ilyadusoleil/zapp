@@ -14,10 +14,9 @@ import Context from '../Context';
 import useProjects from '../hooks/useProjects';
 
 const ProjectHeader = () => {
-  const USER_ID = 1;
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
-  const { isLoading, isError, data } = useProjects(USER_ID);
+  const { isLoading, isError, data } = useProjects(ctx.state.userId);
 
   const getIndexFromId = (id: number) => {
     if (!data) return 0;
