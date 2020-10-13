@@ -29,11 +29,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       state: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        defaultValue: 0, // TODO sort out values system for state of bug - Open, Assigned, Closed?
         allowNull: false,
       },
       priority: {
-        type: DataTypes.INTEGER, //can have values 1 - 3. '1' highest priority and '3' lowest priority
+        type: DataTypes.INTEGER, // can have values 0 - 2. '0' highest priority and '2' lowest priority
         allowNull: false,
       },
     },
