@@ -22,7 +22,7 @@ const createBug = async function (req, res) {
       .create({
         title: req.body.title,
         description: req.body.description,
-        state: 'Open',
+        state: 0,
         priority: req.body.priority,
         createdAt: new Date(),
         updatedAt: new Date(),
