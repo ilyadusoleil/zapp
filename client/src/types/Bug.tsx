@@ -1,9 +1,9 @@
 export type Bug = {
   id: number;
-  projectId: number;
+  project_Id: number;
   title: string;
   description: string;
-  priority: string; // TODO: Change to number
+  priority: number;
 };
 
 export type BugInput = Omit<Bug, 'id'>;
