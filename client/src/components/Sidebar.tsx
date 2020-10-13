@@ -11,9 +11,11 @@ import {
 
 const SidebarButton = ({
   icon,
+  isActive,
   route,
 }: {
   icon: IconDefinition;
+  isActive: boolean;
   route?: string;
 }) => {
   const handleClick = () => {
@@ -24,7 +26,9 @@ const SidebarButton = ({
 
   return (
     <div
-      className="self-stretch hover:bg-white cursor-pointer flex flex-col items-center"
+      className={`self-stretch hover:bg-white cursor-pointer flex flex-col items-center ${
+        isActive && 'bg-white'
+      }`}
       onClick={handleClick}
     >
       <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
@@ -32,13 +36,39 @@ const SidebarButton = ({
   );
 };
 
-const Sidebar = () => {
+type sidebarDataType = {
+  icon: IconDefinition;
+  path?: string;
+};
+
+const sidebarData: sidebarDataType[] = [
+  {
+    icon: faBars,
+  },
+  {
+    icon: faHome,
+    path: '/dashboard',
+  },
+  {
+    icon: faPlus,
+    path: '/new',
+  },
+  {
+    icon: faListAlt,
+  },
+];
+
+const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   return (
     <div className="inset-y-0 left-0 bg-indigo-200 h-screen w-14 fixed flex flex-col">
-      <SidebarButton icon={faBars} />
-      <SidebarButton icon={faHome} route="/dashboard" />
-      <SidebarButton icon={faPlus} route="/new" />
-      <SidebarButton icon={faListAlt} />
+      {sidebarData.map((sidebarItem, idx) => (
+        <SidebarButton
+          key={idx}
+          icon={sidebarItem.icon}
+          route={sidebarItem.path}
+          isActive={currentPath ? currentPath === sidebarItem.path : false} // Ternary operator to prevent highlighting of unmapped paths when currentPath isn't defined
+        />
+      ))}
     </div>
   );
 };
