@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import { Link, RouteComponentProps } from '@reach/router';
 
@@ -7,14 +7,11 @@ import useEditBug from '../hooks/useEditBug';
 
 import BugEditForm from '../components/BugEditForm';
 
-interface BugDetailsProps extends RouteComponentProps {
-  id?: string;
-}
+import Context from '../Context'
 
-const BugDetails = (props: BugDetailsProps) => {
-  if (!props.id) return <h1>No ID</h1>;
-
-  const { isLoading, isError, data } = useBug(props.id);
+const BugDetails = () => {
+  const ctx = useContext(Context);
+  const { isLoading, isError, data } = useBug(ctx.state.bugModalId);
 
   const [editBug, { status: editBugStatus }] = useEditBug();
 

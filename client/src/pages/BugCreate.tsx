@@ -29,6 +29,7 @@ const BugCreate = (_props: RouteComponentProps) => {
           title: '',
           description: '',
           priority: 'medium',
+          projectId: 0
         }}
       />
       <Link to="/dashboard">Home</Link>

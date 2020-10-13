@@ -11,7 +11,6 @@ import Context, { reducer } from './Context';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import BugCreate from './pages/BugCreate';
-import BugDetails from './pages/BugDetails';
 import ProjectCreate from './pages/ProjectCreate';
 
 const queryCache = new QueryCache();
@@ -20,6 +19,8 @@ const App = () => {
   const initialState = {
     currentProjectId: 0,
     userId: '1',
+    isModalOpen: false,
+    bugModalId: 0,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -32,7 +33,6 @@ const App = () => {
             <Login path="/" />
             <Dashboard path="/dashboard" />
             <BugCreate path="/new" />
-            <BugDetails path="/details/:id" />
             <ProjectCreate path="/newProject" />
           </Router>
         </Context.Provider>
