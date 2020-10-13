@@ -27,16 +27,11 @@ Install dependencies: `npm install`
 - Install server dependencies:
   `cd server`
   `npm install`
-
-- Make sure you have Postgres installed on your local machine
-
+- Make sure you have Postgres installed on your local machine.
 - Create a `.env` file in the server directory (`/server/.env`) and fill it following the example `/server/.env.example`
-
 - Initialise the database - in the command line run: `npx sequelize-cli db:migrate`
-
 - The server is now ready to run. If you wish, you can seed the database with users by running the command `npx sequelize-cli db:seed:all`. You can change the seed or add your own data by navigating to `/server/db/seeders/` and filling in your own data.
-
-- For more information on **Sequelize** migrations read the docs [here](https://sequelize.org/master/manual/migrations.html)
+- For more information on **Sequelize** migrations read the docs [here.](https://sequelize.org/master/manual/migrations.html)
 
 ### Setup prerequisites
 
