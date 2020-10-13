@@ -18,12 +18,7 @@ const defaultFormValues = {
   priority: 'medium',
 };
 
-// type Props = {
-//   setModalIsOpen: (isModalOpen: boolean) => void;
-// };
-
 const BugEditForm = (
-  // { setModalIsOpen }: Props,
   {
     onSubmit,
     submitText,
