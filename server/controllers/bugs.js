@@ -29,7 +29,10 @@ const createBug = async function (req, res) {
         projectId: req.body.project_Id,
         userId: req.body.user_Id,
       })
-      .then(() => res.sendStatus(201));
+      .then((newBug) => {
+        res.status(201);
+        res.send(newBug);
+      });
   } catch (err) {
     console.log('---> error creating new bug database', err.stack);
     res.status(500);
@@ -57,7 +60,10 @@ const editBug = async function (req, res) {
           },
         }
       )
-      .then(() => res.sendStatus(200));
+      .then((updatedBug) => {
+        res.status(200);
+        res.send(updatedBug);
+      });
   } catch (err) {
     console.log('---> error editing bug in database', err.stack);
     res.status(500);
