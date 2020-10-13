@@ -36,7 +36,7 @@ function Bugitem({ bug }: Props) {
         <h1 className="uppercase text-xs">{bug.title}</h1>
         <div className="flex ml-auto">
           <FontAwesomeIcon
-            onClick={() => ctx.dispatch({ type: 'openModal', payload: bug.id })}
+            onClick={() => ctx.dispatch({ type: 'openBugModal', payload: bug.id })}
             icon={faEdit}
             size={'sm'}
             className="mr-10 text-gray-900"

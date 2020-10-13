@@ -9,6 +9,7 @@ import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
 
 import BugDetails from '../pages/BugDetails';
+import ProjectCreate from '../pages/ProjectCreate';
 
 import ProjectHeader from '../components/ProjectHeader';
 
@@ -40,16 +41,18 @@ const Dashboard = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <Sidebar currentPath="/dashboard" />
-      <Modal
-        isOpen={ctx.state.isModalOpen}
-        style={modalStyle}
-        onRequestClose={() => {
+    
+      <Sidebar />
+      <Modal isOpen={ctx.state.isBugModalOpen} style={modalStyle} onRequestClose={() => {
           ctx.dispatch({ type: 'closeModal' });
-        }}
-      >
-        <BugDetails />
-      </Modal>
+        }}>
+          <BugDetails/>
+      </Modal >
+      <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle}>
+          <ProjectCreate/>
+      </Modal >
+      <Sidebar currentPath="/dashboard" />
+
       <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
