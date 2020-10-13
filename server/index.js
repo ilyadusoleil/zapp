@@ -1,13 +1,11 @@
 const express = require('express');
 const router = require('./routes');
 
-const json = express.json();
-
 const app = express();
 
 const PORT = 3000;
 
-app.use(json());
+app.use(express.json());
 app.use('/', router);
 
 app.listen(PORT, () => {
