@@ -1,12 +1,9 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { navigate } from '@reach/router';
 import { MutateFunction } from 'react-query';
 import { Bug } from '../types/Bug';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTimesCircle
-} from '@fortawesome/free-solid-svg-icons';
-import { createTextChangeRange } from 'typescript';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 import Context from '../Context';
 
@@ -18,17 +15,15 @@ const defaultFormValues = {
   priority: 'medium',
 };
 
-const BugEditForm = (
-  {
-    onSubmit,
-    submitText,
-    initialValues = defaultFormValues,
-  }: {
-    onSubmit: MutateFunction<Bug, unknown, Bug, unknown>;
-    submitText: string;
-    initialValues: Bug;
-  }
-) => {
+const BugEditForm = ({
+  onSubmit,
+  submitText,
+  initialValues = defaultFormValues,
+}: {
+  onSubmit: MutateFunction<Bug, unknown, Bug, unknown>;
+  submitText: string;
+  initialValues: Bug;
+}) => {
   const ctx = useContext(Context);
   const [values, setValues] = React.useState(initialValues);
 
@@ -47,41 +42,38 @@ const BugEditForm = (
   }, [initialValues]);
 
   return (
-    <div className="bg-gray-200 w-72 p-4" style={{'width': '20rem'}}>
-      <form onSubmit={handleSubmit}>
+    <div className="bg-gray-200 p-4">
+      <form onSubmit={handleSubmit} className="flex flex-col align-stretch">
         <label htmlFor="title">Title</label>
-        <div>
-          <input
-            type="text"
-            name="title"
-            value={values.title}
-            onChange={(e) => setValue('title', e.target.value)}
-            required
-          />
-        </div>
+        <input
+          type="text"
+          name="title"
+          value={values.title}
+          onChange={(e) => setValue('title', e.target.value)}
+          required
+        />
         <br />
         <label htmlFor="description">Content</label>
-        <div>
-          <textarea
-            name="description"
-            value={values.description}
-            onChange={(e) => setValue('description', e.target.value)}
-            required
-          />
-        </div>
-
-        <label htmlFor="priority">Title</label>
-        <div>
-          <input
-            type="text"
-            name="priority"
-            value={values.priority}
-            onChange={(e) => setValue('priority', e.target.value)}
-            required
-          />
-        </div>
+        <textarea
+          name="description"
+          className="h-32 resize-none"
+          value={values.description}
+          onChange={(e) => setValue('description', e.target.value)}
+          required
+        />
         <br />
-        <button type="submit">{submitText}</button>
+        <label htmlFor="priority">Priority</label>
+        <input
+          type="text"
+          name="priority"
+          value={values.priority}
+          onChange={(e) => setValue('priority', e.target.value)}
+          required
+        />
+        <br />
+        <button type="submit" className="self-start">
+          {submitText}
+        </button>
       </form>
       <FontAwesomeIcon onClick={() => ctx.dispatch({type: 'closeBugModal'})} icon={faTimesCircle} size={'lg'} className="mr-10 text-gray-900" />
     </div>

@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
-import Modal from 'react-modal';
+import Modal, { Styles } from 'react-modal';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
-import useProjects from '../hooks/useProjects';
 
 import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
@@ -28,27 +27,32 @@ const Dashboard = (_props: RouteComponentProps) => {
     return <span>Error: </span>;
   }
 
-  const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
+  const modalStyle: Styles = {
+    content: {
+      position: 'absolute',
+      top: '5%',
+      left: '5%',
+      right: '5%',
+      bottom: '5%',
+    },
   };
+
+  Modal.setAppElement('body'); // Prevents React: App element is not defined warning
 
   return (
     <>
     
       <Sidebar />
-      <Modal isOpen={ctx.state.isBugModalOpen} style={customStyles}>
+      <Modal isOpen={ctx.state.isBugModalOpen} style={modalStyle} onRequestClose={() => {
+          ctx.dispatch({ type: 'closeModal' });
+        }}>
           <BugDetails/>
       </Modal >
-      <Modal isOpen={ctx.state.isProjectOpen} style={customStyles}>
+      <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle}>
           <ProjectCreate/>
       </Modal >
+      <Sidebar currentPath="/dashboard" />
+
       <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
