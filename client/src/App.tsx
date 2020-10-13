@@ -20,7 +20,7 @@ const App = () => {
     currentProjectId: 0,
     userId: '1',
     isModalOpen: false,
-    bugModalId: 0,
+    bugModalId: 0
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
