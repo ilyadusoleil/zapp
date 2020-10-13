@@ -3,7 +3,7 @@ import { createContext } from 'react';
 type State = {
   currentProjectId: number;
   userId: string;
-  isBugOpen: boolean;
+  isBugModalOpen: boolean;
   isProjectOpen: boolean;
   bugModalId: number;
 };
@@ -11,7 +11,7 @@ type State = {
 const initialState: State = {
   currentProjectId: 0,
   userId: '1',
-  isBugOpen: false,
+  isBugModalOpen: false,
   isProjectOpen: false,
   bugModalId: 0,
 };

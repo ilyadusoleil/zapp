@@ -43,7 +43,7 @@ const Dashboard = (_props: RouteComponentProps) => {
     <>
     
       <Sidebar />
-      <Modal isOpen={ctx.state.isBugOpen} style={customStyles}>
+      <Modal isOpen={ctx.state.isBugModalOpen} style={customStyles}>
           <BugDetails/>
       </Modal >
       <Modal isOpen={ctx.state.isProjectOpen} style={customStyles}>
