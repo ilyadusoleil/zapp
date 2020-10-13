@@ -44,11 +44,12 @@ const Dashboard = (_props: RouteComponentProps) => {
     
       <Sidebar />
       <Modal isOpen={ctx.state.isBugModalOpen} style={modalStyle} onRequestClose={() => {
-          ctx.dispatch({ type: 'closeModal' });
+          ctx.dispatch({ type: 'closeBugModal' });
         }}>
           <BugDetails/>
       </Modal >
-      <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle}>
+      <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle} onRequestClose={() => {
+          ctx.dispatch({ type: 'closeProjectModal' });}}>
           <ProjectCreate/>
       </Modal >
       <Sidebar currentPath="/dashboard" />
