@@ -11,11 +11,13 @@ const getProjects = async function (req, res) {
       include: {
         model: db.project,
         required: true,
-        attributes: ['id', 'name'],
+        attributes: ['id', 'name', 'description'],
       },
     });
+    const processedProjects = projects.map(el => el.projects[0])
+
     res.status(200);
-    res.send(projects);
+    res.send(processedProjects);
   } catch (err) {
     console.log('---> error retrieving projects from the database', err.stack);
     res.status(500);
