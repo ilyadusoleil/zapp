@@ -15,7 +15,6 @@ const createComment = async function (req, res) {
         res.send(newComment);
       });
   } catch (err) {
-    console.log('---> error creating comment in database', err.stack);
     res.status(500);
     res.send({ err, message: 'error creating comment in database' });
   }

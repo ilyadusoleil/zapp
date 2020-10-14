@@ -2,7 +2,7 @@
 
 ## Easy to use issue tracking
 
-Zapp is an app to manage issues during the software development lifecycle
+Zapp is an app for managing issues in the software development lifecycle. Zapp is designed with small teams in mind and aims to make issue tracking simple and straightforward.
 
 ![Node.js CI](https://github.com/ilyadusoleil/zapp/workflows/Node.js%20CI/badge.svg)
 

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.bulkInsert('comments', [
       {
         content: 'This is a comment left by Ste',
@@ -55,7 +55,7 @@ module.exports = {
     ]);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete('comments', null, {});
   },
 };

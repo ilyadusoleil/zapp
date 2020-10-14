@@ -8,7 +8,9 @@
     "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
-    "mockserver": "json-server --watch db.json"
+    "mockserver": "json-server --watch db.json",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"src/*/*.{js,jsx,ts,tsx}\""
   },
   "keywords": [],
   "author": "",

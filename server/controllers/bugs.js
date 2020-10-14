@@ -10,7 +10,6 @@ const getBugs = async function (req, res) {
     res.status(200);
     res.send(bugs);
   } catch (err) {
-    console.log('---> error retrieving bugs from the database', err.stack);
     res.status(500);
     res.send({ err, message: 'error retrieving bugs from the database' });
   }
@@ -34,7 +33,6 @@ const createBug = async function (req, res) {
         res.send(newBug);
       });
   } catch (err) {
-    console.log('---> error creating new bug database', err.stack);
     res.status(500);
     res.send({ err, message: 'error creating new bug in database' });
   }
@@ -65,7 +63,6 @@ const editBug = async function (req, res) {
         res.send(updatedBug);
       });
   } catch (err) {
-    console.log('---> error editing bug in database', err.stack);
     res.status(500);
     res.send({ err, message: 'error editing bug in database' });
   }

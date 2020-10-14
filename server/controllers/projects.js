@@ -19,7 +19,6 @@ const getProjects = async function (req, res) {
     res.status(200);
     res.send(processedProjects);
   } catch (err) {
-    console.log('---> error retrieving projects from the database', err.stack);
     res.status(500);
     res.send({ err, message: 'error retrieving projects from the database' });
   }
@@ -48,7 +47,6 @@ const createProject = async function (req, res) {
         res.send(newProject);
       });
   } catch (err) {
-    console.log('---> error creating project in database', err.stack);
     res.status(500);
     res.send({ err, message: 'error creating project in database' });
   }

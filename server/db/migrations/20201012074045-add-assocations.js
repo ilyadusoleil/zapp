@@ -1,7 +1,5 @@
 'use strict';
 
-const sequelize = require('sequelize');
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     //ADD ASSOCIATIONS
@@ -55,7 +53,7 @@ module.exports = {
       });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     //REMOVE ASSOCIATIONS
 
     //remove user belongs to many projects through projectuser
