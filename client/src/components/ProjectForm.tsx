@@ -4,7 +4,7 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 
 const defaultFormValues = {
-  name: '',
+  title: '',
   description: '',
   userId: 'nouser',
 };
