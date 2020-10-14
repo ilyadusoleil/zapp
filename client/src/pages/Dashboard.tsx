@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
 import Modal, { Styles } from 'react-modal';
 
@@ -14,11 +14,21 @@ import ProjectCreate from '../pages/ProjectCreate';
 import ProjectHeader from '../components/ProjectHeader';
 
 import Context from '../Context';
+import { setSyntheticTrailingComments } from 'typescript';
 
 const Dashboard = (_props: RouteComponentProps) => {
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(ctx.state.currentProjectId); //TODO: change hard coding of projectId
+  const [bugs, setBugs] = useState([] as Bug []);
+  const [isSorted, toggleIsSorted] = useState()
 
+  useEffect (() => {
+      if(data) {
+          const bugs= data.sort((a, b) => a.priority - b.priority)
+          setBugs(bugs)
+      }
+  }, [data])
+  
   if (isLoading) {
     return <span>Loading...</span>;
   }
@@ -27,7 +37,7 @@ const Dashboard = (_props: RouteComponentProps) => {
     return <span>Error: </span>;
   }
 
-  const modalStyle: Styles = {
+ const modalStyle: Styles = {
     content: {
       position: 'absolute',
       top: '5%',
@@ -36,6 +46,13 @@ const Dashboard = (_props: RouteComponentProps) => {
       bottom: '5%',
     },
   };
+
+const sortByDateCreated = (bugs: any) => {
+        const createdSort = [...bugs].sort((a: any, b: any) => b.priority  - a.priority)
+    setBugs(createdSort)
+}
+
+
 
   Modal.setAppElement('body'); // Prevents React: App element is not defined warning
 
@@ -57,8 +74,9 @@ const Dashboard = (_props: RouteComponentProps) => {
       <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
+        <button onClick= {() =>  sortByDateCreated(bugs)} >sort by date</button>
 
-        {data.map((bug: Bug, index) => (
+        {bugs.map((bug: Bug, index) => (
           <Bugitem key={index} bug={bug} />
         ))}
       </div>
