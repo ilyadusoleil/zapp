@@ -12,21 +12,21 @@ const BugCreate = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <Sidebar currentPath="/new"/>
-      <div className='ml-16'>
-      <BugForm
-        onSubmit={createBug}
-        submitText={
-          createBugStatus === 'loading'
-            ? 'Saving...'
-            : createBugStatus === 'error'
-            ? 'Error!'
-            : createBugStatus === 'success'
-            ? 'Saved!'
-            : 'New Issue'
-        }
-      />
-      <Link to="/dashboard">Home</Link>
+      <Sidebar currentPath="/new" />
+      <div className="ml-16">
+        <BugForm
+          onSubmit={createBug}
+          submitText={
+            createBugStatus === 'loading'
+              ? 'Saving...'
+              : createBugStatus === 'error'
+              ? 'Error!'
+              : createBugStatus === 'success'
+              ? 'Saved!'
+              : 'New Issue'
+          }
+        />
+        <Link to="/dashboard">Home</Link>
       </div>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, navigate, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 import Modal, { Styles } from 'react-modal';
 
 import { Bug } from '../types/Bug';

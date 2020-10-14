@@ -1,10 +1,4 @@
-import {
-  useQuery,
-  QueryResult,
-  MutationResultPair,
-  useMutation,
-  queryCache,
-} from 'react-query';
+import { useMutation, queryCache } from 'react-query';
 
 import fetchRequest from '../services/ApiService';
 import { Bug, BugInput } from '../types/Bug';
