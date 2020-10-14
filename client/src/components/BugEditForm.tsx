@@ -14,7 +14,7 @@ const defaultFormValues = {
   description: '',
   priority: 1,
   state: 0,
-  created_At: new Date()
+  created_At: new Date(),
 };
 
 const BugEditForm = ({
@@ -35,7 +35,6 @@ const BugEditForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    console.log('EDIT', values)
 
     const processedValues = {
       title: values.title,
@@ -45,11 +44,11 @@ const BugEditForm = ({
       created_At: values.created_At,
       project_Id: values.project_Id,
       // user_Id: values.,
-      id: values.id
-    }
+      id: values.id,
+    };
 
     onSubmit(processedValues);
-    ctx.dispatch({type: 'closeBugModal'})
+    ctx.dispatch({ type: 'closeBugModal' });
   };
 
   React.useEffect(() => {
@@ -90,7 +89,12 @@ const BugEditForm = ({
           {submitText}
         </button>
       </form>
-      <FontAwesomeIcon onClick={() => ctx.dispatch({type: 'closeBugModal'})} icon={faTimesCircle} size={'lg'} className="mr-10 text-gray-900" />
+      <FontAwesomeIcon
+        onClick={() => ctx.dispatch({ type: 'closeBugModal' })}
+        icon={faTimesCircle}
+        size={'lg'}
+        className="mr-10 text-gray-900"
+      />
     </div>
   );
 };
