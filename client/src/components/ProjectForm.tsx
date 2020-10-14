@@ -4,7 +4,7 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 
 const defaultFormValues = {
-  name: '',
+  title: '',
   description: '',
   userId: 'nouser',
 };
@@ -42,7 +42,7 @@ const ProjectForm = ({
         <input
           type="text"
           name="title"
-          value={values.name}
+          value={values.title}
           onChange={(e) => setValue('title', e.target.value)}
           required
         />
