@@ -3,8 +3,9 @@ import { useMutation, queryCache } from 'react-query';
 import fetchRequest from '../services/ApiService';
 import { Project, ProjectInput } from '../types/Project';
 
-function useCreateBug() {
+function useCreateProject() {
   const createBug = async (project: ProjectInput): Promise<Project> => {
+    console.log('create project', project)
     return fetchRequest('/projects', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -14,9 +15,9 @@ function useCreateBug() {
 
   return useMutation(createBug, {
     onSuccess: () => {
-      queryCache.refetchQueries('projects'); //TODO compare with invalidateQueries(['project', bug.id]);
+      queryCache.refetchQueries(['project']); //TODO compare with invalidateQueries(['project', bug.id]);
     },
   });
 }
 
-export default useCreateBug;
+export default useCreateProject;

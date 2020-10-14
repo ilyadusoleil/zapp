@@ -43,7 +43,7 @@ const ProjectHeader = () => {
         className="bg-gray-100 p-5 flex justify-items cursor-pointer"
       >
         <div className="text-lg">
-          {data[getIndexFromId(ctx.state.currentProjectId)].title}
+          {data[getIndexFromId(ctx.state.currentProjectId)].name}
         </div>
         <FontAwesomeIcon
           icon={isOpened ? up : down}
@@ -68,7 +68,7 @@ const ProjectHeader = () => {
                 }}
               >
                 <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
-                <p>{project.title}</p>
+                <p>{project.name}</p>
               </div>
             )
         )}

@@ -4,9 +4,9 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 
 const defaultFormValues = {
-  title: '',
+  name: '',
   description: '',
-  userId: 'nouser',
+  user_Id: 'nouser',
 };
 
 const ProjectForm = ({
@@ -27,7 +27,7 @@ const ProjectForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    const valuesCopy = Object.assign({}, values, { userId: ctx.state.userId });
+    const valuesCopy = Object.assign({}, values, { user_Id: ctx.state.userId });
     onSubmit(valuesCopy);
   };
 
@@ -37,13 +37,13 @@ const ProjectForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="title">Title</label>
+      <label htmlFor="name">Name</label>
       <div>
         <input
           type="text"
-          name="title"
-          value={values.title}
-          onChange={(e) => setValue('title', e.target.value)}
+          name="name"
+          value={values.name}
+          onChange={(e) => setValue('name', e.target.value)}
           required
         />
       </div>
