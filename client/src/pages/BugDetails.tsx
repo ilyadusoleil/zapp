@@ -1,13 +1,13 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 
-import { Link, RouteComponentProps } from '@reach/router';
+import { Link } from '@reach/router';
 
 import useBug from '../hooks/useBug';
 import useEditBug from '../hooks/useEditBug';
 
 import BugEditForm from '../components/BugEditForm';
 
-import Context from '../Context'
+import Context from '../Context';
 
 const BugDetails = () => {
   const ctx = useContext(Context);

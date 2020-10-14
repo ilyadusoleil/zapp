@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { navigate } from '@reach/router';
 import { MutateFunction } from 'react-query';
 import { Bug } from '../types/Bug';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

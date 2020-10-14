@@ -27,7 +27,7 @@ module.exports = {
       });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     //remove comment belongs to bug
     return queryInterface.removeColumn('comments', 'bugId').then(() => {
       //remove comment belongs to user

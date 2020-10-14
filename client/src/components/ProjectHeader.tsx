@@ -16,7 +16,7 @@ import useProjects from '../hooks/useProjects';
 const ProjectHeader = () => {
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
-  const { isLoading, isError, data } = useProjects(ctx.state.userId);
+  const { data } = useProjects(ctx.state.userId);
 
   const getIndexFromId = (id: number) => {
     if (!data) return 0;
@@ -43,7 +43,7 @@ const ProjectHeader = () => {
         className="bg-gray-100 p-5 flex justify-items cursor-pointer"
       >
         <div className="text-lg">
-          {data[getIndexFromId(ctx.state.currentProjectId)].name}
+          {data[getIndexFromId(ctx.state.currentProjectId)].title}
         </div>
         <FontAwesomeIcon
           icon={isOpened ? up : down}
@@ -68,14 +68,14 @@ const ProjectHeader = () => {
                 }}
               >
                 <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
-                <p>{project.name}</p>
+                <p>{project.title}</p>
               </div>
             )
         )}
         <div
           className="h-10 flex items-center"
           onClick={() => {
-            ctx.dispatch({ type: 'openProjectModal'});
+            ctx.dispatch({ type: 'openProjectModal' });
           }}
         >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
