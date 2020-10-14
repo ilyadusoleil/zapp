@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 
 import { Collapse } from 'react-collapse';
 
+import { navigate } from '@reach/router';
+
 import { Bug } from '../types/Bug';
 
 import './Bugitem.css';
@@ -43,7 +45,9 @@ function Bugitem({ bug }: Props) {
         <div className="flex ml-auto">
           <FontAwesomeIcon
             onClick={() =>
-              ctx.dispatch({ type: 'openBugModal', payload: bug.id })
+              navigate(`/edit/${bug.id}`, {
+                state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+              })
             }
             icon={faEdit}
             size={'sm'}
