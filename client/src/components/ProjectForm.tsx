@@ -42,7 +42,7 @@ const ProjectForm = ({
         <input
           type="text"
           name="title"
-          value={values.name}
+          value={values.title}
           onChange={(e) => setValue('title', e.target.value)}
           required
         />
