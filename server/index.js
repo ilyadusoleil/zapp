@@ -6,6 +6,8 @@ const passport = require('passport');
 
 const app = express();
 
+require('./config/passport')(passport);
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -14,7 +16,9 @@ app.use(
     // TODO add store
   })
 );
+
 app.use(express.json());
+
 app.use(
   cors({
     origin: 'http://localhost:1234', // allow to server to accept request from different origin

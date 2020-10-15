@@ -16,9 +16,8 @@ module.exports = function (passport) {
         callbackURL: '/auth/google/callback',
       },
       async function (accessToken, refreshToken, profile, done) {
-        console.log(profile);
         const newUser = {
-          email: profile.email,
+          email: profile.emails[0].value,
           googleId: profile.id,
           displayName: profile.displayName,
           image: profile.photos[0].value,
@@ -33,7 +32,6 @@ module.exports = function (passport) {
               googleId: profile.id,
             },
           });
-
           if (user) {
             // user found in db
             done(null, user);
@@ -41,7 +39,7 @@ module.exports = function (passport) {
             //if not found by googleId see if they're email has been added to a project
             user = await db.user.findOne({
               where: {
-                email: profile.email,
+                email: profile.emails[0].value,
               },
             });
             user = user

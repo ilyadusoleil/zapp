@@ -9,24 +9,37 @@ const passport = require('passport');
 
 const router = express.Router();
 
+
 //=============
 // AUTH
 //=============
 
 router.get(
   '/auth/google',
-  passport.authenticate('google', { scope: ['profile'] })
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 router.get(
-  'auth/google/callback',
+  '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: `${process.env.CLIENT}/landing`, // TODO: .env this
     failureRedirect: 'auth/login/failed',
   })
 );
 
-router.get('auth/login/failed', (req, res) => {
+// when login is successful, retrieve user info
+router.get("/auth/login/success", (req, res) => {
+  if (req.user) {
+    res.json({
+      success: true,
+      message: "user has successfully authenticated",
+      user: req.user,
+      cookies: req.cookies
+    });
+  }
+});
+
+router.get('/auth/login/failed', (req, res) => {
   res.status(401).json({
     success: false,
     message: 'user failed to authenticate.',
@@ -35,7 +48,7 @@ router.get('auth/login/failed', (req, res) => {
 
 router.get('/auth/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect(`${process.env.CLIENT}/landing`);
 });
 
 //=============
