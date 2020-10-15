@@ -17,6 +17,7 @@ import Context, { reducer } from './Context';
 
 import Login from './pages/Login';
 import Landing from './pages/Landing';
+import PreDashboard from './pages/PreDashboard';
 import Dashboard from './pages/Dashboard';
 import BugCreate from './pages/BugCreate';
 import ProjectCreate from './pages/ProjectCreate';
@@ -29,6 +30,7 @@ function Routes(props: RouterProps) {
     <Router {...props}>
       <Login path="/" />
       <Landing path="/landing" />
+      <PreDashboard path="/preDashboard" />
       <Dashboard path="/dashboard" />
       <BugCreate path="/new" />
       <ProjectCreate path="/newProject" />

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { MutateFunction } from 'react-query';
 import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
+import { navigate } from '@reach/router';
 
 const defaultFormValues = {
   name: '',
@@ -12,10 +13,12 @@ const defaultFormValues = {
 const ProjectForm = ({
   onSubmit,
   submitText,
+  submitRoute,
   initialValues = defaultFormValues,
 }: {
   onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
   submitText: string;
+  submitRoute?: string;
   initialValues?: ProjectInput;
 }) => {
   const [values, setValues] = useState(initialValues);
@@ -29,6 +32,9 @@ const ProjectForm = ({
     e.preventDefault();
     const valuesCopy = Object.assign({}, values, { userId: ctx.state.userId });
     onSubmit(valuesCopy);
+    if (submitRoute) {
+      navigate(submitRoute);
+    }
   };
 
   useEffect(() => {
@@ -40,6 +46,7 @@ const ProjectForm = ({
       <label htmlFor="name">Name</label>
       <div>
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           name="name"
           value={values.name}
@@ -48,7 +55,12 @@ const ProjectForm = ({
         />
       </div>
       <br />
-      <button type="submit">{submitText}</button>
+      <button
+        className="mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        type="submit"
+      >
+        {submitText}
+      </button>
     </form>
   );
 };

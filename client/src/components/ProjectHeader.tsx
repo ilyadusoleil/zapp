@@ -25,15 +25,6 @@ const ProjectHeader = () => {
     return res;
   };
 
-  useEffect(() => {
-    if (data && ctx.state.currentProjectId == 0) {
-      ctx.dispatch({
-        type: 'updateCurrentProject',
-        payload: data[0].id,
-      });
-    }
-  }, [data]);
-
   if (!data) return <h1>Oh no</h1>;
 
   return (
