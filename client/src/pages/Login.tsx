@@ -2,16 +2,21 @@ import React from 'react';
 
 import { navigate, RouteComponentProps } from '@reach/router';
 
+import { SERVER } from '../constants';
+
+import GoogleButton from 'react-google-button';
+
 const Login = (_props: RouteComponentProps) => {
   const handleLogin = () => {
     navigate('dashboard');
+    // window.open(`${SERVER}/auth/google`, '_self'); // TODO: change this when oauth implementation
   };
 
   return (
-    <>
-      <h1>Login</h1>
-      <button onClick={handleLogin}>Press me to login</button>
-    </>
+    <div className="flex flex-col items-center justify-items-center">
+      <h1 className="text-xl mb-3">Welcome to Zapp</h1>
+      <GoogleButton onClick={handleLogin} />
+    </div>
   );
 };
 
