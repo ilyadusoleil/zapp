@@ -36,12 +36,12 @@ function Bugitem({ bug }: Props) {
   };
 
   return (
-    <div className=" m-1 bg-gray-100 w-72 border b-gray-200 ">
+    <div className="mt-4 mb-4 p-4 m-1 bg-gray-200 w-72 border b-gray-200 ">
       <div
         onClick={() => setisOpened(!isOpened)}
         className="bg-gray-200  p-1 flex justify-items cursor-pointer"
       >
-        <h1 className="uppercase text-xs">{bug.title}</h1>
+        <h1 className="Capitalize text-s">{bug.title}</h1>
         <div className="flex ml-auto">
           <FontAwesomeIcon
             onClick={() =>
