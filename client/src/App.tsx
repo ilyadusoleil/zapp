@@ -63,7 +63,10 @@ const App = () => {
         <Context.Provider value={{ state, dispatch }}>
           <Location>
             {({ location, navigate }: LocationContext) => {
-              const { oldLocation } = location.state || {};
+              const state: any = location.state; // TODO: remove this any
+              const { oldLocation } = state || {};
+
+              // Basically if there is a 'old location' attached to the state render the route as a modal instead
               return (
                 <>
                   <Routes
