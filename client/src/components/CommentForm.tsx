@@ -22,7 +22,7 @@ const CommentForm = ({
 
   return (
     <form
-      className="w-3/12 max-w-l border-2 border-indigo-200 rounded-lg bg-gray-100 p-10 "
+      className="border-2 border-indigo-200 rounded-lg bg-gray-100 p-10"
       onSubmit={handleSubmit}
     >
       <div>
@@ -39,7 +39,7 @@ const CommentForm = ({
 
       <div className="flex">
         <button
-          className="mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          className="mt-5 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           type="submit"
         >
           SUBMIT
