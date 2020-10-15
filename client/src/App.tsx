@@ -1,16 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import ReactDOM from 'react-dom';
 
-import { QueryCache } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
 
-import {
-  Router,
-  Location,
-  WindowLocation,
-  RouterProps,
-  LocationContext,
-} from '@reach/router';
+import { Router, Location, RouterProps, LocationContext, Redirect } from '@reach/router';
 import { Dialog } from '@reach/dialog';
 
 import Context, { reducer } from './Context';
@@ -27,24 +20,31 @@ import BugEdit from './pages/BugEdit';
 import '@reach/dialog/styles.css';
 
 function Routes(props: RouterProps) {
+  const ctx = useContext(Context);
   return (
     <Router {...props}>
       <Login path="/" />
       <Landing path="/landing" />
-      <PreDashboard path="/preDashboard" />
-      <Dashboard path="/dashboard" />
-      <BugCreate path="/new" />
-      <ProjectCreate path="/newProject" />
 
-      <BugDetails path="/details/:id" />
-      <BugEdit path="/details/edit/:id" />
+      {ctx.state.isAuthenticated ? (
+        <>
+          <PreDashboard path="/preDashboard" />
+          <Dashboard path="/dashboard/:id" />
+          <BugCreate path="/new" />
+          <ProjectCreate path="/newProject" />
+
+          <BugDetails path="/details/:id" />
+          <BugEdit path="/details/edit/:id" />
+        </>
+      ) : (
+        <Redirect from="*" to="/" noThrow />
+      )}
     </Router>
   );
 }
 
 const App = () => {
   const initialState = {
-    currentProjectId: 0,
     isBugModalOpen: false,
     isProjectOpen: false,
     bugModalId: 0,
