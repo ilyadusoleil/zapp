@@ -47,7 +47,7 @@ const sidebarData: sidebarDataType[] = [
   },
   {
     icon: faHome,
-    path: '/dashboard',
+    path: '/preDashboard',
   },
   {
     icon: faPlus,

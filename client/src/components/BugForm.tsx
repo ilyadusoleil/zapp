@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { MutateFunction } from 'react-query';
 import { BugInput, Bug } from '../types/Bug';
 import Context from '../Context';
+import { navigate } from '@reach/router';
 
 const defaultFormValues = {
   title: '',
@@ -14,10 +15,12 @@ const defaultFormValues = {
 const BugForm = ({
   onSubmit,
   submitText,
+  submitRoute,
   initialValues = defaultFormValues,
 }: {
   onSubmit: MutateFunction<Bug, unknown, BugInput, unknown>;
   submitText: string;
+  submitRoute?: string;
   initialValues?: BugInput;
 }) => {
   const ctx = useContext(Context);
@@ -33,6 +36,9 @@ const BugForm = ({
       projectId: ctx.state.currentProjectId,
     });
     onSubmit(valuesCopy);
+    if (submitRoute) {
+      navigate(submitRoute);
+    }
   };
 
   useEffect(() => {
@@ -41,7 +47,7 @@ const BugForm = ({
 
   return (
     <form
-      className="w-3/12 max-w-l border-2 border-indigo-200 rounded-lg bg-gray-100 p-10 "
+      className="m-10 ml-0 border-2 border-indigo-200 rounded-lg bg-gray-100 p-10 "
       onSubmit={handleSubmit}
     >
       <label
