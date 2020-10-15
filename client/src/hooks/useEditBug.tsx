@@ -3,7 +3,7 @@ import fetchRequest from '../services/ApiService';
 
 import { Bug } from '../types/Bug';
 
-export default function useSavePost() {
+export default function useSaveBug() {
   const editBug = async (bug: Bug): Promise<Bug> => {
     return fetchRequest(`/bugs`, {
       method: 'PUT',
@@ -14,18 +14,10 @@ export default function useSavePost() {
 
   return useMutation(editBug, {
     onMutate: (values) => {
-      const oldIssue = queryCache.getQueryData<Bug>(['bug', values.id]);
-      if (!oldIssue) return;
-
-      queryCache.setQueryData<Bug>(['bug', values.id], (old) => ({
-        ...old,
-        ...values,
-      }));
-
-      return () => queryCache.setQueryData<Bug>(['bug', values.id], oldIssue);
+      return () => queryCache.setQueryData<Bug>(['bug', values.id], values);
     },
     onError: (_error, _values, rollback) => (rollback as () => void)(),
-    onSuccess: async (/*values*/) => {
+    onSuccess: async (values) => {
       // FIXME: revert to commented code once server returns new value
       queryCache.refetchQueries(['projectbugs']);
       await queryCache.refetchQueries(['bug']);
