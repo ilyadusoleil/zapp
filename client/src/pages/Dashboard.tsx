@@ -20,7 +20,7 @@ const Dashboard = (_props: RouteComponentProps) => {
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(ctx.state.currentProjectId); //TODO: change hard coding of projectId
   const [bugs, setBugs] = useState([] as Bug []);
-  const [isSorted, toggleIsSorted] = useState()
+  const [isSorted, setIsSorted] = useState(true)
 
   useEffect (() => {
       if(data) {
@@ -47,9 +47,14 @@ const Dashboard = (_props: RouteComponentProps) => {
     },
   };
 
-const sortByDateCreated = (bugs: any) => {
-        const createdSort = [...bugs].sort((a: any, b: any) => b.priority  - a.priority)
-    setBugs(createdSort)
+const sortBy = (bugs: any, isSorted: boolean) => {
+    if(isSorted) {
+     const sortA = [...bugs].sort((a: any, b: any) => b.priority  - a.priority)
+    return setBugs(sortA), setIsSorted(false)
+    } else  {
+    const sortB = [...bugs].sort((a: any, b: any) => a.priority  - b.priority)
+    return setBugs(sortB), setIsSorted(true);
+    }
 }
 
 
@@ -59,27 +64,27 @@ const sortByDateCreated = (bugs: any) => {
   return (
     <>
     
-      <Sidebar />
-      <Modal isOpen={ctx.state.isBugModalOpen} style={modalStyle} onRequestClose={() => {
-          ctx.dispatch({ type: 'closeBugModal' });
+    <Sidebar />
+    <Modal isOpen={ctx.state.isBugModalOpen} style={modalStyle} onRequestClose={() => {
+        ctx.dispatch({ type: 'closeBugModal' });
         }}>
-          <BugDetails/>
-      </Modal >
-      <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle} onRequestClose={() => {
-          ctx.dispatch({ type: 'closeProjectModal' });}}>
-          <ProjectCreate/>
-      </Modal >
-      <Sidebar currentPath="/dashboard" />
+        <BugDetails/>
+    </Modal >
+    <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle} onRequestClose={() => {
+        ctx.dispatch({ type: 'closeProjectModal' });}}>
+        <ProjectCreate/>
+    </Modal >
+    <Sidebar currentPath="/dashboard" />
 
-      <div className="mx-16">
+    <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
-        <button onClick= {() =>  sortByDateCreated(bugs)} >sort by date</button>
+        <button onClick= {() => {sortBy(bugs, isSorted)}}>sort by priority</button>
 
         {bugs.map((bug: Bug, index) => (
-          <Bugitem key={index} bug={bug} />
+        <Bugitem key={index} bug={bug} />
         ))}
-      </div>
+    </div>
     </>
   );
 };
