@@ -8,8 +8,7 @@ import GoogleButton from 'react-google-button';
 
 const Login = (_props: RouteComponentProps) => {
   const handleLogin = () => {
-    navigate('dashboard');
-    // window.open(`${SERVER}/auth/google`, '_self'); // TODO: change this when oauth implementation
+    window.open(`${SERVER}/auth/google`, '_self'); // TODO: change this when oauth implementation
   };
 
   return (
