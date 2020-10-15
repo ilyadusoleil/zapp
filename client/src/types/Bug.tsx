@@ -4,7 +4,7 @@ export type Bug = {
   title: string;
   description: string;
   priority: number;
-  created_At: Date;
+  createdAt: Date;
   state: any; // TODO update this once finalised on server
 };
 

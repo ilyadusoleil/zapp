@@ -17,76 +17,95 @@ import Context from '../Context';
 import { setSyntheticTrailingComments } from 'typescript';
 
 const Dashboard = (_props: RouteComponentProps) => {
-  const ctx = useContext(Context);
+const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(ctx.state.currentProjectId); //TODO: change hard coding of projectId
-  const [bugs, setBugs] = useState([] as Bug []);
-  const [isSorted, setIsSorted] = useState(true)
+const [sortIdx, setSortIdx] = useState(0);
 
-  useEffect (() => {
-      if(data) {
-          const bugs= data.sort((a, b) => a.priority - b.priority)
-          setBugs(bugs)
-      }
-  }, [data])
-  
-  if (isLoading) {
+if (isLoading) {
     return <span>Loading...</span>;
-  }
-
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
-
- const modalStyle: Styles = {
-    content: {
-      position: 'absolute',
-      top: '5%',
-      left: '5%',
-      right: '5%',
-      bottom: '5%',
-    },
-  };
-
-const sortBy = (bugs: any, isSorted: boolean) => {
-    if(isSorted) {
-     const sortA = [...bugs].sort((a: any, b: any) => b.priority  - a.priority)
-    return setBugs(sortA), setIsSorted(false)
-    } else  {
-    const sortB = [...bugs].sort((a: any, b: any) => a.priority  - b.priority)
-    return setBugs(sortB), setIsSorted(true);
-    }
 }
 
+if (isError || !data) {
+    return <span>Error: </span>;
+}
 
+const modalStyle: Styles = {
+    content: {
+    position: 'absolute',
+    top: '5%',
+    left: '5%',
+    right: '5%',
+    bottom: '5%',
+    },
+};
+
+type selectInfo = {
+    label: string;
+    sortFunction: (a: Bug, b: Bug) => number;
+};
+
+const SELECT_INFO: selectInfo[] = [
+    { label: 'high-low', sortFunction: (a, b) => a.priority - b.priority },
+    { label: 'low-high', sortFunction: (a, b) => b.priority - a.priority },
+    {
+    label: 'first-last',
+    sortFunction: (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+    },
+    {
+    label: 'last-first',
+    sortFunction: (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+    },
+];
 
   Modal.setAppElement('body'); // Prevents React: App element is not defined warning
 
-  return (
+return (
     <>
-    
     <Sidebar />
-    <Modal isOpen={ctx.state.isBugModalOpen} style={modalStyle} onRequestClose={() => {
+    <Modal
+        isOpen={ctx.state.isBugModalOpen}
+        style={modalStyle}
+        onRequestClose={() => {
         ctx.dispatch({ type: 'closeBugModal' });
-        }}>
-        <BugDetails/>
-    </Modal >
-    <Modal isOpen={ctx.state.isProjectOpen} style={modalStyle} onRequestClose={() => {
-        ctx.dispatch({ type: 'closeProjectModal' });}}>
-        <ProjectCreate/>
-    </Modal >
+        }}
+    >
+        <BugDetails />
+    </Modal>
+    <Modal
+        isOpen={ctx.state.isProjectOpen}
+        style={modalStyle}
+        onRequestClose={() => {
+        ctx.dispatch({ type: 'closeProjectModal' });
+        }}
+    >
+        <ProjectCreate />
+    </Modal>
     <Sidebar currentPath="/dashboard" />
 
     <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
-        <button onClick= {() => {sortBy(bugs, isSorted)}}>sort by priority</button>
+        <select
+        onChange={(e) => {
+            setSortIdx(parseInt(e.target.value));
+        }}
+        >
+        {SELECT_INFO.map((el, i) => (
+            <option value={i} key={i}>
+            {el.label}
+            </option>
+        ))}
 
-        {bugs.map((bug: Bug, index) => (
-        <Bugitem key={index} bug={bug} />
+        </select>
+
+        {[...data]
+        .sort(SELECT_INFO[sortIdx].sortFunction)
+        .map((bug: Bug, index) => (
+            <Bugitem key={index} bug={bug} />
         ))}
     </div>
     </>
-  );
+);
 };
 
 export default Dashboard;
