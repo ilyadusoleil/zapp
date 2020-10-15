@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 
 import { Collapse } from 'react-collapse';
 
+import { navigate } from '@reach/router';
+
 import { Bug } from '../types/Bug';
 
 import './Bugitem.css';
@@ -18,7 +20,6 @@ function Bugitem({ bug }: Props) {
   const ctx = useContext(Context);
   const [isOpened, setisOpened] = useState(false);
 
-
   // FIXME: Update all equality checks to === below once server returns number??
   function priority(level: number) {
     return level == 0
@@ -32,7 +33,7 @@ function Bugitem({ bug }: Props) {
     if (level == 0) return 'High';
     if (level == 1) return 'Medium';
     return 'Low';
-  }
+  };
 
   return (
     <div className=" m-1 bg-gray-100 w-72 border b-gray-200 ">
@@ -43,7 +44,11 @@ function Bugitem({ bug }: Props) {
         <h1 className="uppercase text-xs">{bug.title}</h1>
         <div className="flex ml-auto">
           <FontAwesomeIcon
-            onClick={() => ctx.dispatch({ type: 'openBugModal', payload: bug.id })}
+            onClick={() =>
+              navigate(`/edit/${bug.id}`, {
+                state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+              })
+            }
             icon={faEdit}
             size={'sm'}
             className="mr-10 text-gray-900"

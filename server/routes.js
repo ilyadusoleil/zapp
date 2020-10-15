@@ -5,7 +5,38 @@ const commentsCtrl = require('./controllers/comments');
 const detailsCtrl = require('./controllers/details');
 const commentMiddleware = require('./middleware/getComments');
 
+const passport = require('passport');
+
 const router = express.Router();
+
+//=============
+// AUTH
+//=============
+
+router.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile'] })
+);
+
+router.get(
+  'auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: 'auth/login/failed',
+  })
+);
+
+router.get('auth/login/failed', (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: 'user failed to authenticate.',
+  });
+});
+
+router.get('/auth/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 //=============
 // PROJECTS

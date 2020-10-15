@@ -19,7 +19,6 @@ const getProjects = async function (req, res) {
     res.status(200);
     res.send(processedProjects);
   } catch (err) {
-    console.log('---> error retrieving projects from the database', err.stack);
     res.status(500);
     res.send({ err, message: 'error retrieving projects from the database' });
   }
@@ -27,28 +26,25 @@ const getProjects = async function (req, res) {
 
 const createProject = async function (req, res) {
   try {
-    db.project
-      .create({
-        name: req.body.name,
-        description: req.body.description,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
-      .then((newProject) => {
-        db.projectuser.create({
-          userId: req.body.user_Id,
-          projectId: newProject.id,
-          authorization: 0,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-      })
-      .then((newProject) => {
-        res.status(201);
-        res.send(newProject);
-      });
+    const newProject = await db.project.create({
+      name: req.body.name,
+      description: req.body.description,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    // TODO: hande case where new Poject is created but join table entry is not...
+    await db.projectuser.create({
+      userId: req.body.user_Id,
+      projectId: newProject.dataValues.id,
+      authorization: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    
+    res.status(201);
+    res.send(newProject);
+
   } catch (err) {
-    console.log('---> error creating project in database', err.stack);
     res.status(500);
     res.send({ err, message: 'error creating project in database' });
   }

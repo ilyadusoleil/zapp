@@ -8,7 +8,9 @@
     "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
-    "mockserver": "json-server --watch db.json"
+    "mockserver": "json-server --watch db.json",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"src/*/*.{js,jsx,ts,tsx}\""
   },
   "keywords": [],
   "author": "",
@@ -18,10 +20,12 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@reach/dialog": "^0.11.2",
     "@reach/router": "^1.3.4",
     "react": "^16.13.1",
     "react-collapse": "^5.0.1",
     "react-dom": "^16.13.1",
+    "react-google-button": "^0.7.1",
     "react-modal": "^3.11.2",
     "react-query": "^2.23.1",
     "react-query-devtools": "^2.6.0",

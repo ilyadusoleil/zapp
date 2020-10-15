@@ -10,7 +10,6 @@ const getComments = async function (req, res, next) {
     req.body.comments = comments;
     next();
   } catch (err) {
-    console.log('---> error retrieving comments from the database', err.stack);
     res.status(500);
     res.send({ err, message: 'error retrieving comments from the database' });
   }

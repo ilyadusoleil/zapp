@@ -1,8 +1,8 @@
 export type Project = {
   id: number;
-  title: string;
+  name: string;
   description?: string;
-  userId: string;
+  user_Id: string;
 };
 
 export type ProjectInput = Omit<Project, 'id'>;

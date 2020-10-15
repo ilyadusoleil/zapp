@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, navigate, RouteComponentProps } from '@reach/router';
+import React, { useContext, useState } from 'react';
+import { RouteComponentProps } from '@reach/router';
 import Modal, { Styles } from 'react-modal';
 
 import { Bug } from '../types/Bug';
@@ -61,28 +61,18 @@ const SELECT_INFO: selectInfo[] = [
 
 return (
     <>
-    <Sidebar />
-    <Modal
-        isOpen={ctx.state.isBugModalOpen}
-        style={modalStyle}
-        onRequestClose={() => {
-        ctx.dispatch({ type: 'closeBugModal' });
-        }}
-    >
-        <BugDetails />
-    </Modal>
-    <Modal
+      <Modal
         isOpen={ctx.state.isProjectOpen}
         style={modalStyle}
         onRequestClose={() => {
-        ctx.dispatch({ type: 'closeProjectModal' });
+          ctx.dispatch({ type: 'closeProjectModal' });
         }}
-    >
+      >
         <ProjectCreate />
-    </Modal>
-    <Sidebar currentPath="/dashboard" />
+      </Modal>
+      <Sidebar currentPath="/dashboard" />
 
-    <div className="mx-16">
+      <div className="mx-16">
         <ProjectHeader />
         <h1>Dashboard</h1>
         <select

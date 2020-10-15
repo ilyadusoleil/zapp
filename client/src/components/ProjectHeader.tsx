@@ -16,7 +16,7 @@ import useProjects from '../hooks/useProjects';
 const ProjectHeader = () => {
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
-  const { isLoading, isError, data } = useProjects(ctx.state.userId);
+  const { data } = useProjects(ctx.state.userId);
 
   const getIndexFromId = (id: number) => {
     if (!data) return 0;
@@ -75,7 +75,7 @@ const ProjectHeader = () => {
         <div
           className="h-10 flex items-center"
           onClick={() => {
-            ctx.dispatch({ type: 'openProjectModal'});
+            ctx.dispatch({ type: 'openProjectModal' });
           }}
         >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
