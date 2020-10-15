@@ -7,6 +7,7 @@ import useCreateComment from '../hooks/useCreateComment';
 
 import Sidebar from '../components/Sidebar';
 import CommentForm from '../components/CommentForm';
+import CommentComponent from '../components/CommentComponent';
 
 import Context from '../Context';
 
@@ -43,8 +44,11 @@ const BugDetails = (props: BugDetailsProps) => {
         <div>{data.title}</div>
         <div>{data.description}</div>
 
-        {data.comments && data.comments.map(el => (<div key={el.id}>{el.content}</div>))}
-        <CommentForm onSubmit={createComment} bugId={parseInt(props.id)}/>
+        {data.comments &&
+          data.comments.map((el) => (
+            <CommentComponent key={el.id} comment={el} />
+          ))}
+        <CommentForm onSubmit={createComment} bugId={parseInt(props.id)} />
       </div>
     </>
   );

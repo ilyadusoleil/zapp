@@ -3,6 +3,7 @@ const projectsCtrl = require('./controllers/projects');
 const bugsCtrl = require('./controllers/bugs');
 const commentsCtrl = require('./controllers/comments');
 const detailsCtrl = require('./controllers/details');
+const usersCtrl = require('./controllers/users');
 const commentMiddleware = require('./middleware/getComments');
 
 const passport = require('passport');
@@ -61,6 +62,7 @@ router.post('/projects', projectsCtrl.createProject);
 // USERS
 //=============
 
+router.get('/user', usersCtrl.getUser)
 // TODO create user or use OAUTH??
 // TODO end point for adding user to project
 
