@@ -6,7 +6,7 @@ import Context from '../Context';
 const defaultFormValues = {
   name: '',
   description: '',
-  user_Id: 'nouser',
+  userId: 'nouser',
 };
 
 const ProjectForm = ({
@@ -27,7 +27,7 @@ const ProjectForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    const valuesCopy = Object.assign({}, values, { user_Id: ctx.state.userId });
+    const valuesCopy = Object.assign({}, values, { userId: ctx.state.userId });
     onSubmit(valuesCopy);
   };
 

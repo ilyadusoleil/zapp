@@ -4,7 +4,7 @@ const getComments = async function (req, res, next) {
   try {
     const comments = await db.comment.findAll({
       where: {
-        bugId: req.query.bug_Id,
+        bugId: req.query.bugId,
       },
     });
     req.body.comments = comments;
