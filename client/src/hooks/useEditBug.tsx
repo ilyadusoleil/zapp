@@ -21,7 +21,7 @@ export default function useSaveBug() {
       // FIXME: revert to commented code once server returns new value
       queryCache.refetchQueries(['projectbugs']);
       await queryCache.refetchQueries(['bug']);
-      // queryCache.refetchQueries(['projectbugs', values.project_Id]);
+      // queryCache.refetchQueries(['projectbugs', values.projectId]);
       // await queryCache.refetchQueries(['bug', values.id]);
     },
   });
