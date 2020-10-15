@@ -45,9 +45,7 @@ function Bugitem({ bug }: Props) {
         <div className="flex ml-auto">
           <FontAwesomeIcon
             onClick={() =>
-              navigate(`/edit/${bug.id}`, {
-                state: { oldLocation: JSON.parse(JSON.stringify(location)) },
-              })
+              navigate(`/details/${bug.id}`)
             }
             icon={faEdit}
             size={'sm'}
