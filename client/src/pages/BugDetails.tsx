@@ -16,7 +16,7 @@ interface BugDetailsProps extends RouteComponentProps {
 
 const BugDetails = (props: BugDetailsProps) => {
   if (!props.id) return <h1>Hmm no id</h1>;
-  const { isLoading, isError, data } = useBug(parseInt(props.id)););
+  const { isLoading, isError, data } = useBug(parseInt(props.id));
   const [createComment, { status: createCommentStatus }] = useCreateComment();
 
   if (isLoading) {
