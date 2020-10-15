@@ -3,9 +3,10 @@ import React, { useContext } from 'react';
 import { Link, navigate, RouteComponentProps } from '@reach/router';
 
 import useBug from '../hooks/useBug';
-import useEditBug from '../hooks/useEditBug';
+import useCreateComment from '../hooks/useCreateComment';
 
 import Sidebar from '../components/Sidebar';
+import CommentForm from '../components/CommentForm';
 
 import Context from '../Context';
 
@@ -15,7 +16,8 @@ interface BugDetailsProps extends RouteComponentProps {
 
 const BugDetails = (props: BugDetailsProps) => {
   if (!props.id) return <h1>Hmm no id</h1>;
-  const { isLoading, isError, data } = useBug(parseInt(props.id));
+  const { isLoading, isError, data } = useBug(parseInt(props.id)););
+  const [createComment, { status: createCommentStatus }] = useCreateComment();
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -24,7 +26,6 @@ const BugDetails = (props: BugDetailsProps) => {
   if (isError || !data) {
     return <span>Error: </span>;
   }
-  console.log(data);
   return (
     <>
       <Sidebar />
@@ -41,6 +42,9 @@ const BugDetails = (props: BugDetailsProps) => {
         </button>
         <div>{data.title}</div>
         <div>{data.description}</div>
+
+        {data.comments && data.comments.map(el => (<div key={el.id}>{el.content}</div>))}
+        <CommentForm onSubmit={createComment} bugId={parseInt(props.id)}/>
       </div>
     </>
   );
