@@ -1,16 +1,9 @@
 import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
-import { QueryCache } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
 
-import {
-  Router,
-  Location,
-  WindowLocation,
-  RouterProps,
-  LocationContext,
-} from '@reach/router';
+import { Router, Location, RouterProps, LocationContext } from '@reach/router';
 import { Dialog } from '@reach/dialog';
 
 import Context, { reducer } from './Context';
@@ -32,7 +25,7 @@ function Routes(props: RouterProps) {
       <Login path="/" />
       <Landing path="/landing" />
       <PreDashboard path="/preDashboard" />
-      <Dashboard path="/dashboard" />
+      <Dashboard path="/dashboard/:id" />
       <BugCreate path="/new" />
       <ProjectCreate path="/newProject" />
 
@@ -44,7 +37,6 @@ function Routes(props: RouterProps) {
 
 const App = () => {
   const initialState = {
-    currentProjectId: 0,
     isBugModalOpen: false,
     isProjectOpen: false,
     bugModalId: 0,
