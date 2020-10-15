@@ -6,6 +6,8 @@ type State = {
   isBugModalOpen: boolean;
   isProjectOpen: boolean;
   bugModalId: number;
+  isAuthenticated: boolean;
+  authError: string;
 };
 
 const initialState: State = {
@@ -14,6 +16,9 @@ const initialState: State = {
   isBugModalOpen: false,
   isProjectOpen: false,
   bugModalId: 0,
+
+  isAuthenticated: false,
+  authError: '',
 };
 
 const Context = createContext<{
@@ -51,6 +56,27 @@ const reducer = (state: State, action: any) => {
     case 'closeProjectModal':
       return Object.assign({}, state, {
         isProjectOpen: false,
+      });
+
+    case 'login':
+      return Object.assign({}, state, {
+        isAuthenticated: true,
+        authError: '',
+        userId: action.payload,
+      });
+
+    case 'loginError':
+      return Object.assign({}, state, {
+        isAuthenticated: false,
+        authError: action.payload,
+        userId: 0,
+      });
+      
+    case 'logout':
+      return Object.assign({}, state, {
+        isAuthenticated: false,
+        authError: '',
+        userId: 0,
       });
 
     default:

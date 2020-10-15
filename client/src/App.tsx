@@ -33,10 +33,14 @@ function Routes(props : RouterProps) {
 const App = () => {
   const initialState = {
     currentProjectId: 0,
-    userId: '3', // TODO: no longer hard code this one user authenitcation is working
     isBugModalOpen: false,
     isProjectOpen: false,
     bugModalId: 0,
+    
+    userId: '3', // TODO: no longer hard code this one user authenitcation is working
+    // user: {},
+    isAuthenticated: false,
+    authError: "",
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
