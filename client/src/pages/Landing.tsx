@@ -25,9 +25,9 @@ const Landing = (_props: RouteComponentProps) => {
       })
       .then((responseJson) => {
         // Login
-        ctx.dispatch({type: 'login', payload: responseJson.id}) // TODO: check .id is the right key
+        ctx.dispatch({type: 'login', payload: responseJson.user.id}) // TODO: check .id is the right key
         // TODO: also update to store ful user information
-        navigate('/dashboard');
+        navigate('/preDashboard');
       })
       .catch((error) => {
         // Return to home page
