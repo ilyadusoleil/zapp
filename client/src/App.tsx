@@ -21,6 +21,7 @@ import PreDashboard from './pages/PreDashboard';
 import Dashboard from './pages/Dashboard';
 import BugCreate from './pages/BugCreate';
 import ProjectCreate from './pages/ProjectCreate';
+import BugDetails from './pages/BugDetails';
 import BugEdit from './pages/BugEdit';
 
 import '@reach/dialog/styles.css';
@@ -35,7 +36,8 @@ function Routes(props: RouterProps) {
       <BugCreate path="/new" />
       <ProjectCreate path="/newProject" />
 
-      <BugEdit path="/edit/:id" />
+      <BugDetails path="/details/:id" />
+      <BugEdit path="/details/edit/:id" />
     </Router>
   );
 }
@@ -61,7 +63,10 @@ const App = () => {
         <Context.Provider value={{ state, dispatch }}>
           <Location>
             {({ location, navigate }: LocationContext) => {
-              const { oldLocation } = location.state || {};
+              const state: any = location.state; // TODO: remove this any
+              const { oldLocation } = state || {};
+
+              // Basically if there is a 'old location' attached to the state render the route as a modal instead
               return (
                 <>
                   <Routes

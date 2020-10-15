@@ -8,7 +8,6 @@ import useBugs from '../hooks/useBugs';
 import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
 
-import BugDetails from '../pages/BugDetails';
 import ProjectCreate from '../pages/ProjectCreate';
 
 import ProjectHeader from '../components/ProjectHeader';
