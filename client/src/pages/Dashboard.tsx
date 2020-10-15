@@ -15,13 +15,32 @@ import ProjectHeader from '../components/ProjectHeader';
 import Context from '../Context';
 import { setSyntheticTrailingComments } from 'typescript';
 
-interface DashboardProps extends RouteComponentProps
-{
+interface DashboardProps extends RouteComponentProps {
   id?: string;
 }
 
-const Dashboard = ({id: projectId}: DashboardProps) => {
-  if (!projectId) return (<h1>Hmm no id for dashboard</h1>) // TODO: redirect to first or most recently used project
+type selectInfo = {
+  label: string;
+  sortFunction: (a: Bug, b: Bug) => number;
+};
+
+const SELECT_INFO: selectInfo[] = [
+  { label: 'high-low', sortFunction: (a, b) => a.priority - b.priority },
+  { label: 'low-high', sortFunction: (a, b) => b.priority - a.priority },
+  {
+    label: 'first-last',
+    sortFunction: (a, b) =>
+      new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+  },
+  {
+    label: 'last-first',
+    sortFunction: (a, b) =>
+      new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+  },
+];
+
+const Dashboard = ({ id: projectId }: DashboardProps) => {
+  if (!projectId) return <h1>Hmm no id for dashboard</h1>; // TODO: redirect to first or most recently used project
 
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(parseInt(projectId));
@@ -35,53 +54,13 @@ const Dashboard = ({id: projectId}: DashboardProps) => {
     return <span>Error: </span>;
   }
 
-  const modalStyle: Styles = {
-    content: {
-      position: 'absolute',
-      top: '5%',
-      left: '5%',
-      right: '5%',
-      bottom: '5%',
-    },
-  };
-
-  type selectInfo = {
-    label: string;
-    sortFunction: (a: Bug, b: Bug) => number;
-  };
-
-  const SELECT_INFO: selectInfo[] = [
-    { label: 'high-low', sortFunction: (a, b) => a.priority - b.priority },
-    { label: 'low-high', sortFunction: (a, b) => b.priority - a.priority },
-    {
-      label: 'first-last',
-      sortFunction: (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-    },
-    {
-      label: 'last-first',
-      sortFunction: (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-    },
-  ];
-
-  Modal.setAppElement('body'); // Prevents React: App element is not defined warning
 
   return (
     <>
-      <Modal
-        isOpen={ctx.state.isProjectOpen}
-        style={modalStyle}
-        onRequestClose={() => {
-          ctx.dispatch({ type: 'closeProjectModal' });
-        }}
-      >
-        <ProjectCreate />
-      </Modal>
       <Sidebar currentPath="/dashboard" />
 
       <div className="mx-16">
-        <ProjectHeader projectId={parseInt(projectId)}/>
+        <ProjectHeader projectId={parseInt(projectId)} />
         <h1>Dashboard</h1>
         <select
           onChange={(e) => {

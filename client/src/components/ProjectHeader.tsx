@@ -62,7 +62,9 @@ const ProjectHeader = ({projectId} : {projectId: number}) => {
         <div
           className="h-10 flex items-center"
           onClick={() => {
-            ctx.dispatch({ type: 'openProjectModal' });
+            navigate(`/newProject`, {
+              state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+            });
           }}
         >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />

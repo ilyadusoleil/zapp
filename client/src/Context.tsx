@@ -29,28 +29,6 @@ const Context = createContext<{
 
 const reducer = (state: State, action: any) => {
   switch (action.type) {
-    case 'openBugModal':
-      return Object.assign({}, state, {
-        isBugModalOpen: true,
-        bugModalId: action.payload,
-      });
-
-    case 'closeBugModal':
-      return Object.assign({}, state, {
-        isBugModalOpen: false,
-        bugModalId: 0,
-      });
-
-    case 'openProjectModal':
-      return Object.assign({}, state, {
-        isProjectOpen: true,
-      });
-
-    case 'closeProjectModal':
-      return Object.assign({}, state, {
-        isProjectOpen: false,
-      });
-
     case 'login':
       return Object.assign({}, state, {
         isAuthenticated: true,
