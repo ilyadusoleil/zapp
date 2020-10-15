@@ -4,7 +4,7 @@ const getDetails = async function (req, res) {
   try {
     const details = await db.bug.findOne({
       where: {
-        id: req.query.bug_Id,
+        id: req.query.bugId,
       },
     });
     details.dataValues.comments = req.body.comments;

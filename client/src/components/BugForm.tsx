@@ -5,7 +5,7 @@ import Context from '../Context';
 
 const defaultFormValues = {
   title: '',
-  project_Id: -1,
+  projectId: -1,
   description: '',
   priority: 2,
   state: 0,
@@ -30,7 +30,7 @@ const BugForm = ({
     setValues(defaultFormValues);
     e.preventDefault();
     const valuesCopy = Object.assign({}, values, {
-      project_Id: ctx.state.currentProjectId,
+      projectId: ctx.state.currentProjectId,
     });
     onSubmit(valuesCopy);
   };

@@ -4,7 +4,7 @@ const getBugs = async function (req, res) {
   try {
     const bugs = await db.bug.findAll({
       where: {
-        projectId: req.query.project_Id,
+        projectId: req.query.projectId,
       },
     });
     res.status(200);
@@ -25,8 +25,8 @@ const createBug = async function (req, res) {
         priority: req.body.priority,
         createdAt: new Date(),
         updatedAt: new Date(),
-        projectId: req.body.project_Id,
-        userId: req.body.user_Id,
+        projectId: req.body.projectId,
+        userId: req.body.userId,
       })
       .then((newBug) => {
         res.status(201);
@@ -47,10 +47,10 @@ const editBug = async function (req, res) {
           description: req.body.description,
           state: req.body.state,
           priority: req.body.priority,
-          createdAt: req.body.created_At,
+          createdAt: req.body.createdAt,
           updatedAt: new Date(),
-          projectId: req.body.project_Id,
-          userId: req.body.user_Id,
+          projectId: req.body.projectId,
+          userId: req.body.userId,
         },
         {
           where: {

@@ -7,8 +7,8 @@ const createComment = async function (req, res) {
         content: req.body.content,
         createdAt: new Date(),
         updatedAt: new Date(),
-        bugId: req.body.bug_Id,
-        userId: req.body.user_Id,
+        bugId: req.body.bugId,
+        userId: req.body.userId,
       })
       .then((newComment) => {
         res.status(201);

@@ -8,12 +8,12 @@ import Context from '../Context';
 
 const defaultFormValues = {
   id: 0,
-  project_Id: 0, // TOOD: get correct type
+  projectId: 0, // TODO: get correct type
   title: '',
   description: '',
   priority: 1,
   state: 0,
-  created_At: new Date(),
+  createdAt: new Date(),
 };
 
 const BugEditForm = ({
@@ -40,9 +40,8 @@ const BugEditForm = ({
       description: values.description,
       state: values.state,
       priority: values.priority,
-      created_At: values.created_At,
-      project_Id: values.project_Id,
-      // user_Id: values.,
+      createdAt: values.createdAt,
+      projectId: values.projectId,
       id: values.id,
     };
 

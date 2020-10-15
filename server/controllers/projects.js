@@ -6,7 +6,7 @@ const getProjects = async function (req, res) {
       //TODO improve this query
       attributes: [],
       where: {
-        userId: req.query.user_Id,
+        userId: req.query.userId,
       },
       include: {
         model: db.project,
@@ -34,16 +34,15 @@ const createProject = async function (req, res) {
     });
     // TODO: hande case where new Poject is created but join table entry is not...
     await db.projectuser.create({
-      userId: req.body.user_Id,
+      userId: req.body.userId,
       projectId: newProject.dataValues.id,
       authorization: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    
+
     res.status(201);
     res.send(newProject);
-
   } catch (err) {
     res.status(500);
     res.send({ err, message: 'error creating project in database' });
