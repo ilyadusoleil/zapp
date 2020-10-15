@@ -19,9 +19,13 @@ const PreDashboard = (_props: RouteComponentProps) => {
 
   useEffect(() => {
     if (projectsData && projectsData.length > 0) {
+      ctx.dispatch({
+        type: 'updateCurrentProject',
+        payload: projectsData[0].id,
+      });
       navigate('/dashboard');
     }
-  }, []);
+  }, [projectsData]);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -32,7 +36,7 @@ const PreDashboard = (_props: RouteComponentProps) => {
   }
 
   return (
-    <>
+    <div className="m-20">
       <div>Welcome to Zap!</div>
       <div>Create your first project below</div>
       <ProjectForm
@@ -44,11 +48,11 @@ const PreDashboard = (_props: RouteComponentProps) => {
             ? 'Error!'
             : createProjectStatus === 'success'
             ? 'Saved!'
-            : 'New Project'
+            : 'Create your first project'
         }
         submitRoute="/dashboard"
       />
-    </>
+    </div>
   );
 };
 

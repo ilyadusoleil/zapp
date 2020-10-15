@@ -25,13 +25,16 @@ const Landing = (_props: RouteComponentProps) => {
       })
       .then((responseJson) => {
         // Login
-        ctx.dispatch({type: 'login', payload: responseJson.user.id}) // TODO: check .id is the right key
+        console.log('login with userid: ', responseJson.user.id); //  TOOD: remove this console log once login more stable
+        ctx.dispatch({ type: 'login', payload: responseJson.user.id }); // TODO: check .id is the right key
         // TODO: also update to store ful user information
+
+        
         navigate('/preDashboard');
       })
       .catch((error) => {
         // Return to home page
-        ctx.dispatch({type: 'loginError', payload: "Failed to login"})
+        ctx.dispatch({ type: 'loginError', payload: 'Failed to login' });
         navigate('/');
       });
   }, []);

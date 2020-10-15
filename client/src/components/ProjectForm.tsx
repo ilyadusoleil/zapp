@@ -30,6 +30,7 @@ const ProjectForm = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
+
     const valuesCopy = Object.assign({}, values, { user_Id: ctx.state.userId });
     onSubmit(valuesCopy);
     if (submitRoute) {
@@ -46,6 +47,7 @@ const ProjectForm = ({
       <label htmlFor="name">Name</label>
       <div>
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           name="name"
           value={values.name}
@@ -54,7 +56,12 @@ const ProjectForm = ({
         />
       </div>
       <br />
-      <button type="submit">{submitText}</button>
+      <button
+        className="mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        type="submit"
+      >
+        {submitText}
+      </button>
     </form>
   );
 };
