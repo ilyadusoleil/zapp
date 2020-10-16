@@ -1,8 +1,10 @@
 import { createContext } from 'react';
+import { User } from './types/User';
 
 type State = {
   currentProjectId: number;
   userId: string;
+  user?: User;
   isAuthenticated: boolean;
   authError: string;
 };
@@ -26,7 +28,12 @@ const reducer = (state: State, action: any) => {
   switch (action.type) {
     case 'setCurrentProjectId':
       return Object.assign({}, state, {
-        currentProjectId: action.payload
+        currentProjectId: action.payload,
+      });
+
+    case 'updateUser':
+      return Object.assign({}, state, {
+        user: action.payload,
       });
 
     case 'login':
@@ -42,7 +49,7 @@ const reducer = (state: State, action: any) => {
         authError: action.payload,
         userId: 0,
       });
-      
+
     case 'logout':
       return Object.assign({}, state, {
         isAuthenticated: false,
