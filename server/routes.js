@@ -9,7 +9,6 @@ const passport = require('passport');
 
 const router = express.Router();
 
-
 //=============
 // AUTH
 //=============
@@ -28,13 +27,13 @@ router.get(
 );
 
 // when login is successful, retrieve user info
-router.get("/auth/login/success", (req, res) => {
+router.get('/auth/login/success', (req, res) => {
   if (req.user) {
     res.json({
       success: true,
-      message: "user has successfully authenticated",
+      message: 'user has successfully authenticated',
       user: req.user,
-      cookies: req.cookies
+      cookies: req.cookies,
     });
   }
 });
@@ -56,13 +55,7 @@ router.get('/auth/logout', (req, res) => {
 //=============
 router.get('/projects', projectsCtrl.getProjects);
 router.post('/projects', projectsCtrl.createProject);
-
-//=============
-// USERS
-//=============
-
-// TODO create user or use OAUTH??
-// TODO end point for adding user to project
+router.put('/projects', projectsCtrl.editProject);
 
 //=============
 // BUGS
