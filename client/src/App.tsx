@@ -31,8 +31,8 @@ function Routes(props: RouterProps) {
   const ctx = useContext(Context);
   return (
     <Router {...props}>
-      <Login path="/" />
-      <Landing path="/landing" />
+      <Login path="/login" />
+      <Landing path="/" />
 
       {ctx.state.isAuthenticated ? (
         <>

@@ -4,18 +4,34 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 
+var Sequelize = require('sequelize');
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 const app = express();
 
 require('./config/passport')(passport);
 
+// create database, ensure 'sqlite3' in your package.json
+var sequelize = new Sequelize('database', 'username', 'password', {
+  dialect: 'sqlite',
+  storage: './session.sqlite',
+});
+
+var myStore = new SequelizeStore({
+  db: sequelize,
+});
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    store: myStore,
     resave: false,
-    saveUninitialized: false,
-    // TODO add store
+    proxy: true,
+    // saveUninitialized: false,
   })
 );
+
+myStore.sync();
 
 app.use(express.json());
 
