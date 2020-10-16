@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import Modal, { Styles } from 'react-modal';
 
@@ -46,6 +46,10 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
   const { isLoading, isError, data } = useBugs(parseInt(projectId));
   const [sortIdx, setSortIdx] = useState(0);
 
+  useEffect(() => {
+    ctx.dispatch({type: 'setCurrentProjectId', payload: projectId})
+  }, [])
+
   if (isLoading) {
     return <span>Loading...</span>;
   }
@@ -53,7 +57,6 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
   if (isError || !data) {
     return <span>Error: </span>;
   }
-
 
   return (
     <>

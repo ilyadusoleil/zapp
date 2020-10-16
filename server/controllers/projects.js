@@ -1,5 +1,6 @@
 const db = require('../db/models/index');
 
+// GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
   try {
     const projects = await db.projectuser.findAll({

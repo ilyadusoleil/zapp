@@ -45,13 +45,10 @@ function Routes(props: RouterProps) {
 
 const App = () => {
   const initialState = {
-    isBugModalOpen: false,
-    isProjectOpen: false,
-    bugModalId: 0,
-
+    currentProjectId: -1,
     userId: '3', // TODO: no longer hard code this one user authenitcation is working
     // user: {},
-    isAuthenticated: false,
+    isAuthenticated: false, // TODO: set to false
     authError: '',
   };
 

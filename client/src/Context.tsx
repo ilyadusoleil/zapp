@@ -1,20 +1,15 @@
 import { createContext } from 'react';
 
 type State = {
+  currentProjectId: number;
   userId: string;
-  isBugModalOpen: boolean;
-  isProjectOpen: boolean;
-  bugModalId: number;
   isAuthenticated: boolean;
   authError: string;
 };
 
 const initialState: State = {
+  currentProjectId: 0,
   userId: '1',
-  isBugModalOpen: false,
-  isProjectOpen: false,
-  bugModalId: 0,
-
   isAuthenticated: false,
   authError: '',
 };
@@ -29,6 +24,11 @@ const Context = createContext<{
 
 const reducer = (state: State, action: any) => {
   switch (action.type) {
+    case 'setCurrentProjectId':
+      return Object.assign({}, state, {
+        currentProjectId: action.payload
+      });
+
     case 'login':
       return Object.assign({}, state, {
         isAuthenticated: true,
