@@ -2,11 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { MutateFunction } from 'react-query';
 import { CommentInput, Comment } from '../types/Comment';
 import Context from '../Context';
-import { createTextChangeRange } from 'typescript';
+
+import { BUTTON_STYLE } from '../constants';
 
 const CommentForm = ({
   onSubmit,
-  bugId
+  bugId,
 }: {
   onSubmit: MutateFunction<Comment, unknown, CommentInput, unknown>;
   bugId: number;
@@ -16,7 +17,7 @@ const CommentForm = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setContent('')
+    setContent('');
     onSubmit({ content, userId: ctx.state.userId, bugId });
   };
 
@@ -38,10 +39,7 @@ const CommentForm = ({
       </div>
 
       <div className="flex">
-        <button
-          className="mt-5 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-          type="submit"
-        >
+        <button className={`${BUTTON_STYLE} ml-auto`} type="submit">
           SUBMIT
         </button>
       </div>
