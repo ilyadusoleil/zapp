@@ -92,9 +92,7 @@ const EmailChips = ({
     const emails = paste?.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
 
     if (emails) {
-      console.log('emails', emails);
       const newEmails = emails.filter((email: string) => isValidEmail(email));
-      console.log('newEmails', newEmails);
       for (let i = 0; i < newEmails.length; i++) {
         await addCollaborator(newEmails[i]);
       }
