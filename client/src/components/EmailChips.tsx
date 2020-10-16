@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useContext } from 'react';
 import fetchRequest from '../services/ApiService';
+import Context from '../Context';
 
 const defaultChips: {
   id: number | null;
@@ -17,6 +18,7 @@ const EmailChips = ({
   const [collaborator, setCollaborator] = useState('');
   const [error, setError] = useState('');
   const [chips, setChips] = useState(defaultChips);
+  const ctx = useContext(Context);
 
   const handleChangeCollaborator = (e: ChangeEvent<HTMLInputElement>) => {
     setCollaborator(e.target.value);
@@ -77,7 +79,7 @@ const EmailChips = ({
 
     if (emails) {
       console.log('emails', emails);
-      const newEmails = emails.filter((email: string) => !isInList(email));
+      const newEmails = emails.filter((email: string) => isValidEmail(email));
       console.log('newEmails', newEmails);
       for (let i = 0; i < newEmails.length; i++) {
         await addCollaborator(newEmails[i]);
@@ -86,7 +88,7 @@ const EmailChips = ({
   };
 
   const isValidEmail = (email: string) => {
-    let error = '';
+    let error = null;
 
     if (!isEmail(email)) {
       error = `${email} is not a valid email address.`;
@@ -96,7 +98,9 @@ const EmailChips = ({
       error = `${email} has already been added.`;
     }
 
-    //TODO handle if email = current users email;
+    if (ctx.state.user?.email === email) {
+      error = `You do not need to add your own email`;
+    }
 
     if (error) {
       setError(error);
@@ -120,7 +124,6 @@ const EmailChips = ({
     <div>
       <div className="bg-gray-100 h-24 flex flex-wrap justify-center items-center overflow-y-scroll">
         {chips.map((chip) => {
-          console.log(chip);
           return (
             <div
               key={chip.email}
