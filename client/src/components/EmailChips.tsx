@@ -1,4 +1,9 @@
-import React, { useState, ChangeEvent, useContext } from 'react';
+import React, {
+  useState,
+  ChangeEvent,
+  useContext,
+  ClipboardEvent,
+} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,10 +18,10 @@ const defaultChips: {
 
 const EmailChips = ({
   projectUsers,
-  setValue,
+  setProjectUsers,
 }: {
   projectUsers: (string | number)[];
-  setValue: any; //FIXME
+  setProjectUsers: React.Dispatch<React.SetStateAction<(string | number)[]>>;
 }) => {
   const [collaborator, setCollaborator] = useState('');
   const [error, setError] = useState('');
@@ -50,7 +55,7 @@ const EmailChips = ({
         ...oldChips,
         { id: null, email: email, picture: null },
       ]);
-      setValue('projectUsers', [...projectUsers, email]);
+      setProjectUsers((oldProjectUsers) => [...oldProjectUsers, email]);
     } else {
       setChips((oldChips) => [
         ...oldChips,
@@ -60,13 +65,19 @@ const EmailChips = ({
           picture: userDetails.image ? userDetails.image : undefined,
         },
       ]);
-      setValue('projectUsers', [...projectUsers, userDetails.id]);
+      setProjectUsers((oldProjectUsers) => [
+        ...oldProjectUsers,
+        userDetails.id,
+      ]);
     }
   };
 
-  const handleRemoveCollaborator = (toBeRemoved) => {
-    setValue(
-      'projectUsers',
+  const handleRemoveCollaborator = (toBeRemoved: {
+    id: number | null;
+    email: string;
+    picture: string | null;
+  }) => {
+    setProjectUsers(
       projectUsers.filter(
         (user) => user !== toBeRemoved.id && user !== toBeRemoved.email
       )
@@ -74,11 +85,11 @@ const EmailChips = ({
     setChips(chips.filter((chip) => chip !== toBeRemoved));
   };
 
-  const handlePaste = async (e) => {
+  const handlePaste = async (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    const paste = e.clipboardData.getData('text');
-    const emails = paste.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
+    const paste = e.clipboardData?.getData('text');
+    const emails = paste?.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
 
     if (emails) {
       console.log('emails', emails);
