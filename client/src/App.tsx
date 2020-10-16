@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 
 import { ReactQueryDevtools } from 'react-query-devtools';
 
-import { Router, Location, RouterProps, LocationContext, Redirect } from '@reach/router';
+import {
+  Router,
+  Location,
+  RouterProps,
+  LocationContext,
+  Redirect,
+} from '@reach/router';
 import { Dialog } from '@reach/dialog';
 
 import Context, { reducer } from './Context';
@@ -16,6 +22,8 @@ import BugCreate from './pages/BugCreate';
 import ProjectCreate from './pages/ProjectCreate';
 import BugDetails from './pages/BugDetails';
 import BugEdit from './pages/BugEdit';
+
+import Header from './components/Header';
 
 import '@reach/dialog/styles.css';
 
@@ -66,6 +74,7 @@ const App = () => {
               // Basically if there is a 'old location' attached to the state render the route as a modal instead
               return (
                 <>
+                  <Header />
                   <Routes
                     location={oldLocation != null ? oldLocation : location}
                   />
