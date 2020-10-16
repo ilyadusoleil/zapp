@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 
 import { ReactQueryDevtools } from 'react-query-devtools';
 
-import { Router, Location, RouterProps, LocationContext, Redirect } from '@reach/router';
+import {
+  Router,
+  Location,
+  RouterProps,
+  LocationContext,
+  Redirect,
+} from '@reach/router';
 import { Dialog } from '@reach/dialog';
 
 import Context, { reducer } from './Context';
@@ -17,14 +23,16 @@ import ProjectCreate from './pages/ProjectCreate';
 import BugDetails from './pages/BugDetails';
 import BugEdit from './pages/BugEdit';
 
+import Header from './components/Header';
+
 import '@reach/dialog/styles.css';
 
 function Routes(props: RouterProps) {
   const ctx = useContext(Context);
   return (
     <Router {...props}>
-      <Login path="/" />
-      <Landing path="/landing" />
+      <Login path="/login" />
+      <Landing path="/" />
 
       {ctx.state.isAuthenticated ? (
         <>
@@ -66,6 +74,7 @@ const App = () => {
               // Basically if there is a 'old location' attached to the state render the route as a modal instead
               return (
                 <>
+                  <Header />
                   <Routes
                     location={oldLocation != null ? oldLocation : location}
                   />

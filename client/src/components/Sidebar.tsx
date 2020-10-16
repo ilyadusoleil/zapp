@@ -1,3 +1,6 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
+
 import React from 'react';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +11,8 @@ import {
   faListAlt,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { css } from '@emotion/core';
 
 const SidebarButton = ({
   icon,
@@ -60,7 +65,9 @@ const sidebarData: sidebarDataType[] = [
 
 const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   return (
-    <div className="inset-y-0 left-0 bg-indigo-200 h-screen w-14 fixed flex flex-col">
+    <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col" css={css`
+      top: 3rem;
+    `}>
       {sidebarData.map((sidebarItem, idx) => (
         <SidebarButton
           key={idx}

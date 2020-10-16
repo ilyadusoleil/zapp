@@ -22,8 +22,8 @@ router.get(
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: `${process.env.CLIENT}/landing`, // TODO: .env this
-    failureRedirect: 'auth/login/failed',
+    successRedirect: `${process.env.CLIENT}/`,
+    failureRedirect: `auth/login/failed`,
   })
 );
 
@@ -35,6 +35,11 @@ router.get('/auth/login/success', (req, res) => {
       message: 'user has successfully authenticated',
       user: req.user,
       cookies: req.cookies,
+    });
+  } else {
+    res.status(401).json({
+      success: false,
+      message: 'user failed to authenticate.',
     });
   }
 });
@@ -48,7 +53,7 @@ router.get('/auth/login/failed', (req, res) => {
 
 router.get('/auth/logout', (req, res) => {
   req.logout();
-  res.redirect(`${process.env.CLIENT}/landing`);
+  res.redirect(`${process.env.CLIENT}/`);
 });
 
 //=============

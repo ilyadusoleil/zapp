@@ -14,10 +14,10 @@ interface BugEditProps extends RouteComponentProps
   id?: string;
 }
 
-const BugEdit = (props: BugEditProps) => {
-  if (!props.id) return (<h1>Hmm no id</h1>)
+const BugEdit = ({id}: BugEditProps) => {
+  if (!id) return (<h1>Hmm no id</h1>)
 
-  const { isLoading, isError, data } = useBug(parseInt(props.id));
+  const { isLoading, isError, data } = useBug(parseInt(id));
 
   const [editBug, { status: editBugStatus }] = useEditBug();
 
@@ -31,9 +31,9 @@ const BugEdit = (props: BugEditProps) => {
 
   return (
     <>
-      <h1>Edit woohoo</h1>
       <BugEditForm
         onSubmit={editBug}
+        submitRoute={`/details/${id}`}
         submitText={
           editBugStatus === 'loading'
             ? 'Saving...'

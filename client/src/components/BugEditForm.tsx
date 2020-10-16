@@ -3,9 +3,12 @@ import { MutateFunction } from 'react-query';
 import { Bug } from '../types/Bug';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { PrioritySelect } from './Priority';
 
 import Context from '../Context';
 import { navigate } from '@reach/router';
+
+import { BUTTON_STYLE } from '../constants';
 
 const defaultFormValues = {
   id: 0,
@@ -80,24 +83,11 @@ const BugEditForm = ({
         />
         <br />
         <label htmlFor="priority">Priority</label>
-        <input
-          type="text"
-          name="priority"
-          value={values.priority}
-          onChange={(e) => setValue('priority', e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit" className="self-start">
+        <PrioritySelect prioityValue={values.priority} setValue={setValue} />
+        <button type="submit" className={`${BUTTON_STYLE} self-start`}>
           {submitText}
         </button>
       </form>
-      <FontAwesomeIcon
-        onClick={() => ctx.dispatch({ type: 'closeBugModal' })}
-        icon={faTimesCircle}
-        size={'lg'}
-        className="mr-10 text-gray-900"
-      />
     </div>
   );
 };

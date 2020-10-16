@@ -25,15 +25,15 @@ type selectInfo = {
 };
 
 const SELECT_INFO: selectInfo[] = [
-  { label: 'high-low', sortFunction: (a, b) => a.priority - b.priority },
-  { label: 'low-high', sortFunction: (a, b) => b.priority - a.priority },
+  { label: 'High-Low', sortFunction: (a, b) => a.priority - b.priority },
+  { label: 'Low-High', sortFunction: (a, b) => b.priority - a.priority },
   {
-    label: 'first-last',
+    label: 'First-Last',
     sortFunction: (a, b) =>
       new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
   },
   {
-    label: 'last-first',
+    label: 'Last-First',
     sortFunction: (a, b) =>
       new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
   },
