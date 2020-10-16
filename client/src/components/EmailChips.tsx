@@ -146,17 +146,17 @@ const EmailChips = ({
             >
               <div className="flex justify-around">
                 {chip.picture ? (
-                  <img src={chip.picture} className="rounded-full h-6 mx-2" />
+                  <img src={chip.picture} className="rounded-full h-6 mx-1" />
                 ) : chip.picture === undefined ? (
                   <FontAwesomeIcon
                     icon={faGrinAlt}
                     size={'lg'}
-                    className="mx-2"
+                    className="mx-1"
                   />
                 ) : null}
-                <div className="font-bold">{chip.email}</div>
+                <div className="font-bold mx-2 flex-grow">{chip.email}</div>
                 <button
-                  className=" font-bold h-6 w-6 leading-none flex justify-center items-center mx-2 bg-white rounded-full cursor-pointer"
+                  className=" font-bold h-6 w-6 leading-none flex justify-center items-center mx-1 bg-white rounded-full cursor-pointer"
                   type="button"
                   onClick={() => handleRemoveCollaborator(chip)}
                 >
