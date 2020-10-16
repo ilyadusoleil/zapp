@@ -47,22 +47,29 @@ const createProject = async function (req, res) {
     //If any users have been invited to this project
     if (projectUsers.length > 0) {
       for (let i = 0; i < projectUsers.length; i++) {
-        let user = await db.user.findOne({
-          where: {
-            email: projectUsers[i].email,
-          },
-        });
-        if (!user) {
+        let user = null;
+        if (typeof projectUsers[i] === 'number') {
+          //user already exists in db
+          user = await db.user.findOne({
+            where: {
+              id: projectUsers[i],
+            },
+          });
+        } else if (typeof projectUsers[i] === 'string') {
+          //user doesn't exist in db yet
           user = await db.user.create({
-            email: projectUsers[i].email,
+            email: projectUsers[i],
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+        } else {
+          //TODO throw error
         }
         await db.projectuser.create({
+          //assign user to project
           userId: user.id,
           projectId: newProject.dataValues.id,
-          authorization: projectUsers[i].authorization,
+          authorization: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -96,17 +103,23 @@ const editProject = async function (req, res) {
     // If any users have been invited to this project
     if (projectUsers.length > 0) {
       for (let i = 0; i < projectUsers.length; i++) {
-        let user = await db.user.findOne({
-          where: {
-            email: projectUsers[i].email,
-          },
-        });
-        if (!user) {
+        let user = null;
+        if (typeof projectUsers[i] === 'number') {
+          //user already exists in db
+          user = await db.user.findOne({
+            where: {
+              id: projectUsers[i],
+            },
+          });
+        } else if (typeof projectUsers[i] === 'string') {
+          //user doesn't exist in db yet
           user = await db.user.create({
-            email: projectUsers[i].email,
+            email: projectUsers[i],
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+        } else {
+          //TODO throw error
         }
         // Check if the user is already on the project
         let userOnProject = await db.projectUser.findOne({
@@ -119,7 +132,7 @@ const editProject = async function (req, res) {
           await db.projectuser.create({
             userId: user.id,
             projectId: updatedProject.dataValues.id,
-            authorization: projectUsers[i].authorization,
+            authorization: 1,
             createdAt: new Date(),
             updatedAt: new Date(),
           });

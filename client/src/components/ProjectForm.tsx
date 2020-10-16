@@ -4,9 +4,12 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 import { navigate } from '@reach/router';
 
+import EmailChips from './EmailChips';
+
 const defaultFormValues = {
   name: '',
   description: '',
+  projectUsers: [],
   userId: 'nouser',
 };
 
@@ -24,7 +27,7 @@ const ProjectForm = ({
   const [values, setValues] = useState(initialValues);
   const ctx = useContext(Context);
 
-  const setValue = (field: string, value: string) =>
+  const setValue = (field: string, value: string | (string | number)[]) =>
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,6 +57,8 @@ const ProjectForm = ({
           required
         />
       </div>
+      <br />
+      <EmailChips projectUsers={values.projectUsers} setValue={setValue} />
       <br />
       <button
         className="mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
