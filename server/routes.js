@@ -49,7 +49,7 @@ router.get('/auth/login/failed', (req, res) => {
 
 router.get('/auth/logout', (req, res) => {
   req.logout();
-  res.redirect(`${process.env.CLIENT}/landing`);
+  res.redirect(`${process.env.CLIENT}/`);
 });
 
 //=============
