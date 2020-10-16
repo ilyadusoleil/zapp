@@ -39,7 +39,7 @@ const EmailChips = ({
     if (['Enter', 'Tab', ','].includes(e.key)) {
       e.preventDefault();
 
-      const email = collaborator.trim();
+      const email = collaborator.trim().toLowerCase();
 
       if (email && isValidEmail(email)) {
         addCollaborator(email);
@@ -94,7 +94,8 @@ const EmailChips = ({
     if (emails) {
       const newEmails = emails.filter((email: string) => isValidEmail(email));
       for (let i = 0; i < newEmails.length; i++) {
-        await addCollaborator(newEmails[i]);
+        const email = newEmails[i].toLowerCase();
+        await addCollaborator(email);
       }
     }
   };
