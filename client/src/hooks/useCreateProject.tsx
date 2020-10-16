@@ -4,8 +4,8 @@ import fetchRequest from '../services/ApiService';
 import { Project, ProjectInput } from '../types/Project';
 
 function useCreateProject() {
-  const createBug = async (project: ProjectInput): Promise<Project> => {
-    console.log('create project', project)
+  const createProject = async (project: ProjectInput): Promise<Project> => {
+    console.log('create project', project);
     return fetchRequest('/projects', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -13,7 +13,7 @@ function useCreateProject() {
     });
   };
 
-  return useMutation(createBug, {
+  return useMutation(createProject, {
     onSuccess: () => {
       queryCache.refetchQueries(['project']); //TODO compare with invalidateQueries(['project', bug.id]);
     },
