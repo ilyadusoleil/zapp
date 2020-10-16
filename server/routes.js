@@ -10,7 +10,6 @@ const passport = require('passport');
 
 const router = express.Router();
 
-
 //=============
 // AUTH
 //=============
@@ -23,19 +22,24 @@ router.get(
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: `${process.env.CLIENT}/landing`, // TODO: .env this
-    failureRedirect: 'auth/login/failed',
+    successRedirect: `${process.env.CLIENT}/`,
+    failureRedirect: `auth/login/failed`,
   })
 );
 
 // when login is successful, retrieve user info
-router.get("/auth/login/success", (req, res) => {
+router.get('/auth/login/success', (req, res) => {
   if (req.user) {
     res.json({
       success: true,
-      message: "user has successfully authenticated",
+      message: 'user has successfully authenticated',
       user: req.user,
-      cookies: req.cookies
+      cookies: req.cookies,
+    });
+  } else {
+    res.status(401).json({
+      success: false,
+      message: 'user failed to authenticate.',
     });
   }
 });
@@ -62,7 +66,7 @@ router.post('/projects', projectsCtrl.createProject);
 // USERS
 //=============
 
-router.get('/user', usersCtrl.getUser)
+router.get('/user', usersCtrl.getUser);
 // TODO create user or use OAUTH??
 // TODO end point for adding user to project
 

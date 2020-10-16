@@ -13,7 +13,6 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const logout = () => {
-    console.log('log out')
     ctx.dispatch({type: 'logout'});
     window.open(`${SERVER}/auth/logout`, '_self');
   }

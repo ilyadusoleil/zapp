@@ -36,7 +36,7 @@ const Landing = (_props: RouteComponentProps) => {
       .catch((error) => {
         // Return to home page
         ctx.dispatch({ type: 'loginError', payload: 'Failed to login' });
-        navigate('/');
+        navigate('/login');
       });
   }, []);
 
