@@ -63,6 +63,7 @@ router.put('/projects', projectsCtrl.editProject);
 //=============
 
 router.get('/user', usersCtrl.getUser);
+router.get('/user/email', usersCtrl.getUserByEmail);
 // TODO create user or use OAUTH??
 // TODO end point for adding user to project
 
