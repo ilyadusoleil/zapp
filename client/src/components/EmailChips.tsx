@@ -1,4 +1,7 @@
 import React, { useState, ChangeEvent, useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
+
 import fetchRequest from '../services/ApiService';
 import Context from '../Context';
 
@@ -54,7 +57,7 @@ const EmailChips = ({
         {
           id: userDetails.id,
           email: userDetails.email,
-          picture: userDetails.image,
+          picture: userDetails.image ? userDetails.image : undefined,
         },
       ]);
       setValue('projectUsers', [...projectUsers, userDetails.id]);
@@ -132,11 +135,16 @@ const EmailChips = ({
               } m-1 p-2 rounded-full inline-block`}
             >
               <div className="flex justify-around">
-                <img
-                  src={chip.picture ? chip.picture : null} // TODO set to default icon if user doesnt have a picture and set to blank if user doesn't exist
-                  className="rounded-full h-6 mx-2"
-                />
-                <div>{chip.email}</div>
+                {chip.picture ? (
+                  <img src={chip.picture} className="rounded-full h-6 mx-2" />
+                ) : chip.picture === undefined ? (
+                  <FontAwesomeIcon
+                    icon={faGrinAlt}
+                    size={'lg'}
+                    className="mx-2"
+                  />
+                ) : null}
+                <div className="font-bold">{chip.email}</div>
                 <button
                   className=" font-bold h-6 w-6 leading-none flex justify-center items-center mx-2 bg-white rounded-full cursor-pointer"
                   type="button"
