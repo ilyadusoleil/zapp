@@ -31,7 +31,7 @@ const ProjectHeader = ({projectId} : {projectId: number}) => {
     <>
       <div
         onClick={() => setIsOpened(!isOpened)}
-        className="bg-gray-100 p-5 flex justify-items cursor-pointer"
+        className="bg-gray-100 p-3 mt-3 flex justify-items cursor-pointer"
       >
         <div className="text-lg">
           {data[getIndexFromId(projectId)].name}

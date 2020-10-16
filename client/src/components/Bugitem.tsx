@@ -12,6 +12,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import Context from '../Context';
 
+import { PriorityTag } from '../components/Priority'
+
 type Props = {
   bug: Bug;
 };
@@ -19,21 +21,6 @@ type Props = {
 function Bugitem({ bug }: Props) {
   const ctx = useContext(Context);
   const [isOpened, setisOpened] = useState(false);
-
-  // FIXME: Update all equality checks to === below once server returns number??
-  function priority(level: number) {
-    return level == 0
-      ? 'bg-teal-500'
-      : level == 1
-      ? 'bg-teal-400'
-      : 'bg-teal-200';
-  }
-
-  const mapPriorityToString = (level: number) => {
-    if (level == 0) return 'High';
-    if (level == 1) return 'Medium';
-    return 'Low';
-  };
 
   return (
     <div className="mt-4 mb-4 p-4 m-1 bg-gray-200 w-72 border b-gray-200 ">
@@ -51,13 +38,7 @@ function Bugitem({ bug }: Props) {
             size={'sm'}
             className="mr-10 text-gray-900"
           />
-          <p
-            className={` ${priority(
-              bug.priority
-            )} rounded-full text-xs w-16 flex justify-center text-gray-200`}
-          >
-            {mapPriorityToString(bug.priority)}
-          </p>
+          <PriorityTag priority={bug.priority}/>
         </div>
       </div>
 
