@@ -19,11 +19,16 @@ const PreDashboard = (_props: RouteComponentProps) => {
 
   useEffect(() => {
     if (projectsData && projectsData.length > 0) {
-      ctx.dispatch({
-        type: 'updateCurrentProject',
-        payload: projectsData[0].id,
-      });
-      navigate('/dashboard');
+      //navigate to the currently active project if it exists
+      if (
+        projectsData.filter((el) => el.id == ctx.state.currentProjectId)
+          .length > 0
+      ) {
+        navigate(`/dashboard/${ctx.state.currentProjectId}`); //TODO: don't just go to the first created project, but the most recently used project?
+      } else {
+        console.log('project not found')
+        navigate(`/dashboard/${projectsData[0].id}`); //TODO: don't just go to the first created project, but the most recently used project?
+      }
     }
   }, [projectsData]);
 

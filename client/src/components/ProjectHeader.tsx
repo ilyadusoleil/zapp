@@ -13,7 +13,7 @@ import Context from '../Context';
 
 import useProjects from '../hooks/useProjects';
 
-const ProjectHeader = () => {
+const ProjectHeader = ({projectId} : {projectId: number}) => {
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
   const { data } = useProjects(ctx.state.userId);
@@ -34,7 +34,7 @@ const ProjectHeader = () => {
         className="bg-gray-100 p-5 flex justify-items cursor-pointer"
       >
         <div className="text-lg">
-          {data[getIndexFromId(ctx.state.currentProjectId)].name}
+          {data[getIndexFromId(projectId)].name}
         </div>
         <FontAwesomeIcon
           icon={isOpened ? up : down}
@@ -46,16 +46,12 @@ const ProjectHeader = () => {
       <Collapse isOpened={isOpened}>
         {data.map(
           (project) =>
-            project.id != ctx.state.currentProjectId && (
+            project.id != projectId && (
               <div
                 key={project.id}
                 className="h-10 flex items-center"
                 onClick={() => {
-                  ctx.dispatch({
-                    type: 'updateCurrentProject',
-                    payload: project.id,
-                  });
-                  setIsOpened(false);
+                  navigate(`/dashboard/${project.id}`)
                 }}
               >
                 <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
@@ -66,7 +62,9 @@ const ProjectHeader = () => {
         <div
           className="h-10 flex items-center"
           onClick={() => {
-            ctx.dispatch({ type: 'openProjectModal' });
+            navigate(`/newProject`, {
+              state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+            });
           }}
         >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />

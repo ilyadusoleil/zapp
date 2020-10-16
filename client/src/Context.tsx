@@ -3,9 +3,6 @@ import { createContext } from 'react';
 type State = {
   currentProjectId: number;
   userId: string;
-  isBugModalOpen: boolean;
-  isProjectOpen: boolean;
-  bugModalId: number;
   isAuthenticated: boolean;
   authError: string;
 };
@@ -13,10 +10,6 @@ type State = {
 const initialState: State = {
   currentProjectId: 0,
   userId: '1',
-  isBugModalOpen: false,
-  isProjectOpen: false,
-  bugModalId: 0,
-
   isAuthenticated: false,
   authError: '',
 };
@@ -31,31 +24,9 @@ const Context = createContext<{
 
 const reducer = (state: State, action: any) => {
   switch (action.type) {
-    case 'updateCurrentProject':
+    case 'setCurrentProjectId':
       return Object.assign({}, state, {
-        currentProjectId: action.payload,
-      });
-
-    case 'openBugModal':
-      return Object.assign({}, state, {
-        isBugModalOpen: true,
-        bugModalId: action.payload,
-      });
-
-    case 'closeBugModal':
-      return Object.assign({}, state, {
-        isBugModalOpen: false,
-        bugModalId: 0,
-      });
-
-    case 'openProjectModal':
-      return Object.assign({}, state, {
-        isProjectOpen: true,
-      });
-
-    case 'closeProjectModal':
-      return Object.assign({}, state, {
-        isProjectOpen: false,
+        currentProjectId: action.payload
       });
 
     case 'login':

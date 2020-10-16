@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 import Context from '../Context';
+import { navigate } from '@reach/router';
 
 const defaultFormValues = {
   id: 0,
@@ -19,10 +20,12 @@ const defaultFormValues = {
 const BugEditForm = ({
   onSubmit,
   submitText,
+  submitRoute,
   initialValues = defaultFormValues,
 }: {
   onSubmit: MutateFunction<Bug, unknown, Bug, unknown>;
   submitText: string;
+  submitRoute?: string;
   initialValues: Bug;
 }) => {
   const ctx = useContext(Context);
@@ -46,7 +49,9 @@ const BugEditForm = ({
     };
 
     onSubmit(processedValues);
-    ctx.dispatch({ type: 'closeBugModal' });
+    if (submitRoute) {
+      navigate(submitRoute);
+    }
   };
 
   React.useEffect(() => {

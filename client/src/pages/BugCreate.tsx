@@ -16,6 +16,7 @@ const BugCreate = (_props: RouteComponentProps) => {
       <div className="ml-16">
         <BugForm
           onSubmit={createBug}
+          submitRoute="/preDashboard"
           submitText={
             createBugStatus === 'loading'
               ? 'Saving...'
@@ -26,7 +27,6 @@ const BugCreate = (_props: RouteComponentProps) => {
               : 'New Issue'
           }
         />
-        <Link to="/dashboard">Home</Link>
       </div>
     </>
   );
