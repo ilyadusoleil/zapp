@@ -49,18 +49,17 @@ const BugDetails = ({ id }: BugDetailsProps) => {
           />
         </div>
         <div className="mb-10">{data.description}</div>
-        <div className="flex">
-          {/* <AttributeBox label="Priority" ValueComponent={<PriorityTag priority={data.priority}/>} /> */}
-          <div className="flex-grow">
-            <div className="p-5 divide-y divide-gray-400 text-gray-800"></div>
-            <div className="flex">
+        <div className="flex mb-10">
+          <div className="mr-5 flex-grow divide-y divide-gray-400">
+            <div className="p-5"></div>
+            <div className="flex pt-3">
               <div className="mr-20">Priority</div>
               <PriorityTag priority={data.priority}/>
             </div>
           </div>
-          <div className="flex-grow bg-gray-200">
-            <div className="p-5 divide-y divide-gray-400 text-gray-800"></div>
-            <div className="flex">
+          <div className="ml-5 flex-grow divide-y divide-gray-400">
+            <div className="p-5"></div>
+            <div className="flex pt-3">
               <div className="mr-20">Assignee</div>
               <UserChip userId={data.userId}/>
             </div>
