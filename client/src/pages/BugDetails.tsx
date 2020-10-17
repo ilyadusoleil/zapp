@@ -8,6 +8,8 @@ import useCreateComment from '../hooks/useCreateComment';
 import Sidebar from '../components/Sidebar';
 import CommentForm from '../components/CommentForm';
 import CommentComponent from '../components/CommentComponent';
+import AttributeBox from '../components/AttributeBox';
+import { PriorityTag } from '../components/Priority';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +18,7 @@ interface BugDetailsProps extends RouteComponentProps {
   id?: string;
 }
 
-const BugDetails = ({id}: BugDetailsProps) => {
+const BugDetails = ({ id }: BugDetailsProps) => {
   if (!id) id = '0';
   const { isLoading, isError, data } = useBug(parseInt(id));
   const [createComment] = useCreateComment();
@@ -45,7 +47,25 @@ const BugDetails = ({id}: BugDetailsProps) => {
             }}
           />
         </div>
-        <div className="mb-20">{data.description}</div>
+        <div className="mb-10">{data.description}</div>
+        <div className="flex">
+          {/* <AttributeBox label="Priority" ValueComponent={<PriorityTag priority={data.priority}/>} /> */}
+          <div className="flex-grow">
+            <div className="p-5 divide-y divide-gray-400 text-gray-800"></div>
+            <div className="flex">
+              <div className="mr-20">Priority</div>
+              <PriorityTag priority={data.priority}/>
+            </div>
+          </div>
+          <div className="flex-grow">
+            <div className="p-5 divide-y divide-gray-400 text-gray-800"></div>
+            <div className="flex">
+              <div className="mr-20">Assignee</div>
+              {/* {<ValueComponent/>} */}
+            </div>
+          </div>
+        </div>
+
         {data.comments &&
           data.comments.map((el) => (
             <CommentComponent key={el.id} comment={el} />
