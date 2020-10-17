@@ -61,6 +61,7 @@ router.get('/auth/logout', (req, res) => {
 //=============
 router.get('/projects', projectsCtrl.getProjects);
 router.post('/projects', projectsCtrl.createProject);
+router.put('/projects', projectsCtrl.editProject);
 
 //Get information about all the users attached to a particular project
 router.get('/projectsUsers', projectsCtrl.getProjectUsers);
@@ -69,6 +70,7 @@ router.get('/projectsUsers', projectsCtrl.getProjectUsers);
 //=============
 
 router.get('/user', usersCtrl.getUser);
+router.get('/user/email', usersCtrl.getUserByEmail);
 // TODO create user or use OAUTH??
 // TODO end point for adding user to project
 

@@ -55,7 +55,8 @@ const PreDashboard = (_props: RouteComponentProps) => {  // eslint-disable-line 
             ? 'Saved!'
             : 'Create your first project'
         }
-        submitRoute="/dashboard"
+        //TODO this forces the page to reload and redirect to users first project. Eventually we want it to redivert to the last project worked on
+        submitRoute="/preDashboard"
       />
     </div>
   );

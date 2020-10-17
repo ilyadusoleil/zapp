@@ -4,11 +4,16 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 import { navigate } from '@reach/router';
 
+import EmailChips from './EmailChips';
+
 const defaultFormValues = {
   name: '',
   description: '',
+  // projectUsers: [],
   userId: 'nouser',
 };
+
+const initialProjectUser: (string | number)[] = [];
 
 const ProjectForm = ({
   onSubmit,
@@ -19,18 +24,25 @@ const ProjectForm = ({
   onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
   submitText: string;
   submitRoute?: string;
-  initialValues?: ProjectInput;
+  initialValues?: Omit<ProjectInput, 'projectUsers'>;
 }) => {
   const [values, setValues] = useState(initialValues);
+  const [projectUsers, setProjectUsers] = useState(initialProjectUser);
   const ctx = useContext(Context);
 
+  // const setValue = (field: string, value: string | (string | number)[]) =>
   const setValue = (field: string, value: string) =>
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setValues(defaultFormValues);
     e.preventDefault();
-    const valuesCopy = Object.assign({}, values, { userId: ctx.state.userId });
+    const valuesCopy = Object.assign(
+      {},
+      values,
+      { projectUsers },
+      { userId: ctx.state.userId }
+    );
     onSubmit(valuesCopy);
     if (submitRoute) {
       navigate(submitRoute);
@@ -54,6 +66,11 @@ const ProjectForm = ({
           required
         />
       </div>
+      <br />
+      <EmailChips
+        projectUsers={projectUsers}
+        setProjectUsers={setProjectUsers}
+      />
       <br />
       <button
         className="mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
