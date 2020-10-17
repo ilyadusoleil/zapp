@@ -4,7 +4,6 @@ const bugsCtrl = require('./controllers/bugs');
 const commentsCtrl = require('./controllers/comments');
 const detailsCtrl = require('./controllers/details');
 const usersCtrl = require('./controllers/users');
-const commentMiddleware = require('./middleware/getComments');
 
 const passport = require('passport');
 
@@ -90,6 +89,6 @@ router.post('/comments', commentsCtrl.createComment);
 // DETAILS
 //=============
 
-router.get('/details', commentMiddleware.getComments, detailsCtrl.getDetails);
+router.get('/details', detailsCtrl.getDetails);
 
 module.exports = router;
