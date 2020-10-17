@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import React, {
   useState,
   ChangeEvent,
@@ -11,9 +13,9 @@ import fetchRequest from '../services/ApiService';
 import Context from '../Context';
 
 const defaultChips: {
-  id: number | null;
+  id?: number;
   email: string;
-  picture: string | null;
+  picture?: string;
 }[] = [];
 
 const EmailChips = ({
@@ -53,7 +55,7 @@ const EmailChips = ({
     if (!userDetails) {
       setChips((oldChips) => [
         ...oldChips,
-        { id: null, email: email, picture: null },
+        { id: undefined, email: email, picture: undefined },
       ]);
       setProjectUsers((oldProjectUsers) => [...oldProjectUsers, email]);
     } else {
@@ -73,9 +75,9 @@ const EmailChips = ({
   };
 
   const handleRemoveCollaborator = (toBeRemoved: {
-    id: number | null;
+    id?: number;
     email: string;
-    picture: string | null;
+    picture?: string;
   }) => {
     setProjectUsers(
       projectUsers.filter(
@@ -146,14 +148,18 @@ const EmailChips = ({
             >
               <div className="flex justify-around">
                 {chip.picture ? (
-                  <img src={chip.picture} className="rounded-full h-6 mx-1" />
-                ) : chip.picture === undefined ? (
+                  <img
+                    src={chip.picture}
+                    className="rounded-full h-6 mx-1"
+                    alt="user avatar"
+                  />
+                ) : (
                   <FontAwesomeIcon
                     icon={faGrinAlt}
                     size={'lg'}
                     className="mx-1"
                   />
-                ) : null}
+                )}
                 <div className="font-bold mx-2 flex-grow">{chip.email}</div>
                 <button
                   className=" font-bold h-6 w-6 leading-none flex justify-center items-center mx-1 bg-white rounded-full cursor-pointer"

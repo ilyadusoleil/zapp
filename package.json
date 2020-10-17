@@ -6,6 +6,8 @@
   "scripts": {
     "build": "npm run build:client",
     "build:client": "cd client && npm i && npm run build",
+    "lint": "npm run lint:client",
+    "lint:client": "cd client && npm i && npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ilyadusoleil/zapp/issues"
   },
-  "homepage": "https://github.com/ilyadusoleil/zapp#readme"
+  "homepage": "https://github.com/ilyadusoleil/zapp#readme",
+  "devDependencies": {
+    "eslint": "^7.11.0"
+  }
 }

@@ -13,6 +13,8 @@ const defaultFormValues = {
   userId: 'nouser',
 };
 
+const initialProjectUser: (string | number)[] = [];
+
 const ProjectForm = ({
   onSubmit,
   submitText,
@@ -25,7 +27,7 @@ const ProjectForm = ({
   initialValues?: Omit<ProjectInput, 'projectUsers'>;
 }) => {
   const [values, setValues] = useState(initialValues);
-  const [projectUsers, setProjectUsers] = useState([] as (string | number)[]);
+  const [projectUsers, setProjectUsers] = useState(initialProjectUser);
   const ctx = useContext(Context);
 
   // const setValue = (field: string, value: string | (string | number)[]) =>
