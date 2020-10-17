@@ -32,14 +32,14 @@ const Header: HeaderComponent = () => {
       <div className="inset-x-0 top-0 bg-gray-200 h-12 flex">
         <img src={Logo} alt="ZAPP" className="h-12 ml-1 self-center"></img>
         {ctx.state.user && ctx.state.user.image && (
-          <div
+          <div className="ml-auto mr-3 h-8 self-center"
             onClick={() => setIsOpen(!isOpen)}
             onKeyDown={() => setIsOpen(!isOpen)}
             role="button"
             tabIndex={0}
           >
             <img
-              className="ml-auto mr-3 h-8 self-center rounded-full cursor-pointer"
+              className="h-8 rounded-full cursor-pointer"
               alt="user profile"
               src={ctx.state.user.image}
             />
