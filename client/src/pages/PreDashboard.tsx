@@ -9,7 +9,8 @@ import ProjectForm from '../components/ProjectForm';
 
 import Context from '../Context';
 
-const PreDashboard = (_props: RouteComponentProps) => {
+
+const PreDashboard = (_props: RouteComponentProps) => {  // eslint-disable-line @typescript-eslint/no-unused-vars
   const ctx = useContext(Context);
   const { isLoading, isError, data: projectsData } = useProjects(
     ctx.state.userId
@@ -26,7 +27,6 @@ const PreDashboard = (_props: RouteComponentProps) => {
       ) {
         navigate(`/dashboard/${ctx.state.currentProjectId}`); //TODO: don't just go to the first created project, but the most recently used project?
       } else {
-        console.log('project not found')
         navigate(`/dashboard/${projectsData[0].id}`); //TODO: don't just go to the first created project, but the most recently used project?
       }
     }

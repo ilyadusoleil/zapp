@@ -7,15 +7,12 @@ import useEditBug from '../hooks/useEditBug';
 
 import BugEditForm from '../components/BugEditForm';
 
-import Context from '../Context'
-
-interface BugEditProps extends RouteComponentProps
-{
+interface BugEditProps extends RouteComponentProps {
   id?: string;
 }
 
-const BugEdit = ({id}: BugEditProps) => {
-  if (!id) return (<h1>Hmm no id</h1>)
+const BugEdit = ({ id }: BugEditProps) => {
+  if (!id) id = '0';
 
   const { isLoading, isError, data } = useBug(parseInt(id));
 
@@ -48,6 +45,5 @@ const BugEdit = ({id}: BugEditProps) => {
     </>
   );
 };
-
 
 export default BugEdit;

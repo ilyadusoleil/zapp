@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Link, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 import useCreateBug from '../hooks/useCreateBug';
 
 import BugForm from '../components/BugForm';
 import Sidebar from '../components/Sidebar';
 
-const BugCreate = (_props: RouteComponentProps) => {
+const BugCreate = (_props: RouteComponentProps) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   const [createBug, { status: createBugStatus }] = useCreateBug();
 
   return (
