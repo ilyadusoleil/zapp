@@ -6,7 +6,7 @@ import { SERVER } from '../constants';
 
 import GoogleButton from 'react-google-button';
 
-const Login = (_props: RouteComponentProps) => {
+const Login = (_props: RouteComponentProps) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   const handleLogin = () => {
     window.open(`${SERVER}/auth/google`, '_self'); // TODO: change this when oauth implementation
   };

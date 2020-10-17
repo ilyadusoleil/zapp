@@ -16,9 +16,9 @@ interface BugDetailsProps extends RouteComponentProps {
   id?: string;
 }
 
-const BugDetails = (props: BugDetailsProps) => {
-  if (!props.id) return <h1>Hmm no id</h1>;
-  const { isLoading, isError, data } = useBug(parseInt(props.id));
+const BugDetails = ({id}: BugDetailsProps) => {
+  if (!id) id = '0';
+  const { isLoading, isError, data } = useBug(parseInt(id));
   const [createComment] = useCreateComment();
 
   if (isLoading) {
@@ -39,7 +39,7 @@ const BugDetails = (props: BugDetailsProps) => {
             size={'lg'}
             className="m-3 cursor-pointer transition duration-200  transform hover:scale-125"
             onClick={() => {
-              navigate(`/details/edit/${props.id}`, {
+              navigate(`/details/edit/${id}`, {
                 state: { oldLocation: JSON.parse(JSON.stringify(location)) },
               });
             }}
@@ -50,7 +50,7 @@ const BugDetails = (props: BugDetailsProps) => {
           data.comments.map((el) => (
             <CommentComponent key={el.id} comment={el} />
           ))}
-        <CommentForm onSubmit={createComment} bugId={parseInt(props.id)} />
+        <CommentForm onSubmit={createComment} bugId={parseInt(id)} />
       </div>
     </>
   );

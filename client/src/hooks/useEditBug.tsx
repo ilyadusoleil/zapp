@@ -19,7 +19,9 @@ export default function useSaveBug() {
       return () => queryCache.setQueryData<Bug>(['bug', values.id], values);
     },
     onError: (_error, _values, rollback: rollbackType) => (rollback)(),
-    onSuccess: async (_values) => {
+
+    // TODO remove this (est line removal below) once below code is updated
+    onSuccess: async (_values) => { // eslint-disable-line @typescript-eslint/no-unused-vars 
       // FIXME: revert to commented code once server returns new value
       queryCache.refetchQueries(['projectbugs']);
       await queryCache.refetchQueries(['bug']);
