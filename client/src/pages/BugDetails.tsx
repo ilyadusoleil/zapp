@@ -16,8 +16,6 @@ import UserChip from '../components/UserChip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import { BugDetails } from '../types/Bug';
-
 import { BUTTON_STYLE } from '../constants';
 
 interface BugDetailsProps extends RouteComponentProps {

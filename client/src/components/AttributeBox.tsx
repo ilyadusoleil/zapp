@@ -2,10 +2,10 @@ import React from 'react';
 
 type AttributeBoxProps = {
   label: string;
-  ValueComponent: (val: number) => JSX.Element;
+  // ValueComponent: (val: number) => JSX.Element;
 }
 
-const AttributeBox = ({label, ValueComponent}: AttributeBoxProps) => {
+const AttributeBox = ({label}: AttributeBoxProps) => {
 
   return (
     <div className="flex-grow">
