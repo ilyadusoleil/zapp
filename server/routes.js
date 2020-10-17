@@ -63,6 +63,8 @@ router.get('/projects', projectsCtrl.getProjects);
 router.post('/projects', projectsCtrl.createProject);
 router.put('/projects', projectsCtrl.editProject);
 
+//Get information about all the users attached to a particular project
+router.get('/projectsUsers', projectsCtrl.getProjectUsers);
 //=============
 // USERS
 //=============
