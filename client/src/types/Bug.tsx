@@ -9,6 +9,7 @@ export type BugDetails = {
   createdAt: Date;
   state: number; // TODO update this once finalised on server
   comments: Comment[];
+  userId: number;
 };
 
 export type Bug = Omit<BugDetails, 'comments'>;
