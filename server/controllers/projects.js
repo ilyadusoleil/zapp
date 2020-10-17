@@ -50,7 +50,33 @@ const createProject = async function (req, res) {
   }
 };
 
+const getProjectUsers = async function (req, res) {
+  try {
+    const users = await db.projectuser.findAll({
+      attributes: ['userId'],
+      where: {
+        projectId: req.query.projectId,
+      }
+    });
+    const processedUsers = users.map((el) => el.userId);
+
+    const userInfo = await db.user.findAll({
+      where: {
+        id: processedUsers,
+      },
+    })
+
+    res.status(200);
+    res.send(userInfo);
+  } catch (err) {
+    res.status(500);
+    res.send({ err, message: 'error retrieving user related to a project from the database' });
+  }
+};
+
+
 module.exports = {
   getProjects,
   createProject,
+  getProjectUsers
 };
