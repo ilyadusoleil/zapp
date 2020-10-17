@@ -3,7 +3,6 @@ import React from 'react';
 type AttributeBoxProps = {
   label: string;
   ValueComponent: (val: number) => JSX.Element;
-  val:
 }
 
 const AttributeBox = ({label, ValueComponent}: AttributeBoxProps) => {
