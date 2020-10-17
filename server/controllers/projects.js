@@ -3,23 +3,35 @@ const db = require('../db/models/index');
 // GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
   try {
-    const projects = await db.projectuser.findAll({
-      //TODO improve this query
-      attributes: [],
-      where: {
-        userId: req.query.userId,
-      },
-      include: {
-        model: db.project,
-        required: true,
-        attributes: ['id', 'name', 'description'],
-      },
-    });
-    const processedProjects = projects.map((el) => el.projects[0]);
+    if (req.query.userId) {
+      const projects = await db.projectuser.findAll({
+        //TODO improve this query
+        attributes: [],
+        where: {
+          userId: req.query.userId,
+        },
+        include: {
+          model: db.project,
+          required: true,
+          attributes: ['id', 'name', 'description'],
+        },
+      });
+      const processedProjects = projects.map((el) => el.projects[0]);
 
-    res.status(200);
-    res.send(processedProjects);
+      res.status(200);
+      res.send(processedProjects);
+    } else if (req.query.projectId) {
+      console.log('finding one project');
+      const project = await db.project.findAll({
+        where: {
+          id: req.query.projectId,
+        },
+      });
+      res.status(200);
+      res.send(project[0]);
+    }
   } catch (err) {
+    console.log(err);
     res.status(500);
     res.send({ err, message: 'error retrieving projects from the database' });
   }
@@ -122,7 +134,7 @@ const editProject = async function (req, res) {
           //TODO throw error
         }
         // Check if the user is already on the project
-        let userOnProject = await db.projectUser.findOne({
+        let userOnProject = await db.projectuser.findOne({
           where: {
             userId: user.id,
           },
@@ -142,7 +154,7 @@ const editProject = async function (req, res) {
     res.status(200);
     res.send(updatedProject);
   } catch (err) {
-    console.log('--> error editing projecting in the database', err);
+    console.log('--> error editing project in the database', err);
     res.status(500);
     res.send({ err, message: 'error editing project in database' });
   }
