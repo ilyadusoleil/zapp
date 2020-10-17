@@ -1,10 +1,11 @@
+// TODO fix babel so it'll parse emotion correctly and then can remove some of these eslint
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
+import React from 'react'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
-import React from 'react';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types'; // eslint-disable-line import/no-unresolved
 import {
   faHome,
   faPlus,
@@ -35,6 +36,9 @@ const SidebarButton = ({
         isActive && 'bg-white'
       }`}
       onClick={handleClick}
+      onKeyDown={handleClick}
+      role="button"
+      tabIndex={0}
     >
       <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
     </div>

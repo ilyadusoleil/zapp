@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Link, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 import useCreateProject from '../hooks/useCreateProject';
 
 import ProjectForm from '../components/ProjectForm';
 
-const ProjectCreate = (_props: RouteComponentProps) => {
+const ProjectCreate = (_props: RouteComponentProps) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   const [createProject, { status: createProjectStatus }] = useCreateProject();
 
   return (

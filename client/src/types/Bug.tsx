@@ -7,7 +7,7 @@ export type BugDetails = {
   description: string;
   priority: number;
   createdAt: Date;
-  state: any; // TODO update this once finalised on server
+  state: number; // TODO update this once finalised on server
   comments: Comment[];
 };
 

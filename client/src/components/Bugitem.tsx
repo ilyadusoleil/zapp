@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { Collapse } from 'react-collapse';
 
@@ -10,7 +10,6 @@ import './Bugitem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import Context from '../Context';
 
 import { PriorityTag } from '../components/Priority'
 
@@ -19,13 +18,15 @@ type Props = {
 };
 
 function Bugitem({ bug }: Props) {
-  const ctx = useContext(Context);
   const [isOpened, setisOpened] = useState(false);
 
   return (
     <div className="mt-4 mb-4 p-4 m-1 bg-gray-200 w-72 border b-gray-200 ">
       <div
         onClick={() => setisOpened(!isOpened)}
+        onKeyDown={() => setisOpened(!isOpened)}
+        role="button"
+        tabIndex={0}
         className="bg-gray-200  p-1 flex justify-items cursor-pointer"
       >
         <h1 className="Capitalize text-s">{bug.title}</h1>
