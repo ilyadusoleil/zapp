@@ -10,6 +10,7 @@ import CommentForm from '../components/CommentForm';
 import CommentComponent from '../components/CommentComponent';
 import AttributeBox from '../components/AttributeBox';
 import { PriorityTag } from '../components/Priority';
+import UserChip from '../components/UserChip';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -57,11 +58,11 @@ const BugDetails = ({ id }: BugDetailsProps) => {
               <PriorityTag priority={data.priority}/>
             </div>
           </div>
-          <div className="flex-grow">
+          <div className="flex-grow bg-gray-200">
             <div className="p-5 divide-y divide-gray-400 text-gray-800"></div>
             <div className="flex">
               <div className="mr-20">Assignee</div>
-              {/* {<ValueComponent/>} */}
+              <UserChip userId={data.userId}/>
             </div>
           </div>
         </div>
