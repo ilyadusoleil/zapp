@@ -5,7 +5,6 @@ import { Project, ProjectInput } from '../types/Project';
 
 function useCreateProject() {
   const createProject = async (project: ProjectInput): Promise<Project> => {
-    console.log('create project', project);
     return fetchRequest('/projects', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

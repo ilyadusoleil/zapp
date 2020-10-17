@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import Modal, { Styles } from 'react-modal';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
@@ -8,12 +7,9 @@ import useBugs from '../hooks/useBugs';
 import Bugitem from '../components/Bugitem';
 import Sidebar from '../components/Sidebar';
 
-import ProjectCreate from '../pages/ProjectCreate';
-
 import ProjectHeader from '../components/ProjectHeader';
 
 import Context from '../Context';
-import { setSyntheticTrailingComments } from 'typescript';
 
 interface DashboardProps extends RouteComponentProps {
   id?: string;
@@ -40,7 +36,7 @@ const SELECT_INFO: selectInfo[] = [
 ];
 
 const Dashboard = ({ id: projectId }: DashboardProps) => {
-  if (!projectId) return <h1>Hmm no id for dashboard</h1>; // TODO: redirect to first or most recently used project
+  if (!projectId) projectId = '0';//return <h1>Hmm no id for dashboard</h1>; // TODO: redirect to first or most recently used project
 
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(parseInt(projectId));
@@ -66,7 +62,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         <ProjectHeader projectId={parseInt(projectId)} />
         <h1>Dashboard</h1>
         <select
-          onChange={(e) => {
+          onBlur={(e) => {
             setSortIdx(parseInt(e.target.value));
           }}
         >

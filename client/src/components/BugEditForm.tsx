@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { MutateFunction } from 'react-query';
 import { Bug } from '../types/Bug';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { PrioritySelect } from './Priority';
 
-import Context from '../Context';
 import { navigate } from '@reach/router';
 
 import { BUTTON_STYLE } from '../constants';
@@ -31,7 +28,6 @@ const BugEditForm = ({
   submitRoute?: string;
   initialValues: Bug;
 }) => {
-  const ctx = useContext(Context);
   const [values, setValues] = React.useState(initialValues);
 
   const setValue = (field: string, value: string) =>
