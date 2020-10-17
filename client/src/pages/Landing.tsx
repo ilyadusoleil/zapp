@@ -33,7 +33,7 @@ const Landing = (_props: RouteComponentProps) => {
         
         navigate('/preDashboard');
       })
-      .catch((error) => {
+      .catch(() => {
         // Return to home page
         ctx.dispatch({ type: 'loginError', payload: 'Failed to login' });
         navigate('/login');

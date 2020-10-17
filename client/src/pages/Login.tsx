@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { navigate, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 import { SERVER } from '../constants';
 

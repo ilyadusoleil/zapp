@@ -38,7 +38,6 @@ const Header: HeaderComponent = () => {
             src={ctx.state.user.image}
             onClick={() => setIsOpen(!isOpen)}
             onKeyDown={() => setIsOpen(!isOpen)}
-            role="button"
             tabIndex={0}
           />
         )}

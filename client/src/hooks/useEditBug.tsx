@@ -3,6 +3,8 @@ import fetchRequest from '../services/ApiService';
 
 import { Bug } from '../types/Bug';
 
+type rollbackType = () => void;
+
 export default function useSaveBug() {
   const editBug = async (bug: Bug): Promise<Bug> => {
     return fetchRequest(`/bugs`, {
@@ -16,8 +18,8 @@ export default function useSaveBug() {
     onMutate: (values) => {
       return () => queryCache.setQueryData<Bug>(['bug', values.id], values);
     },
-    onError: (_error, _values, rollback) => (rollback as () => void)(),
-    onSuccess: async (values) => {
+    onError: (_error, _values, rollback: rollbackType) => (rollback)(),
+    onSuccess: async (_values) => {
       // FIXME: revert to commented code once server returns new value
       queryCache.refetchQueries(['projectbugs']);
       await queryCache.refetchQueries(['bug']);
