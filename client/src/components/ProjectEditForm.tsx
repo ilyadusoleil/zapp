@@ -14,7 +14,7 @@ const defaultFormValues = {
 
 const initialProjectUser: (string | number)[] = [];
 
-const ProjectForm = ({
+const ProjectEditForm = ({
   onSubmit,
   submitText,
   submitRoute,
@@ -81,4 +81,4 @@ const ProjectForm = ({
   );
 };
 
-export default ProjectForm;
+export default ProjectEditForm;
