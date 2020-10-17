@@ -6,19 +6,13 @@ import { navigate } from '@reach/router';
 
 import EmailChips from './EmailChips';
 
-const defaultFormValues = {
-  name: '',
-  description: '',
-  userId: 'nouser',
-};
-
 const initialProjectUser: (string | number)[] = [];
 
 const ProjectEditForm = ({
   onSubmit,
   submitText,
   submitRoute,
-  initialValues = defaultFormValues,
+  initialValues,
 }: {
   onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
   submitText: string;
@@ -34,14 +28,8 @@ const ProjectEditForm = ({
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setValues(defaultFormValues);
     e.preventDefault();
-    const valuesCopy = Object.assign(
-      {},
-      values,
-      { projectUsers },
-      { userId: ctx.state.userId }
-    );
+    const valuesCopy = Object.assign({}, values, { projectUsers });
     onSubmit(valuesCopy);
     if (submitRoute) {
       navigate(submitRoute);
@@ -49,6 +37,7 @@ const ProjectEditForm = ({
   };
 
   useEffect(() => {
+    console.log(initialValues);
     setValues(initialValues);
   }, [initialValues]);
 
