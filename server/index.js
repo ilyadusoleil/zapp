@@ -37,7 +37,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: 'http://localhost:1234', // allow to server to accept request from different origin
+    origin: process.env.CLIENT, // allow to server to accept request from different origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // allow session cookie from browser to pass through
   })
