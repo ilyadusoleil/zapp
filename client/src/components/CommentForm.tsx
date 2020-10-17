@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { MutateFunction } from 'react-query';
 import { CommentInput, Comment } from '../types/Comment';
 import Context from '../Context';

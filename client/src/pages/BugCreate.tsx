@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 import useCreateBug from '../hooks/useCreateBug';
 

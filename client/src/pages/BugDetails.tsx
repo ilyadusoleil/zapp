@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { Link, navigate, RouteComponentProps } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 
 import useBug from '../hooks/useBug';
 import useCreateComment from '../hooks/useCreateComment';
@@ -19,7 +19,7 @@ interface BugDetailsProps extends RouteComponentProps {
 const BugDetails = (props: BugDetailsProps) => {
   if (!props.id) return <h1>Hmm no id</h1>;
   const { isLoading, isError, data } = useBug(parseInt(props.id));
-  const [createComment, { status: createCommentStatus }] = useCreateComment();
+  const [createComment] = useCreateComment();
 
   if (isLoading) {
     return <span>Loading...</span>;

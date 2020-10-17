@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Collapse } from 'react-collapse';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,7 @@ import Context from '../Context';
 
 import useProjects from '../hooks/useProjects';
 
-const ProjectHeader = ({projectId} : {projectId: number}) => {
+const ProjectHeader = ({ projectId }: { projectId: number }) => {
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
   const { data } = useProjects(ctx.state.userId);
@@ -31,11 +31,12 @@ const ProjectHeader = ({projectId} : {projectId: number}) => {
     <>
       <div
         onClick={() => setIsOpened(!isOpened)}
+        onKeyDown={() => setIsOpened(!isOpened)}
+        role="button"
+        tabIndex={0}
         className="bg-gray-100 p-3 flex justify-items cursor-pointer"
       >
-        <div className="text-lg">
-          {data[getIndexFromId(projectId)].name}
-        </div>
+        <div className="text-lg">{data[getIndexFromId(projectId)].name}</div>
         <FontAwesomeIcon
           icon={isOpened ? up : down}
           size={'lg'}
@@ -50,9 +51,10 @@ const ProjectHeader = ({projectId} : {projectId: number}) => {
               <div
                 key={project.id}
                 className="h-10 flex items-center"
-                onClick={() => {
-                  navigate(`/dashboard/${project.id}`)
-                }}
+                onClick={() => navigate(`/dashboard/${project.id}`)}
+                onKeyDown={() => navigate(`/dashboard/${project.id}`)}
+                role="button"
+                tabIndex={0}
               >
                 <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
                 <p>{project.name}</p>
@@ -66,6 +68,13 @@ const ProjectHeader = ({projectId} : {projectId: number}) => {
               state: { oldLocation: JSON.parse(JSON.stringify(location)) },
             });
           }}
+          onKeyDown={() => {
+            navigate(`/newProject`, {
+              state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+            });
+          }}
+          role="button"
+          tabIndex={0}
         >
           <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
           <p>New Project</p>

@@ -35,6 +35,9 @@ const SidebarButton = ({
         isActive && 'bg-white'
       }`}
       onClick={handleClick}
+      onKeyDown={handleClick}
+      role="button"
+      tabIndex={0}
     >
       <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
     </div>
