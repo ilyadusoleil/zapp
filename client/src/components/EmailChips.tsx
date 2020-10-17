@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import React, {
   useState,
   ChangeEvent,
@@ -146,7 +148,11 @@ const EmailChips = ({
             >
               <div className="flex justify-around">
                 {chip.picture ? (
-                  <img src={chip.picture} className="rounded-full h-6 mx-1" />
+                  <img
+                    src={chip.picture}
+                    className="rounded-full h-6 mx-1"
+                    alt="user avatar"
+                  />
                 ) : (
                   <FontAwesomeIcon
                     icon={faGrinAlt}
