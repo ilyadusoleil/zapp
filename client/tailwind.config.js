@@ -16,9 +16,7 @@ module.exports = {
             '50%': { transform: 'rotate(3deg)' },
             }
         },
-        backgroundImage: {
-            hero: "url('/src/components/desk.jpeg')",
-    },
+
         animation: {
             wiggle: 'wiggle 1s ease-in-out infinite',
             },
