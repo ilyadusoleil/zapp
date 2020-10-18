@@ -136,6 +136,7 @@ const editProject = async function (req, res) {
         let userOnProject = await db.projectuser.findOne({
           where: {
             userId: user.id,
+            projectId: req.body.id,
           },
         });
         // If they're not already on the project then invite them
