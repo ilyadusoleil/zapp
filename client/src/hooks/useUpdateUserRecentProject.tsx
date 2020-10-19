@@ -18,7 +18,7 @@ export default function useUpdateUserRecentProject() {
     onMutate: (values) => {
       return () => queryCache.setQueryData<User>(['user', values.id], values);
     },
-    onError: (_error, _values, rollback: rollbackType) => (rollback)(),
+    onError: (_error, _values, rollback: rollbackType) => rollback(),
 
     onSuccess: async () => {
       queryCache.refetchQueries(['user']);
