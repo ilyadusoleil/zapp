@@ -1,7 +1,4 @@
-// TODO fix babel so it'll parse emotion correctly and then can remove some of these eslint
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
-import React from 'react'; // eslint-disable-line @typescript-eslint/no-unused-vars
+import React, { useState, useContext } from 'react'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +10,8 @@ import {
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { css } from '@emotion/core';
+import Context from '../Context';
+import { isJsxOpeningElement } from 'typescript';
 
 const SidebarButton = ({
   icon,
@@ -68,10 +66,11 @@ const sidebarData: sidebarDataType[] = [
 ];
 
 const Sidebar = ({ currentPath }: { currentPath?: string }) => {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const ctx = useContext(Context);
+
   return (
-    <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col" css={css`
-      top: 3rem;
-    `}>
+    <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col top-0">
       {sidebarData.map((sidebarItem, idx) => (
         <SidebarButton
           key={idx}
@@ -80,6 +79,22 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
           isActive={currentPath ? currentPath === sidebarItem.path : false} // Ternary operator to prevent highlighting of unmapped paths when currentPath isn't defined
         />
       ))}
+
+      {ctx.state.user && ctx.state.user.image && (
+        <div
+          className="ml-auto mr-3 h-8 self-center"
+          onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+          onKeyDown={() => setIsUserMenuOpen(!isUserMenuOpen)}
+          role="button"
+          tabIndex={0}
+        >
+          <img
+            className="h-8 rounded-full cursor-pointer"
+            alt="user profile"
+            src={ctx.state.user.image}
+          />
+        </div>
+      )}
     </div>
   );
 };
