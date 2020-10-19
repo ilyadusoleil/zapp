@@ -11,13 +11,12 @@ module.exports = {
     },
 
     extend: {
-        width: {
-        'container': '31%',
+      width: {
+        container: '31%',
         'md-container': '46%',
-        }
+      },
     },
-},
-variants: {},
-plugins: [],
-
+  },
+  variants: {},
+  plugins: [],
 };

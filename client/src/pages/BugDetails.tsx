@@ -51,7 +51,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
           <FontAwesomeIcon
             icon={faEdit}
             size={'lg'}
-            className="m-3 cursor-pointer transition duration-200  transform hover:scale-125"
+            className="m-3 cursor-pointer transition duration-200 transform hover:scale-125"
             onClick={() => {
               navigate(`/details/edit/${id}`, {
                 state: { oldLocation: JSON.parse(JSON.stringify(location)) },

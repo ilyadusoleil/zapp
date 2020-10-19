@@ -13,7 +13,7 @@ import {
 
 import { SERVER } from '../constants';
 
-import useOnclickOutside from "react-cool-onclickoutside";
+import useOnclickOutside from 'react-cool-onclickoutside';
 
 import Context from '../Context';
 
@@ -73,7 +73,6 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const ctx = useContext(Context);
 
-
   const ref = useOnclickOutside(() => {
     setIsUserMenuOpen(false);
   });
@@ -88,10 +87,7 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   };
 
   return (
-
-
     <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col top-0">
-
       {sidebarData.map((sidebarItem, idx) => (
         <SidebarButton
           key={idx}
@@ -118,7 +114,10 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
       )}
 
       {isUserMenuOpen && (
-        <div ref={ref} className="absolute left-0 bottom-0 ml-12 h-12 z-10 shadow-md bg-white flex flex-col cursor-pointer">
+        <div
+          ref={ref}
+          className="absolute left-0 bottom-0 ml-12 h-12 z-10 shadow-md bg-white flex flex-col cursor-pointer"
+        >
           <div
             className="flex self-center hover:bg-gray-200"
             onClick={logout}
