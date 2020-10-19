@@ -16,31 +16,70 @@ id?: string;
 }
 
 type selectInfo = {
-label: string;
-sortFunction: (a: Bug, b: Bug) => number;
+  label: string;
+  func: (a: Bug, b: Bug) => number;
 };
 
-const SELECT_INFO: selectInfo[] = [
-{ label: 'High-Low', sortFunction: (a, b) => a.priority - b.priority },
-{ label: 'Low-High', sortFunction: (a, b) => b.priority - a.priority },
-{
+const sortPriority = (a: Bug, b: Bug) => a.priority - b.priority;
+const sortCreated = (a: Bug, b: Bug) =>
+  new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+
+const SORT_INFO: selectInfo[] = [
+  {
+    label: 'High-Low',
+    func: (a, b) => sortPriority(a, b) || sortCreated(a, b),
+  },
+  {
+    label: 'Low-High',
+    func: (a, b) => sortPriority(b, a) || sortCreated(a, b),
+  },
+  {
     label: 'First-Last',
-    sortFunction: (a, b) =>
-    new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-},
-{
+    func: (a, b) => sortCreated(a, b),
+  },
+  {
     label: 'Last-First',
-    sortFunction: (a, b) =>
-    new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-},
+    func: (a, b) => sortCreated(b, a),
+  },
 ];
+
+type selectFilterInfo = {
+  label: string;
+  func: (a: Bug) => boolean;
+};
 
 const Dashboard = ({ id: projectId }: DashboardProps) => {
 if (!projectId) projectId = '0';
 
-const ctx = useContext(Context);
-const { isLoading, isError, data } = useBugs(parseInt(projectId));
-const [sortIdx, setSortIdx] = useState(0);
+  const ctx = useContext(Context);
+  const { isLoading, isError, data } = useBugs(parseInt(projectId));
+
+  const [sortIdx, setSortIdx] = useState(0);
+  const [assigneeFilterIdx, setAssigneeFilterIdx] = useState(0);
+  const [isShowCompleted, setIsShowCompleted] = useState(false);
+
+  const ASSIGNEE_FILTER_INFO: selectFilterInfo[] = [
+    {
+      label: 'All',
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      func: (_a) => true,
+    },
+    {
+      label: 'Just me',
+      func: (a) => (a.userId ? a.userId == ctx.state.userId : false),
+    },
+    { label: 'Unassigned', func: (a) => !a.userId },
+  ];
+
+  const updateSortSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortIdx(parseInt(e.target.value));
+  };
+  const updateAssigneeFilterSelect = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setAssigneeFilterIdx(parseInt(e.target.value));
+  };
+
 
 useEffect(() => {
     ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
@@ -57,35 +96,53 @@ if (isLoading) {
 return (
     <>
     <Sidebar currentPath="/dashboard" />
-
-    <div className="mx-16">
-    <h1>Bugs Dashboard</h1>
+      <div className="mx-16">
+        <h1>Bugs Dashboard</h1>
         <ProjectHeader projectId={parseInt(projectId)} />
-        <div className='inline-block relative w-64 mt-4'>
-        <select className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
-        onBlur={(e) => {
-            setSortIdx(parseInt(e.target.value));
-        }}
+
+        <h1 className="mb-5">Dashboard</h1>
+
+        <select
+          className="mr-5"
+          onChange={updateSortSelect}
+          onBlur={updateSortSelect}
         >
-        {SELECT_INFO.map((el, i) => (
+          {SORT_INFO.map((el, i) => (
             <option value={i} key={i}>
             {el.label}
             </option>
         ))}
+        <select
+          className="mr-5"
+          onChange={updateAssigneeFilterSelect}
+          onBlur={updateAssigneeFilterSelect}
+        >
+          {ASSIGNEE_FILTER_INFO.map((el, i) => (
+            <option value={i} key={i}>
+              {el.label}
+            </option>
+          ))}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-</div>
-        
-        </div>
+
+        <label>
+          Show Completed
+          <input
+            className="ml-3"
+            type="checkbox"
+            onChange={(e) => setIsShowCompleted(e.target.checked)}
+          />
+        </label>
+
         <div className='flex flex-wrap lg:justify-around xl:justify-between'>
-        {[...data]
-        .sort(SELECT_INFO[sortIdx].sortFunction)
-        .map((bug: Bug, index) => (
-            <Bugitem key={index} bug={bug} />
-        ))}
+          {[...data]
+            .filter((bug) => (isShowCompleted ? true : bug.state == 0))
+            .filter(ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func)
+            .sort(SORT_INFO[sortIdx].func)
+            .map((bug: Bug, index) => (
+              <Bugitem key={index} bug={bug} />
+            ))}
         </div>
-    </div>
+      </div>
     </>
   );
 };

@@ -24,8 +24,6 @@ import ProjectEdit from './pages/ProjectEdit';
 import BugDetails from './pages/BugDetails';
 import BugEdit from './pages/BugEdit';
 
-import Header from './components/Header';
-
 import '@reach/dialog/styles.css';
 
 function Routes(props: RouterProps) {
@@ -75,7 +73,6 @@ const App = () => {
               // Basically if there is a 'old location' attached to the state render the route as a modal instead
               return (
                 <>
-                  <Header />
                   <Routes
                     location={oldLocation != null ? oldLocation : location}
                   />
@@ -94,7 +91,7 @@ const App = () => {
           </Location>
         </Context.Provider>
       </React.StrictMode>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right"/>
     </>
   );
 };
