@@ -12,11 +12,14 @@ import {
 import Context from '../Context';
 
 import useProjects from '../hooks/useProjects';
+import useUpdateUserRecentProject from '../hooks/useUpdateUserRecentProject';
 
 const ProjectHeader = ({ projectId }: { projectId: number }) => {
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
   const { data } = useProjects(ctx.state.userId);
+
+  const [updateUserRecentProject] = useUpdateUserRecentProject();
 
   const getIndexFromId = (id: number) => {
     if (!data) return 0;
@@ -27,10 +30,11 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
 
   const navigateToBug = (id: number) => {
     return () => {
-      ctx.dispatch({type: 'setCurrentProjectId', payload: id})
-      navigate(`/dashboard/${id}`)
-    }
-  }
+      ctx.dispatch({ type: 'setCurrentProjectId', payload: id });
+      updateUserRecentProject(Object.assign({}, ctx.state.user, {recentProject: id}));
+      navigate(`/dashboard/${id}`);
+    };
+  };
 
   if (!data) return <h1>Oh no</h1>;
 
