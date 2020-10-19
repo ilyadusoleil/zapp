@@ -12,7 +12,7 @@ import ProjectHeader from '../components/ProjectHeader';
 import Context from '../Context';
 
 interface DashboardProps extends RouteComponentProps {
-  id?: string;
+id?: string;
 }
 
 type selectInfo = {
@@ -49,7 +49,7 @@ type selectFilterInfo = {
 };
 
 const Dashboard = ({ id: projectId }: DashboardProps) => {
-  if (!projectId) projectId = '0';
+if (!projectId) projectId = '0';
 
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(parseInt(projectId));
@@ -80,39 +80,27 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
     setAssigneeFilterIdx(parseInt(e.target.value));
   };
 
-  useEffect(() => {
-    ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
-  }, []);
 
-  if (isLoading) {
+useEffect(() => {
+    ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
+}, []);
+
+if (isLoading) {
     return <span>Loading...</span>;
-  }
+}
 
   if (isError || !data) {
     return <span>Error: </span>;
   }
 
-  return (
+return (
     <>
-      <Sidebar currentPath="/dashboard" />
-
+    <Sidebar currentPath="/dashboard" />
       <div className="mx-16">
         <h1>Bugs Dashboard</h1>
         <ProjectHeader projectId={parseInt(projectId)} />
 
         <h1 className="mb-5">Dashboard</h1>
-
-        <select
-          className="mr-5"
-          onChange={updateSortSelect}
-          onBlur={updateSortSelect}
-        >
-          {SORT_INFO.map((el, i) => (
-            <option value={i} key={i}>
-              {el.label}
-            </option>
-          ))}
-        </select>
 
         <select
           className="mr-5"
@@ -135,7 +123,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
           />
         </label>
 
-        <div className="flex flex-wrap justify-between">
+        <div className='flex flex-wrap lg:justify-around xl:justify-between'>
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
             .filter(ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func)
@@ -144,7 +132,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
               <Bugitem key={index} bug={bug} />
             ))}
         </div>
-      </div>
+        </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { navigate } from '@reach/router';
 
@@ -16,11 +16,8 @@ type Props = {
 
 function Bugitem({ bug }: Props) {
 
-  const toggleOpen = () => {
-    setisOpened(!isOpened);
-  };
 
-  return (
+return (
 
     <div className="w-full mt-4 mb-4 p-1 m-1 bg-gray-100  border b-gray-200 rounded-lg shadow-lg lg:w-md-container  xl:w-container  ">
       <div
@@ -34,6 +31,9 @@ function Bugitem({ bug }: Props) {
             </div>
         
         <div className="flex ml-auto">
+        <div className='p-2'>
+          <PriorityTag priority={bug.priority}/>
+          </div>
         </div>
       </div>
 
@@ -64,3 +64,4 @@ function Bugitem({ bug }: Props) {
 }
 
 export default Bugitem;
+
