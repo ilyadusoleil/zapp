@@ -30,7 +30,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
   const [editBug] = useEditBug();
 
   const completeBug = () => {
-    const editedBugs = Object.assign({}, data, {state: 1})
+    const editedBugs = Object.assign({}, data, { state: 1 });
     editBug(editedBugs);
     navigate('/preDashboard');
   };

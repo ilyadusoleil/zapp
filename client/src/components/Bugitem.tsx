@@ -8,14 +8,17 @@ import './Bugitem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-
-import { PriorityTag } from '../components/Priority'
+import { PriorityTag } from '../components/Priority';
 
 type Props = {
   bug: Bug;
 };
 
 function Bugitem({ bug }: Props) {
+
+  const toggleOpen = () => {
+    setisOpened(!isOpened);
+  };
 
   return (
 
@@ -31,9 +34,6 @@ function Bugitem({ bug }: Props) {
             </div>
         
         <div className="flex ml-auto">
-            <div className='p-2'>
-          <PriorityTag priority={bug.priority}/>
-          </div>
         </div>
       </div>
 
