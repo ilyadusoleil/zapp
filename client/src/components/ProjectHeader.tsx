@@ -32,6 +32,12 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
       state: { oldLocation: JSON.parse(JSON.stringify(location)) },
     });
   };
+  const navigateToBug = (id: number) => {
+    return () => {
+      ctx.dispatch({ type: 'setCurrentProjectId', payload: id });
+      navigate(`/dashboard/${id}`);
+    };
+  };
 
   if (!data) return <h1>Oh no</h1>;
 
@@ -64,8 +70,8 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
               <div
                 key={project.id}
                 className="h-10 flex items-center"
-                onClick={() => navigate(`/dashboard/${project.id}`)}
-                onKeyDown={() => navigate(`/dashboard/${project.id}`)}
+                onClick={navigateToBug(project.id)}
+                onKeyDown={navigateToBug(project.id)}
                 role="button"
                 tabIndex={0}
               >
