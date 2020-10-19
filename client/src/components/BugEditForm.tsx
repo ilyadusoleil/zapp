@@ -30,18 +30,7 @@ const BugEditForm = ({
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // setValues(defaultFormValues);
     e.preventDefault();
-
-    // const processedValues = {
-    //   title: values.title,
-    //   description: values.description,
-    //   state: values.state,
-    //   priority: values.priority,
-    //   createdAt: values.createdAt,
-    //   projectId: values.projectId,
-    //   id: values.id,
-    // };
 
     onSubmit(values);
     if (submitRoute) {
@@ -80,11 +69,11 @@ const BugEditForm = ({
         <label htmlFor="userId">Assigned User</label>
         <select
           name="userId"
-          value={values.userId}
+          value={values.userId ? values.userId : -1}
           onBlur={(e) => setValue('userId', e.target.value)}
           onChange={(e) => setValue('userId', e.target.value)}
         >
-          <option value={undefined}>Assign User</option>
+          <option value={-1}>Unassigned</option>
           {userData?.map((info, i) => (
             <option key={i} value={info.id}>
               {info.displayName || info.firstName || info.email}

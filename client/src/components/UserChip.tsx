@@ -5,7 +5,7 @@ import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
 
 import useUser from '../hooks/useUser';
 
-const UserChip = ({ userId }: { userId: number }) => {
+const UserChip = ({ userId }: { userId?: number }) => {
   if (!userId) userId = 0;
 
   const { isLoading, data } = useUser(userId);
