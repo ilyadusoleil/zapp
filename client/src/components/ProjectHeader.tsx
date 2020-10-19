@@ -83,6 +83,9 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
         >
           <div
             onClick={openEditForm}
+            onKeyDown={openEditForm}
+            role="button"
+          tabIndex={0}
             className="hover:bg-gray-200 cursor-pointer py-3 pr-10"
           >
             <FontAwesomeIcon icon={edit} className="mx-3" size={'lg'} />
