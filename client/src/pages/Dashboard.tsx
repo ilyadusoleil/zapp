@@ -59,8 +59,9 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
       <Sidebar currentPath="/dashboard" />
 
       <div className="mx-16">
+      <h1>Bugs Dashboard</h1>
         <ProjectHeader projectId={parseInt(projectId)} />
-        <h1>Dashboard</h1>
+        
         <select
           onBlur={(e) => {
             setSortIdx(parseInt(e.target.value));
@@ -72,12 +73,13 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
             </option>
           ))}
         </select>
-
+        <div className='flex flex-wrap justify-between'>
         {[...data]
           .sort(SELECT_INFO[sortIdx].sortFunction)
           .map((bug: Bug, index) => (
             <Bugitem key={index} bug={bug} />
           ))}
+          </div>
       </div>
     </>
   );
