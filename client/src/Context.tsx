@@ -16,15 +16,20 @@ const initialState: State = {
   authError: '',
 };
 
+type actionType = {
+  type: string,
+  payload: number | string
+}
+
 const Context = createContext<{
   state: State;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<actionType>;
 }>({
   state: initialState,
   dispatch: () => null,
 });
 
-const reducer = (state: State, action: any) => {
+const reducer = (state: State, action: actionType) => {
   switch (action.type) {
     case 'setCurrentProjectId':
       return Object.assign({}, state, {
