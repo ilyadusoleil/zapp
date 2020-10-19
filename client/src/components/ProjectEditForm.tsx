@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { MutateFunction } from 'react-query';
 import { ProjectInput, Project } from '../types/Project';
 import { navigate } from '@reach/router';
+import Context from '../Context';
 
 import EmailChips from './EmailChips';
 import { BUTTON_STYLE } from '../constants';
@@ -21,6 +22,7 @@ const ProjectEditForm = ({
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
+  const ctx = useContext(Context);
 
   // const setValue = (field: string, value: string | number) =>
   const setValue = (field: string, value: string | number) =>
@@ -28,9 +30,12 @@ const ProjectEditForm = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const valuesCopy = Object.assign({}, values, {
-      projectUsers,
-    });
+    const valuesCopy = Object.assign(
+      {},
+      values,
+      { projectUsers },
+      { userId: ctx.state.userId }
+    );
     onSubmit(valuesCopy);
     if (submitRoute) {
       navigate(submitRoute);

@@ -1,4 +1,5 @@
 const db = require('../db/models/index');
+const sendInvitationEmail = require('../email/invitationEmail');
 
 // GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
@@ -57,6 +58,11 @@ const createProject = async function (req, res) {
 
     //If any users have been invited to this project
     if (projectUsers.length > 0) {
+      //Get name of the person who invited user
+      const invitedBy = await db.user.findOne({
+        where: { id: userId },
+      });
+      const invitedByName = `${invitedBy.firstName} ${invitedBy.lastName}`;
       for (let i = 0; i < projectUsers.length; i++) {
         let user = null;
         if (typeof projectUsers[i] === 'number') {
@@ -73,6 +79,7 @@ const createProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          await sendInvitationEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
@@ -97,9 +104,9 @@ const createProject = async function (req, res) {
 
 const editProject = async function (req, res) {
   try {
-    const { projectUsers } = req.body;
+    const { projectUsers, userId, name } = req.body;
     const updatedProject = {
-      name: req.body.name,
+      name: name,
       description: req.body.description,
       state: req.body.state,
       createdAt: req.body.createdAt,
@@ -113,6 +120,11 @@ const editProject = async function (req, res) {
 
     // If any users have been invited to this project
     if (projectUsers.length > 0) {
+      //Get name of the person who invited user
+      const invitedBy = await db.user.findOne({
+        where: { id: userId },
+      });
+      const invitedByName = `${invitedBy.firstName} ${invitedBy.lastName}`;
       for (let i = 0; i < projectUsers.length; i++) {
         let user = null;
         if (typeof projectUsers[i] === 'number') {
@@ -129,6 +141,7 @@ const editProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          await sendInvitationEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
