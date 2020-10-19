@@ -40,28 +40,29 @@ const createBug = async function (req, res) {
 
 const editBug = async function (req, res) {
   try {
-    db.bug
-      .update(
-        {
-          title: req.body.title,
-          description: req.body.description,
-          state: req.body.state,
-          priority: req.body.priority,
-          createdAt: req.body.createdAt,
-          updatedAt: new Date(),
-          projectId: req.body.projectId,
-          userId: req.body.userId,
-        },
-        {
-          where: {
-            id: req.body.id,
-          },
-        }
-      )
-      .then((updatedBug) => {
-        res.status(200);
-        res.send(updatedBug);
-      });
+    const updatedBug = {
+      title: req.body.title,
+      description: req.body.description,
+      state: req.body.state,
+      priority: req.body.priority,
+      createdAt: req.body.createdAt,
+      updatedAt: new Date(),
+      projectId: req.body.projectId,
+      userId: req.body.userId,
+    };
+    const isUpdated = await db.bug.update(updatedBug, {
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    if (isUpdated[0] === 1) {
+      res.status(200);
+      res.send(updatedBug);
+    } else {
+      res.status(500);
+      res.send({ message: 'error editing bug in database' });
+    }
   } catch (err) {
     res.status(500);
     res.send({ err, message: 'error editing bug in database' });

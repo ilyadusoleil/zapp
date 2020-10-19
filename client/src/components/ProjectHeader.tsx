@@ -7,6 +7,7 @@ import {
   faPlus as plus,
   faChevronDown as down,
   faChevronUp as up,
+  faEdit as edit,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Context from '../Context';
@@ -25,12 +26,18 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     return res;
   };
 
+  const openEditForm = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/project/edit/${projectId}`, {
+      state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+    });
+  };
   const navigateToBug = (id: number) => {
     return () => {
-      ctx.dispatch({type: 'setCurrentProjectId', payload: id})
-      navigate(`/dashboard/${id}`)
-    }
-  }
+      ctx.dispatch({ type: 'setCurrentProjectId', payload: id });
+      navigate(`/dashboard/${id}`);
+    };
+  };
 
   if (!data) return <h1>Oh no</h1>;
 
@@ -43,11 +50,16 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
         tabIndex={0}
         className="bg-gray-100 p-3 flex justify-items cursor-pointer"
       >
+        <FontAwesomeIcon
+          icon={edit}
+          className="mx-3 mt-2"
+          onClick={openEditForm}
+        />
         <div className="text-lg">{data[getIndexFromId(projectId)].name}</div>
         <FontAwesomeIcon
           icon={isOpened ? up : down}
           size={'lg'}
-          className="ml-3"
+          className="ml-3 mt-1"
         />
       </div>
 
