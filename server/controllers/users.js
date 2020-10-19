@@ -9,6 +9,7 @@ const getUser = async function (req, res) {
     });
     // details.dataValues.comments = req.body.comments;
     res.status(200);
+    if (!details) res.send({displayName: 'Not Assigned'})
     res.send(details);
   } catch (err) {
     res.status(500);
