@@ -70,7 +70,7 @@ const sidebarData: sidebarDataType[] = [
 const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   return (
     <div
-      className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col"
+      className="bottom-0 left-0 bg-teal-500 w-14 fixed flex flex-col"
       css={css`
         top: 3rem;
       `}
