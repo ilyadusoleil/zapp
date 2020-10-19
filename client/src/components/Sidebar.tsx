@@ -77,13 +77,6 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   const ref = useOnclickOutside(() => {
     setIsUserMenuOpen(false);
   });
-  // // Create a ref that we add to the element for which we want to detect outside clicks
-  // const ref = useRef();
-  // // Call hook passing in the ref and a function to call on outside click
-  // useOnClickOutside(ref, () => {
-  //   console.log('close modal?');
-  //   setIsUserMenuOpen(false);
-  // });
 
   const toggleUserMenuOpen = () => {
     setIsUserMenuOpen(!isUserMenuOpen);
@@ -107,7 +100,7 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
 
       {ctx.state.user && ctx.state.user.image && (
         <div
-          className="mt-auto mb-3 h-8 self-center"
+          className="mt-auto mb-3 h-8 self-center ignore-onclickoutside"
           onClick={toggleUserMenuOpen}
           onKeyDown={toggleUserMenuOpen}
           role="button"
