@@ -3,7 +3,7 @@ import fetchRequest from '../services/ApiService';
 import { Project } from '../types/Project';
 
 // Get projects for a single user
-const useProjects = (userId: string): QueryResult<Project[]> => {
+const useProjects = (userId: number): QueryResult<Project[]> => {
   return useQuery(userId && ['project', userId], () =>
     fetchRequest(`/projects?userId=${userId}`)
   );

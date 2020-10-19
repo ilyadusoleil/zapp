@@ -10,8 +10,7 @@ import './Bugitem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-
-import { PriorityTag } from '../components/Priority'
+import { PriorityTag } from '../components/Priority';
 
 type Props = {
   bug: Bug;
@@ -20,11 +19,15 @@ type Props = {
 function Bugitem({ bug }: Props) {
   const [isOpened, setisOpened] = useState(false);
 
+  const toggleOpen = () => {
+    setisOpened(!isOpened);
+  };
+
   return (
     <div className="mt-4 mb-4 p-4 m-1 bg-gray-200 w-72 border b-gray-200 ">
       <div
-        onClick={() => setisOpened(!isOpened)}
-        onKeyDown={() => setisOpened(!isOpened)}
+        onClick={toggleOpen}
+        onKeyDown={toggleOpen}
         role="button"
         tabIndex={0}
         className="bg-gray-200  p-1 flex justify-items cursor-pointer"
@@ -32,14 +35,12 @@ function Bugitem({ bug }: Props) {
         <h1 className="Capitalize text-s">{bug.title}</h1>
         <div className="flex ml-auto">
           <FontAwesomeIcon
-            onClick={() =>
-              navigate(`/details/${bug.id}`)
-            }
+            onClick={() => navigate(`/details/${bug.id}`)}
             icon={faEdit}
             size={'sm'}
             className="mr-10 text-gray-900"
           />
-          <PriorityTag priority={bug.priority}/>
+          <PriorityTag priority={bug.priority} />
         </div>
       </div>
 

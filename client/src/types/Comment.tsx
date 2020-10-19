@@ -3,7 +3,7 @@ export type Comment = {
   createdAt: Date;
   content: string;
   bugId: number;
-  userId: string;
+  userId: number;
 };
 
 export type CommentInput = Omit<Comment, 'id' | 'createdAt'>;

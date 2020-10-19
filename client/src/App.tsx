@@ -56,9 +56,8 @@ function Routes(props: RouterProps) {
 const App = () => {
   const initialState = {
     currentProjectId: -1,
-    userId: '3', // TODO: no longer hard code this one user authenitcation is working
-    // user: {},
-    isAuthenticated: false, // TODO: set to false
+    userId: 0,
+    isAuthenticated: false,
     authError: '',
   };
 

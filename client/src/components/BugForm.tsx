@@ -31,12 +31,12 @@ const BugForm = ({
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setValues(defaultFormValues);
     e.preventDefault();
     const valuesCopy = Object.assign({}, values, {
       projectId: ctx.state.currentProjectId,
     });
     onSubmit(valuesCopy);
+    setValues(defaultFormValues);
     if (submitRoute) {
       navigate(submitRoute);
     }

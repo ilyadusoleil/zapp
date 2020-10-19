@@ -2,7 +2,7 @@ export type Project = {
   id: number;
   name: string;
   description?: string;
-  userId: string;
+  userId: number;
   projectUsers: (string | number)[];
 };
 
