@@ -38,7 +38,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     navigate(`/newProject`, {
       state: { oldLocation: JSON.parse(JSON.stringify(location)) },
     });
-  }
+  };
 
   if (!data) return <h1>Oh no</h1>;
 
