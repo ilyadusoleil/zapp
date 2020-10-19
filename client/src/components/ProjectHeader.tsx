@@ -39,7 +39,9 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
   const navigateToProject = (id: number) => {
     return () => {
       ctx.dispatch({ type: 'setCurrentProjectId', payload: id });
-      updateUserRecentProject(Object.assign({}, ctx.state.user, {recentProject: id}));
+      updateUserRecentProject(
+        Object.assign({}, ctx.state.user, { recentProject: id })
+      );
       navigate(`/dashboard/${id}`);
     };
   };
@@ -52,7 +54,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     });
   };
 
-  if (!data) return <h1>Oh no</h1>;
+  if (!data || !Array.isArray(data) || data.length < 1) return <h1>Oh no</h1>;
 
   return (
     <>
@@ -77,22 +79,24 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
       </div>
 
       <Collapse isOpened={isOpened}>
-        {data.map(
-          (project) =>
-            project.id != projectId && (
-              <div
-                key={project.id}
-                className="h-10 flex items-center"
-                onClick={navigateToProject(project.id)}
-                onKeyDown={navigateToProject(project.id)}
-                role="button"
-                tabIndex={0}
-              >
-                <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
-                <p>{project.name}</p>
-              </div>
-            )
-        )}
+        {[...data]
+          .filter((el) => el.state != 1)
+          .map(
+            (project) =>
+              project.id != projectId && (
+                <div
+                  key={project.id}
+                  className="h-10 flex items-center"
+                  onClick={navigateToProject(project.id)}
+                  onKeyDown={navigateToProject(project.id)}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
+                  <p>{project.name}</p>
+                </div>
+              )
+          )}
         <div
           className="h-10 flex items-center"
           onClick={navigateToNewProject}

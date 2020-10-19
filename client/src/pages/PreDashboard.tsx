@@ -1,3 +1,8 @@
+/*
+  Will always redirect to this page, and if there are open projects, 
+  it will automatically redirect to Dashboard.tsx
+*/
+
 import React, { useEffect, useContext } from 'react';
 
 import { RouteComponentProps, navigate } from '@reach/router';
@@ -19,7 +24,7 @@ const PreDashboard = (_props: RouteComponentProps) => {
   const [createProject, { status: createProjectStatus }] = useCreateProject();
 
   useEffect(() => {
-    if (projectsData && projectsData.length > 0) {
+    if (projectsData && projectsData.filter((el) => el.state != 1).length > 0) {
       //navigate to the currently active project if it exists
       //First check global context, but if that isn't set, get from database
       if (

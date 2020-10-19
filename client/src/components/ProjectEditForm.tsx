@@ -43,7 +43,9 @@ const ProjectEditForm = ({
     e.preventDefault();
     await setValue('state', 1);
     const form = document.getElementById('edit-project-form');
-    form.requestSubmit();
+    if (form) {
+      form.requestSubmit();
+    }
   };
 
   useEffect(() => {
