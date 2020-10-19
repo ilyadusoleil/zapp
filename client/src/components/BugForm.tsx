@@ -3,7 +3,7 @@ import { MutateFunction } from 'react-query';
 import { BugInput, Bug } from '../types/Bug';
 import Context from '../Context';
 import { navigate } from '@reach/router';
-import { PrioritySelect } from './Priority'
+import { PrioritySelect } from './Priority';
 
 const defaultFormValues = {
   title: '',
@@ -90,7 +90,7 @@ const BugForm = ({
       >
         Priority
       </label>
-      <PrioritySelect prioityValue={values.priority} setValue={setValue}/>
+      <PrioritySelect prioityValue={values.priority} setValue={setValue} />
       <br />
       <div className="flex">
         <button

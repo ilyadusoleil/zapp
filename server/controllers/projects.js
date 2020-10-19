@@ -3,23 +3,35 @@ const db = require('../db/models/index');
 // GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
   try {
-    const projects = await db.projectuser.findAll({
-      //TODO improve this query
-      attributes: [],
-      where: {
-        userId: req.query.userId,
-      },
-      include: {
-        model: db.project,
-        required: true,
-        attributes: ['id', 'name', 'description'],
-      },
-    });
-    const processedProjects = projects.map((el) => el.projects[0]);
+    if (req.query.userId) {
+      const projects = await db.projectuser.findAll({
+        //TODO improve this query
+        attributes: [],
+        where: {
+          userId: req.query.userId,
+        },
+        include: {
+          model: db.project,
+          required: true,
+          attributes: ['id', 'name', 'description'],
+        },
+      });
+      const processedProjects = projects.map((el) => el.projects[0]);
 
-    res.status(200);
-    res.send(processedProjects);
+      res.status(200);
+      res.send(processedProjects);
+    } else if (req.query.projectId) {
+      console.log('finding one project');
+      const project = await db.project.findAll({
+        where: {
+          id: req.query.projectId,
+        },
+      });
+      res.status(200);
+      res.send(project[0]);
+    }
   } catch (err) {
+    console.log(err);
     res.status(500);
     res.send({ err, message: 'error retrieving projects from the database' });
   }
@@ -87,19 +99,18 @@ const createProject = async function (req, res) {
 const editProject = async function (req, res) {
   try {
     const { projectUsers } = req.body;
-    const updatedProject = await db.project.update(
-      {
-        name: req.body.name,
-        description: req.body.description,
-        createdAt: req.body.createdAt,
-        updatedAt: new Date(),
+    const updatedProject = {
+      name: req.body.name,
+      description: req.body.description,
+      createdAt: req.body.createdAt,
+      updatedAt: new Date(),
+    };
+    const isUpdated = await db.project.update(updatedProject, {
+      where: {
+        id: req.body.id,
       },
-      {
-        where: {
-          id: req.body.id,
-        },
-      }
-    );
+    });
+
     // If any users have been invited to this project
     if (projectUsers.length > 0) {
       for (let i = 0; i < projectUsers.length; i++) {
@@ -122,16 +133,17 @@ const editProject = async function (req, res) {
           //TODO throw error
         }
         // Check if the user is already on the project
-        let userOnProject = await db.projectUser.findOne({
+        let userOnProject = await db.projectuser.findOne({
           where: {
             userId: user.id,
+            projectId: req.body.id,
           },
         });
         // If they're not already on the project then invite them
         if (!userOnProject) {
           await db.projectuser.create({
             userId: user.id,
-            projectId: updatedProject.dataValues.id,
+            projectId: req.body.id,
             authorization: 1,
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -139,12 +151,16 @@ const editProject = async function (req, res) {
         }
       }
     }
-    res.status(200);
-    res.send(updatedProject);
+    if (isUpdated[0] === 1) {
+      res.status(200);
+      res.send(updatedProject);
+    } else {
+      res.status(500);
+      res.send({ message: 'error editing project in database' });
+    }
   } catch (err) {
-    console.log('--> error editing projecting in the database', err);
     res.status(500);
-    res.send({ err, message: 'error editing project in database' });
+    res.send({ message: 'error editing project in database' });
   }
 };
 
@@ -154,7 +170,7 @@ const getProjectUsers = async function (req, res) {
       attributes: ['userId'],
       where: {
         projectId: req.query.projectId,
-      }
+      },
     });
     const processedUsers = users.map((el) => el.userId);
 
@@ -162,20 +178,22 @@ const getProjectUsers = async function (req, res) {
       where: {
         id: processedUsers,
       },
-    })
+    });
 
     res.status(200);
     res.send(userInfo);
   } catch (err) {
     res.status(500);
-    res.send({ err, message: 'error retrieving user related to a project from the database' });
+    res.send({
+      err,
+      message: 'error retrieving user related to a project from the database',
+    });
   }
 };
-
 
 module.exports = {
   getProjects,
   createProject,
   editProject,
-  getProjectUsers
+  getProjectUsers,
 };
