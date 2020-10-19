@@ -4,11 +4,13 @@ module.exports = (sequelize, DataTypes) => {
   class projectuser extends Model {
     static associate(models) {
       projectuser.hasMany(models.user, {
-        foreignKey: 'id', //TODO allownull false
+        foreignKey: 'id',
+        allowNull: false,
       });
 
       projectuser.hasMany(models.project, {
-        foreignKey: 'id', //TODO allownull false
+        foreignKey: 'id',
+        allowNull: false,
       });
     }
   }
