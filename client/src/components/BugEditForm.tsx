@@ -11,17 +11,6 @@ import { BUTTON_STYLE } from '../constants';
 
 import Context from '../Context';
 
-// const defaultFormValues = {
-//   id: 0,
-//   projectId: 0, // TODO: get correct type
-//   title: '',
-//   description: '',
-//   priority: 1,
-//   state: 0,
-//   createdAt: new Date(),
-//   userId: 0
-// };
-
 const BugEditForm = ({
   onSubmit,
   submitText,
@@ -93,11 +82,12 @@ const BugEditForm = ({
           name="userId"
           value={values.userId}
           onBlur={(e) => setValue('userId', e.target.value)}
+          onChange={(e) => setValue('userId', e.target.value)}
         >
           <option value={undefined}>Assign User</option>
           {userData?.map((info, i) => (
             <option key={i} value={info.id}>
-              {info.displayName || info.firstName || info.id}
+              {info.displayName || info.firstName || info.email}
             </option>
           ))}
         </select>

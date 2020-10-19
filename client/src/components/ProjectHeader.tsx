@@ -7,16 +7,20 @@ import {
   faPlus as plus,
   faChevronDown as down,
   faChevronUp as up,
+  faEdit as edit,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Context from '../Context';
 
 import useProjects from '../hooks/useProjects';
+import useUpdateUserRecentProject from '../hooks/useUpdateUserRecentProject';
 
 const ProjectHeader = ({ projectId }: { projectId: number }) => {
   const ctx = useContext(Context);
   const [isOpened, setIsOpened] = useState(false);
   const { data } = useProjects(ctx.state.userId);
+
+  const [updateUserRecentProject] = useUpdateUserRecentProject();
 
   const getIndexFromId = (id: number) => {
     if (!data) return 0;
@@ -25,29 +29,50 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     return res;
   };
 
-  const navigateToBug = (id: number) => {
+  const openEditForm = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/project/edit/${projectId}`, {
+      state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+    });
+  };
+
+  const navigateToProject = (id: number) => {
     return () => {
-      ctx.dispatch({type: 'setCurrentProjectId', payload: id})
-      navigate(`/dashboard/${id}`)
-    }
-  }
+      ctx.dispatch({ type: 'setCurrentProjectId', payload: id });
+      updateUserRecentProject(Object.assign({}, ctx.state.user, {recentProject: id}));
+      navigate(`/dashboard/${id}`);
+    };
+  };
+
+  const toggleIsOpen = () => setIsOpened(!isOpened);
+
+  const navigateToNewProject = () => {
+    navigate(`/newProject`, {
+      state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+    });
+  };
 
   if (!data) return <h1>Oh no</h1>;
 
   return (
     <>
       <div
-        onClick={() => setIsOpened(!isOpened)}
-        onKeyDown={() => setIsOpened(!isOpened)}
+        onClick={toggleIsOpen}
+        onKeyDown={toggleIsOpen}
         role="button"
         tabIndex={0}
         className="bg-gray-100 p-3 flex justify-items cursor-pointer"
       >
+        <FontAwesomeIcon
+          icon={edit}
+          className="mx-3 mt-2"
+          onClick={openEditForm}
+        />
         <div className="text-lg">{data[getIndexFromId(projectId)].name}</div>
         <FontAwesomeIcon
           icon={isOpened ? up : down}
           size={'lg'}
-          className="ml-3"
+          className="ml-3 mt-1"
         />
       </div>
 
@@ -58,8 +83,8 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
               <div
                 key={project.id}
                 className="h-10 flex items-center"
-                onClick={navigateToBug(project.id)}
-                onKeyDown={navigateToBug(project.id)}
+                onClick={navigateToProject(project.id)}
+                onKeyDown={navigateToProject(project.id)}
                 role="button"
                 tabIndex={0}
               >
@@ -70,16 +95,8 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
         )}
         <div
           className="h-10 flex items-center"
-          onClick={() => {
-            navigate(`/newProject`, {
-              state: { oldLocation: JSON.parse(JSON.stringify(location)) },
-            });
-          }}
-          onKeyDown={() => {
-            navigate(`/newProject`, {
-              state: { oldLocation: JSON.parse(JSON.stringify(location)) },
-            });
-          }}
+          onClick={navigateToNewProject}
+          onKeyDown={navigateToNewProject}
           role="button"
           tabIndex={0}
         >

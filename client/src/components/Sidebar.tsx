@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'; // eslint-disable-line @typescript-eslint/no-unused-vars
+import React, { useState, useContext } from 'react';
 
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
