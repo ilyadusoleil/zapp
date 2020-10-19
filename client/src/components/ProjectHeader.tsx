@@ -14,12 +14,18 @@ import Context from '../Context';
 import useProjects from '../hooks/useProjects';
 import useUpdateUserRecentProject from '../hooks/useUpdateUserRecentProject';
 
+import useOnclickOutside from 'react-cool-onclickoutside';
+
 const ProjectHeader = ({ projectId }: { projectId: number }) => {
   const ctx = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useProjects(ctx.state.userId);
 
   const [updateUserRecentProject] = useUpdateUserRecentProject();
+
+  const ref = useOnclickOutside(() => {
+    setIsOpen(false);
+  });
 
   const getIndexFromId = (id: number) => {
     if (!data) return 0;
@@ -57,33 +63,33 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
 
   return (
     <>
-      <div
-        onClick={toggleIsOpen}
-        onKeyDown={toggleIsOpen}
-        role="button"
-        tabIndex={0}
-        className="bg-gray-100 p-3 flex justify-items cursor-pointer"
-      >
+      <div className="bg-gray-100 p-3 flex justify-items">
         <div className="text-lg">{data[getIndexFromId(projectId)].name}</div>
         <FontAwesomeIcon
+          onClick={toggleIsOpen}
+          onKeyDown={toggleIsOpen}
+          role="button"
+          tabIndex={0}
           icon={menu}
           size={'lg'}
-          className="mr-3 mt-1 ml-auto"
+          className="mr-2 ml-auto ignore-onclickoutside duration-200 transition-transform transform hover:scale-125"
         />
       </div>
 
       {isOpen && (
-        <div className={`absolute top-0 right-0 mt-20 pr-5 mr-1 bg-white shadow-sm`}>
-          <div onClick={openEditForm} className="hover:bg-gray-200 cursor-pointer py-3">
-            <FontAwesomeIcon
-              icon={edit}
-              className="mx-3"
-              size={'lg'}
-            />
+        <div
+          ref={ref}
+          className={`absolute top-0 right-0 mt-20 mr-1 bg-white shadow-md`}
+        >
+          <div
+            onClick={openEditForm}
+            className="hover:bg-gray-200 cursor-pointer py-3 pr-10"
+          >
+            <FontAwesomeIcon icon={edit} className="mx-3" size={'lg'} />
             Edit Project
           </div>
 
-          <div className='mt-2 pt-1 border-t-2'>Switch Project</div>
+          <div className="mt-2 pt-1 ml-2 border-t-2">Switch Project</div>
           {data.map(
             (project) =>
               project.id != projectId && (
