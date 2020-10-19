@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,10 +8,14 @@ import {
   faPlus,
   faListAlt,
   faBars,
+  faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { SERVER } from '../constants';
+
+import useOnclickOutside from "react-cool-onclickoutside";
+
 import Context from '../Context';
-import { isJsxOpeningElement } from 'typescript';
 
 const SidebarButton = ({
   icon,
@@ -69,6 +73,27 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const ctx = useContext(Context);
 
+
+  const ref = useOnclickOutside(() => {
+    setIsUserMenuOpen(false);
+  });
+  // // Create a ref that we add to the element for which we want to detect outside clicks
+  // const ref = useRef();
+  // // Call hook passing in the ref and a function to call on outside click
+  // useOnClickOutside(ref, () => {
+  //   console.log('close modal?');
+  //   setIsUserMenuOpen(false);
+  // });
+
+  const toggleUserMenuOpen = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  };
+
+  const logout = () => {
+    ctx.dispatch({ type: 'logout' });
+    window.open(`${SERVER}/auth/logout`, '_self');
+  };
+
   return (
     <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col top-0">
       {sidebarData.map((sidebarItem, idx) => (
@@ -82,9 +107,9 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
 
       {ctx.state.user && ctx.state.user.image && (
         <div
-          className="ml-auto mr-3 h-8 self-center"
-          onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-          onKeyDown={() => setIsUserMenuOpen(!isUserMenuOpen)}
+          className="mt-auto mb-3 h-8 self-center"
+          onClick={toggleUserMenuOpen}
+          onKeyDown={toggleUserMenuOpen}
           role="button"
           tabIndex={0}
         >
@@ -93,6 +118,21 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
             alt="user profile"
             src={ctx.state.user.image}
           />
+        </div>
+      )}
+
+      {isUserMenuOpen && (
+        <div ref={ref} className="absolute left-0 bottom-0 ml-12 h-12 z-10 shadow-md bg-white flex flex-col cursor-pointer">
+          <div
+            className="flex self-center hover:bg-gray-200"
+            onClick={logout}
+            onKeyDown={logout}
+            role="button"
+            tabIndex={0}
+          >
+            <FontAwesomeIcon icon={faSignOutAlt} size={'lg'} className="m-3" />
+            <div className="self-center mr-4">Logout</div>
+          </div>
         </div>
       )}
     </div>
