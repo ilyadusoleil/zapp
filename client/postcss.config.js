@@ -1,1 +1,1 @@
-module.exports = { plugins: ['tailwindcss'] };
+module.exports = { plugins: ['postcss-import', 'tailwindcss', 'postcss-nested'] };
