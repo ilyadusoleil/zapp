@@ -13,7 +13,7 @@ const getProjects = async function (req, res) {
         include: {
           model: db.project,
           required: true,
-          attributes: ['id', 'name', 'description'],
+          attributes: ['id', 'name', 'description', 'state'],
         },
       });
       const processedProjects = projects.map((el) => el.projects[0]);
@@ -21,7 +21,6 @@ const getProjects = async function (req, res) {
       res.status(200);
       res.send(processedProjects);
     } else if (req.query.projectId) {
-      console.log('finding one project');
       const project = await db.project.findAll({
         where: {
           id: req.query.projectId,
@@ -31,7 +30,6 @@ const getProjects = async function (req, res) {
       res.send(project[0]);
     }
   } catch (err) {
-    console.log(err);
     res.status(500);
     res.send({ err, message: 'error retrieving projects from the database' });
   }
@@ -43,6 +41,7 @@ const createProject = async function (req, res) {
     const newProject = await db.project.create({
       name: name,
       description: description,
+      state: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -102,6 +101,7 @@ const editProject = async function (req, res) {
     const updatedProject = {
       name: req.body.name,
       description: req.body.description,
+      state: req.body.state,
       createdAt: req.body.createdAt,
       updatedAt: new Date(),
     };
