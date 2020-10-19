@@ -38,7 +38,6 @@ const getProjects = async function (req, res) {
 
 const createProject = async function (req, res) {
   try {
-    console.log(req.body);
     const { name, description, userId, projectUsers } = req.body;
     const newProject = await db.project.create({
       name: name,
@@ -59,7 +58,6 @@ const createProject = async function (req, res) {
 
     //If any users have been invited to this project
     if (projectUsers.length > 0) {
-      console.log('Someone was invited');
       //Get name of the person who invited user
       const invitedBy = await db.user.findOne({
         where: { id: userId },
@@ -75,23 +73,13 @@ const createProject = async function (req, res) {
             },
           });
         } else if (typeof projectUsers[i] === 'string') {
-          console.log('user doesnt exist in db');
           //user doesn't exist in db yet
           user = await db.user.create({
             email: projectUsers[i],
             createdAt: new Date(),
             updatedAt: new Date(),
           });
-          const emailSent = await sendInvitationEmail(
-            user.email,
-            invitedByName,
-            name
-          );
-          if (emailSent) {
-            console.log('EMAIL SENT');
-          } else {
-            console.log('EMAIL DID NOT SEND');
-          }
+          await sendInvitationEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
@@ -109,7 +97,6 @@ const createProject = async function (req, res) {
     res.status(201);
     res.send(newProject);
   } catch (err) {
-    console.log(err);
     res.status(500);
     res.send({ err, message: 'error creating project in database' });
   }
@@ -117,7 +104,6 @@ const createProject = async function (req, res) {
 
 const editProject = async function (req, res) {
   try {
-    console.log(req.body);
     const { projectUsers, userId, name } = req.body;
     const updatedProject = {
       name: name,
@@ -155,16 +141,7 @@ const editProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
-          const emailSent = await sendInvitationEmail(
-            user.email,
-            invitedByName,
-            name
-          );
-          if (emailSent) {
-            console.log('EMAIL SENT');
-          } else {
-            console.log('EMAIL DID NOT SEND');
-          }
+          await sendInvitationEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
@@ -195,7 +172,6 @@ const editProject = async function (req, res) {
       res.send({ message: 'error editing project in database' });
     }
   } catch (err) {
-    console.log(err);
     res.status(500);
     res.send({ message: 'error editing project in database' });
   }

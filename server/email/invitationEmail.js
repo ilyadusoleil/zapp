@@ -1,7 +1,6 @@
 const email = require('./transporter');
 
 const helloWorldEmail = (recipient, inviterName, projectName) => {
-  console.log('invitation email getting called');
   const mailOptions = {
     from: process.env.EMAIL_ADD,
     to: recipient,
@@ -22,9 +21,11 @@ const helloWorldEmail = (recipient, inviterName, projectName) => {
 
   email.sendMail(mailOptions, function (error, info) {
     if (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
       return false;
     } else {
+      // eslint-disable-next-line no-console
       console.log('Email sent' + info.response);
       return true;
     }
