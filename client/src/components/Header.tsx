@@ -27,14 +27,18 @@ const Header: HeaderComponent = () => {
     window.open(`${SERVER}/auth/logout`, '_self');
   };
 
+  const toggleIsOpen = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div>
       <div className="inset-x-0 top-0 bg-gray-200 h-12 flex">
         <img src={Logo} alt="ZAPP" className="h-12 ml-1 self-center"></img>
         {ctx.state.user && ctx.state.user.image && (
           <div className="ml-auto mr-3 h-8 self-center"
-            onClick={() => setIsOpen(!isOpen)}
-            onKeyDown={() => setIsOpen(!isOpen)}
+            onClick={toggleIsOpen}
+            onKeyDown={toggleIsOpen}
             role="button"
             tabIndex={0}
           >

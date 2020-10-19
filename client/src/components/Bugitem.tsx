@@ -20,11 +20,15 @@ type Props = {
 function Bugitem({ bug }: Props) {
   const [isOpened, setisOpened] = useState(false);
 
+  const toggleOpen = () => {
+    setisOpened(!isOpened)
+  }
+
   return (
     <div className="mt-4 mb-4 p-4 m-1 bg-gray-200 w-72 border b-gray-200 ">
       <div
-        onClick={() => setisOpened(!isOpened)}
-        onKeyDown={() => setisOpened(!isOpened)}
+        onClick={toggleOpen}
+        onKeyDown={toggleOpen}
         role="button"
         tabIndex={0}
         className="bg-gray-200  p-1 flex justify-items cursor-pointer"

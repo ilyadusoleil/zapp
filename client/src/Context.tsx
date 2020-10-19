@@ -18,7 +18,7 @@ const initialState: State = {
 
 type actionType = {
   type: string,
-  payload: number | string
+  payload?: number | string
 }
 
 const Context = createContext<{
