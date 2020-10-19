@@ -104,16 +104,6 @@ return (
 
         <select
           className="mr-5"
-          onChange={updateSortSelect}
-          onBlur={updateSortSelect}
-        >
-          {SORT_INFO.map((el, i) => (
-            <option value={i} key={i}>
-            {el.label}
-            </option>
-        ))}
-        <select
-          className="mr-5"
           onChange={updateAssigneeFilterSelect}
           onBlur={updateAssigneeFilterSelect}
         >
@@ -142,7 +132,7 @@ return (
               <Bugitem key={index} bug={bug} />
             ))}
         </div>
-      </div>
+        </div>
     </>
   );
 };
