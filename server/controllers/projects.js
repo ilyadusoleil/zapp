@@ -1,4 +1,5 @@
 const db = require('../db/models/index');
+const sendInvitationEmail = require('../email/invitationEmail');
 
 // GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
@@ -21,7 +22,6 @@ const getProjects = async function (req, res) {
       res.status(200);
       res.send(processedProjects);
     } else if (req.query.projectId) {
-      console.log('finding one project');
       const project = await db.project.findAll({
         where: {
           id: req.query.projectId,
@@ -39,6 +39,7 @@ const getProjects = async function (req, res) {
 
 const createProject = async function (req, res) {
   try {
+    console.log(req.body);
     const { name, description, userId, projectUsers } = req.body;
     const newProject = await db.project.create({
       name: name,
@@ -58,6 +59,12 @@ const createProject = async function (req, res) {
 
     //If any users have been invited to this project
     if (projectUsers.length > 0) {
+      console.log('Someone was invited');
+      //Get name of the person who invited user
+      const invitedBy = await db.user.findOne({
+        where: { id: userId },
+      });
+      const invitedByName = `${invitedBy.firstName} ${invitedBy.lastName}`;
       for (let i = 0; i < projectUsers.length; i++) {
         let user = null;
         if (typeof projectUsers[i] === 'number') {
@@ -68,12 +75,23 @@ const createProject = async function (req, res) {
             },
           });
         } else if (typeof projectUsers[i] === 'string') {
+          console.log('user doesnt exist in db');
           //user doesn't exist in db yet
           user = await db.user.create({
             email: projectUsers[i],
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          const emailSent = await sendInvitationEmail(
+            user.email,
+            invitedByName,
+            name
+          );
+          if (emailSent) {
+            console.log('EMAIL SENT');
+          } else {
+            console.log('EMAIL DID NOT SEND');
+          }
         } else {
           //TODO throw error
         }
@@ -91,6 +109,7 @@ const createProject = async function (req, res) {
     res.status(201);
     res.send(newProject);
   } catch (err) {
+    console.log(err);
     res.status(500);
     res.send({ err, message: 'error creating project in database' });
   }
@@ -98,9 +117,10 @@ const createProject = async function (req, res) {
 
 const editProject = async function (req, res) {
   try {
-    const { projectUsers } = req.body;
+    console.log(req.body);
+    const { projectUsers, userId, name } = req.body;
     const updatedProject = {
-      name: req.body.name,
+      name: name,
       description: req.body.description,
       createdAt: req.body.createdAt,
       updatedAt: new Date(),
@@ -113,6 +133,11 @@ const editProject = async function (req, res) {
 
     // If any users have been invited to this project
     if (projectUsers.length > 0) {
+      //Get name of the person who invited user
+      const invitedBy = await db.user.findOne({
+        where: { id: userId },
+      });
+      const invitedByName = `${invitedBy.firstName} ${invitedBy.lastName}`;
       for (let i = 0; i < projectUsers.length; i++) {
         let user = null;
         if (typeof projectUsers[i] === 'number') {
@@ -129,6 +154,16 @@ const editProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          const emailSent = await sendInvitationEmail(
+            user.email,
+            invitedByName,
+            name
+          );
+          if (emailSent) {
+            console.log('EMAIL SENT');
+          } else {
+            console.log('EMAIL DID NOT SEND');
+          }
         } else {
           //TODO throw error
         }
@@ -159,6 +194,7 @@ const editProject = async function (req, res) {
       res.send({ message: 'error editing project in database' });
     }
   } catch (err) {
+    console.log(err);
     res.status(500);
     res.send({ message: 'error editing project in database' });
   }
