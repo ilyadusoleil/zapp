@@ -6,6 +6,7 @@ module.exports = {
       {
         name: 'Test project',
         description: 'Project generated from running seed command!',
+        state: 0,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
