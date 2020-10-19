@@ -22,8 +22,8 @@ export default function useEditProject() {
     onError: (_error, _values, rollback: rollbackType) => rollback(),
 
     // TODO remove this (est line removal below) once below code is updated
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onSuccess: async (_values) => {
-      // eslint-disable-line @typescript-eslint/no-unused-vars
       // FIXME: revert to commented code once server returns new value
       queryCache.refetchQueries(['project']);
       await queryCache.refetchQueries(['projects']);
