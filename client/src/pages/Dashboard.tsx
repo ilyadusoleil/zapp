@@ -96,7 +96,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
     <>
       <Sidebar currentPath="/dashboard" />
 
-      <div className="mx-16">
+      <div className="ml-16">
         <h1>Bugs Dashboard</h1>
         <ProjectHeader projectId={parseInt(projectId)} />
 
