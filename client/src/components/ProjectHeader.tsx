@@ -34,8 +34,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     return res;
   };
 
-  const openEditForm = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const openEditForm = () => {
     navigate(`/project/edit/${projectId}`, {
       state: { oldLocation: JSON.parse(JSON.stringify(location)) },
     });
@@ -85,7 +84,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
             onClick={openEditForm}
             onKeyDown={openEditForm}
             role="button"
-          tabIndex={0}
+            tabIndex={0}
             className="hover:bg-gray-200 cursor-pointer py-3 pr-10"
           >
             <FontAwesomeIcon icon={edit} className="mx-3" size={'lg'} />
