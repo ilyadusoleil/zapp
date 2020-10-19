@@ -7,7 +7,12 @@ const getDetails = async function (req, res) {
         id: req.query.bugId,
       },
     });
-    details.dataValues.comments = req.body.comments;
+    const comments = await db.comment.findAll({
+      where: {
+        bugId: req.query.bugId,
+      },
+    });
+    details.dataValues.comments = comments;
     res.status(200);
     res.send(details);
   } catch (err) {
