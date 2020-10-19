@@ -1,53 +1,60 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { MutateFunction } from 'react-query';
 import { Bug } from '../types/Bug';
 import { PrioritySelect } from './Priority';
+
+import useUsers from '../hooks/useUsers';
 
 import { navigate } from '@reach/router';
 
 import { BUTTON_STYLE } from '../constants';
 
-const defaultFormValues = {
-  id: 0,
-  projectId: 0, // TODO: get correct type
-  title: '',
-  description: '',
-  priority: 1,
-  state: 0,
-  createdAt: new Date(),
-};
+import Context from '../Context';
+
+// const defaultFormValues = {
+//   id: 0,
+//   projectId: 0, // TODO: get correct type
+//   title: '',
+//   description: '',
+//   priority: 1,
+//   state: 0,
+//   createdAt: new Date(),
+//   userId: 0
+// };
 
 const BugEditForm = ({
   onSubmit,
   submitText,
+  initialValues,
   submitRoute,
-  initialValues = defaultFormValues,
 }: {
   onSubmit: MutateFunction<Bug, unknown, Bug, unknown>;
   submitText: string;
-  submitRoute?: string;
   initialValues: Bug;
+  submitRoute?: string;
 }) => {
-  const [values, setValues] = React.useState(initialValues);
+  const [values, setValues] = useState(initialValues);
+  const ctx = useContext(Context);
+  const { data: userData } = useUsers(ctx.state.currentProjectId);
 
   const setValue = (field: string, value: string) =>
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setValues(defaultFormValues);
+    // setValues(defaultFormValues);
     e.preventDefault();
 
-    const processedValues = {
-      title: values.title,
-      description: values.description,
-      state: values.state,
-      priority: values.priority,
-      createdAt: values.createdAt,
-      projectId: values.projectId,
-      id: values.id,
-    };
+    // const processedValues = {
+    //   title: values.title,
+    //   description: values.description,
+    //   state: values.state,
+    //   priority: values.priority,
+    //   createdAt: values.createdAt,
+    //   projectId: values.projectId,
+    //   id: values.id,
+    // };
 
-    onSubmit(processedValues);
+    onSubmit(values);
     if (submitRoute) {
       navigate(submitRoute);
     }
@@ -80,6 +87,20 @@ const BugEditForm = ({
         <br />
         <label htmlFor="priority">Priority</label>
         <PrioritySelect prioityValue={values.priority} setValue={setValue} />
+
+        <label htmlFor="userId">Assigned User</label>
+        <select
+          name="userId"
+          value={values.userId}
+          onBlur={(e) => setValue('userId', e.target.value)}
+        >
+          <option value={undefined}>Assign User</option>
+          {userData?.map((info, i) => (
+            <option key={i} value={info.id}>
+              {info.displayName || info.firstName || info.id}
+            </option>
+          ))}
+        </select>
         <button type="submit" className={`${BUTTON_STYLE} self-start`}>
           {submitText}
         </button>
