@@ -3,7 +3,7 @@ import { User } from './types/User';
 
 type State = {
   currentProjectId: number;
-  userId: string;
+  userId: number;
   user?: User;
   isAuthenticated: boolean;
   authError: string;
@@ -11,20 +11,25 @@ type State = {
 
 const initialState: State = {
   currentProjectId: 0,
-  userId: '1',
+  userId: 0,
   isAuthenticated: false,
   authError: '',
 };
 
+type actionType = {
+  type: string;
+  payload?: number | string;
+};
+
 const Context = createContext<{
   state: State;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<actionType>;
 }>({
   state: initialState,
   dispatch: () => null,
 });
 
-const reducer = (state: State, action: any) => {
+const reducer = (state: State, action: actionType) => {
   switch (action.type) {
     case 'setCurrentProjectId':
       return Object.assign({}, state, {

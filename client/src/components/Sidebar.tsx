@@ -1,6 +1,6 @@
 // TODO fix babel so it'll parse emotion correctly and then can remove some of these eslint
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/core';
 import React from 'react'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import { navigate } from '@reach/router';
@@ -69,9 +69,12 @@ const sidebarData: sidebarDataType[] = [
 
 const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   return (
-    <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col" css={css`
-      top: 3rem;
-    `}>
+    <div
+      className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col"
+      css={css`
+        top: 3rem;
+      `}
+    >
       {sidebarData.map((sidebarItem, idx) => (
         <SidebarButton
           key={idx}

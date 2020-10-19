@@ -1,4 +1,3 @@
-
 export type User = {
   id: number;
   email: string;
@@ -9,6 +8,7 @@ export type User = {
   lastName: string;
   createdAt: Date;
   updatedAt: Date;
+  recentProject?: number;
 };
 
 // export type Bug = Omit<BugDetails, 'comments'>;

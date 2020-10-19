@@ -1,24 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MutateFunction } from 'react-query';
 import { ProjectInput, Project } from '../types/Project';
-import Context from '../Context';
 import { navigate } from '@reach/router';
 
 import EmailChips from './EmailChips';
 
-const defaultFormValues = {
-  name: '',
-  description: '',
-  userId: 'nouser',
-};
-
 const initialProjectUser: (string | number)[] = [];
 
-const ProjectForm = ({
+const ProjectEditForm = ({
   onSubmit,
   submitText,
   submitRoute,
-  initialValues = defaultFormValues,
+  initialValues,
 }: {
   onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
   submitText: string;
@@ -27,21 +20,14 @@ const ProjectForm = ({
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
-  const ctx = useContext(Context);
 
   // const setValue = (field: string, value: string | (string | number)[]) =>
   const setValue = (field: string, value: string) =>
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setValues(defaultFormValues);
     e.preventDefault();
-    const valuesCopy = Object.assign(
-      {},
-      values,
-      { projectUsers },
-      { userId: ctx.state.userId }
-    );
+    const valuesCopy = Object.assign({}, values, { projectUsers });
     onSubmit(valuesCopy);
     if (submitRoute) {
       navigate(submitRoute);
@@ -89,4 +75,4 @@ const ProjectForm = ({
   );
 };
 
-export default ProjectForm;
+export default ProjectEditForm;
