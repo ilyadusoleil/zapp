@@ -9,8 +9,15 @@ module.exports = {
       display: ['PT Sans'],
       body: ['PT Sans Narrow'],
     },
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
+
+    extend: {
+        width: {
+        'container': '31%',
+        'md-container': '46%',
+        }
+    },
+},
+variants: {},
+plugins: [],
+
 };
