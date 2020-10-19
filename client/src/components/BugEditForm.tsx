@@ -11,17 +11,6 @@ import { BUTTON_STYLE } from '../constants';
 
 import Context from '../Context';
 
-// const defaultFormValues = {
-//   id: 0,
-//   projectId: 0, // TODO: get correct type
-//   title: '',
-//   description: '',
-//   priority: 1,
-//   state: 0,
-//   createdAt: new Date(),
-//   userId: 0
-// };
-
 const BugEditForm = ({
   onSubmit,
   submitText,
