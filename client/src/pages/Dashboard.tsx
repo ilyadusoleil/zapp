@@ -36,15 +36,15 @@ const SELECT_INFO: selectInfo[] = [
 ];
 
 const Dashboard = ({ id: projectId }: DashboardProps) => {
-  if (!projectId) projectId = '0';//return <h1>Hmm no id for dashboard</h1>; // TODO: redirect to first or most recently used project
+  if (!projectId) projectId = '0';
 
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(parseInt(projectId));
   const [sortIdx, setSortIdx] = useState(0);
 
   useEffect(() => {
-    ctx.dispatch({type: 'setCurrentProjectId', payload: projectId})
-  }, [])
+    ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
+  }, []);
 
   if (isLoading) {
     return <span>Loading...</span>;

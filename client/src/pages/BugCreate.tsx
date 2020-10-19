@@ -7,7 +7,8 @@ import useCreateBug from '../hooks/useCreateBug';
 import BugForm from '../components/BugForm';
 import Sidebar from '../components/Sidebar';
 
-const BugCreate = (_props: RouteComponentProps) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const BugCreate = (_props: RouteComponentProps) => {
   const [createBug, { status: createBugStatus }] = useCreateBug();
 
   return (

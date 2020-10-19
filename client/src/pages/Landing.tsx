@@ -6,7 +6,8 @@ import { navigate, RouteComponentProps } from '@reach/router';
 
 import Context from '../Context';
 
-const Landing = (_props: RouteComponentProps) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Landing = (_props: RouteComponentProps) => {
   const ctx = useContext(Context);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const Landing = (_props: RouteComponentProps) => { // eslint-disable-line @types
       method: 'GET',
       credentials: 'include',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Credentials': 'true',
       },
@@ -31,7 +32,6 @@ const Landing = (_props: RouteComponentProps) => { // eslint-disable-line @types
         ctx.dispatch({ type: 'updateUser', payload: responseJson.user }); // TODO: check .id is the right key
         // TODO: also update to store ful user information
 
-        
         navigate('/preDashboard');
       })
       .catch(() => {

@@ -8,8 +8,6 @@ import useEditBug from '../hooks/useEditBug';
 
 import BugEditForm from '../components/BugEditForm';
 
-
-
 interface BugEditProps extends RouteComponentProps {
   id?: string;
 }
