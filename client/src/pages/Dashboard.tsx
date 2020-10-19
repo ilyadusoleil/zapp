@@ -73,10 +73,12 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
 
   const updateSortSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortIdx(parseInt(e.target.value));
-  }
-  const updateAssigneeFilterSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  };
+  const updateAssigneeFilterSelect = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setAssigneeFilterIdx(parseInt(e.target.value));
-  }
+  };
 
   useEffect(() => {
     ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
@@ -95,9 +97,9 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
       <Sidebar currentPath="/dashboard" />
 
       <div className="mx-16">
-      <h1>Bugs Dashboard</h1>
+        <h1>Bugs Dashboard</h1>
         <ProjectHeader projectId={parseInt(projectId)} />
-        
+
         <h1 className="mb-5">Dashboard</h1>
 
         <select
@@ -124,8 +126,6 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
           ))}
         </select>
 
-        
-
         <label>
           Show Completed
           <input
@@ -135,16 +135,15 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
           />
         </label>
 
-
-<div className='flex flex-wrap justify-between'>
-        {[...data]
-          .filter((bug) => (isShowCompleted ? true : bug.state == 0))
-          .filter(ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func)
-          .sort(SORT_INFO[sortIdx].func)
-          .map((bug: Bug, index) => (
-            <Bugitem key={index} bug={bug} />
-          ))}
-          </div>
+        <div className="flex flex-wrap justify-between">
+          {[...data]
+            .filter((bug) => (isShowCompleted ? true : bug.state == 0))
+            .filter(ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func)
+            .sort(SORT_INFO[sortIdx].func)
+            .map((bug: Bug, index) => (
+              <Bugitem key={index} bug={bug} />
+            ))}
+        </div>
       </div>
     </>
   );
