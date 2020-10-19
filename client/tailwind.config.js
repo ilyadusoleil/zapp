@@ -10,6 +10,10 @@ theme: {
         'body': ['PT Sans Narrow'],
     },
     extend: {
+        width: {
+        'container': '31%',
+        'md-container': '46%',
+        }
     },
 },
 variants: {},
