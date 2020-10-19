@@ -25,11 +25,7 @@ const UserChip = ({ userId }: { userId: number }) => {
       ) : (
         <FontAwesomeIcon icon={faGrinAlt} size={'lg'} className="mx-1" />
       )}
-      />
-    )}
-
       <div className="font-bold mx-2">{data.displayName || data.email}</div>
-
     </div>
   );
 };
