@@ -88,7 +88,10 @@ const Sidebar = ({ currentPath }: { currentPath?: string }) => {
   };
 
   return (
+
+
     <div className="bottom-0 left-0 bg-indigo-200 w-14 fixed flex flex-col top-0">
+
       {sidebarData.map((sidebarItem, idx) => (
         <SidebarButton
           key={idx}
