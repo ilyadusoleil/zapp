@@ -26,7 +26,7 @@ const PriorityTag = ({ priority }: { priority: number }) => {
     <div
       className={`${priorityColor(
         priority
-      )} rounded-full text-xs w-16 flex justify-center text-gray-200`}
+      )} p-1 rounded-full text-xs w-16 flex justify-center text-gray-200`}
     >
       {mapPriorityToString(priority)}
     </div>
