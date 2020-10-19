@@ -6,7 +6,6 @@ import { navigate } from '@reach/router';
 import { PrioritySelect } from './Priority';
 
 const defaultFormValues = {
-  userId: 0,
   title: '',
   projectId: -1,
   description: '',
