@@ -58,7 +58,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     });
   };
 
-  if (!data) return <h1>Oh no</h1>;
+  if (!data || !Array.isArray(data) || data.length < 1) return <h1>Oh no</h1>;
 
   return (
     <>
@@ -92,7 +92,9 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
           </div>
 
           <div className="mt-2 pt-1 ml-2 border-t-2">Switch Project</div>
-          {data.map(
+          {[...data]
+            .filter((el) => el.state != 1)
+            .map(
             (project) =>
               project.id != projectId && (
                 <div

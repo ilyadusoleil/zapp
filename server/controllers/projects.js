@@ -1,4 +1,5 @@
 const db = require('../db/models/index');
+const sendInvitationEmail = require('../email/invitationEmail');
 
 // GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
@@ -13,7 +14,7 @@ const getProjects = async function (req, res) {
         include: {
           model: db.project,
           required: true,
-          attributes: ['id', 'name', 'description'],
+          attributes: ['id', 'name', 'description', 'state'],
         },
       });
       const processedProjects = projects.map((el) => el.projects[0]);
@@ -21,7 +22,6 @@ const getProjects = async function (req, res) {
       res.status(200);
       res.send(processedProjects);
     } else if (req.query.projectId) {
-      console.log('finding one project');
       const project = await db.project.findAll({
         where: {
           id: req.query.projectId,
@@ -31,7 +31,6 @@ const getProjects = async function (req, res) {
       res.send(project[0]);
     }
   } catch (err) {
-    console.log(err);
     res.status(500);
     res.send({ err, message: 'error retrieving projects from the database' });
   }
@@ -43,6 +42,7 @@ const createProject = async function (req, res) {
     const newProject = await db.project.create({
       name: name,
       description: description,
+      state: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -58,6 +58,11 @@ const createProject = async function (req, res) {
 
     //If any users have been invited to this project
     if (projectUsers.length > 0) {
+      //Get name of the person who invited user
+      const invitedBy = await db.user.findOne({
+        where: { id: userId },
+      });
+      const invitedByName = `${invitedBy.firstName} ${invitedBy.lastName}`;
       for (let i = 0; i < projectUsers.length; i++) {
         let user = null;
         if (typeof projectUsers[i] === 'number') {
@@ -74,6 +79,7 @@ const createProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          await sendInvitationEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
@@ -98,10 +104,11 @@ const createProject = async function (req, res) {
 
 const editProject = async function (req, res) {
   try {
-    const { projectUsers } = req.body;
+    const { projectUsers, userId, name } = req.body;
     const updatedProject = {
-      name: req.body.name,
+      name: name,
       description: req.body.description,
+      state: req.body.state,
       createdAt: req.body.createdAt,
       updatedAt: new Date(),
     };
@@ -113,6 +120,11 @@ const editProject = async function (req, res) {
 
     // If any users have been invited to this project
     if (projectUsers.length > 0) {
+      //Get name of the person who invited user
+      const invitedBy = await db.user.findOne({
+        where: { id: userId },
+      });
+      const invitedByName = `${invitedBy.firstName} ${invitedBy.lastName}`;
       for (let i = 0; i < projectUsers.length; i++) {
         let user = null;
         if (typeof projectUsers[i] === 'number') {
@@ -129,6 +141,7 @@ const editProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          await sendInvitationEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
