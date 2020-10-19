@@ -14,7 +14,7 @@ const BugCreate = (_props: RouteComponentProps) => {
   return (
     <>
       <Sidebar currentPath="/new" />
-      <div className="ml-16">
+      <div className="flex justify-center w-full">
         <BugForm
           onSubmit={createBug}
           submitRoute="/preDashboard"
