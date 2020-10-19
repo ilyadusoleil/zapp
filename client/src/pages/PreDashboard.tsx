@@ -9,8 +9,7 @@ import ProjectForm from '../components/ProjectForm';
 
 import Context from '../Context';
 
-const PreDashboard = (_props: RouteComponentProps) => {
-  // eslint-disable-line @typescript-eslint/no-unused-vars
+const PreDashboard = (_props: RouteComponentProps) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   const ctx = useContext(Context);
   const { isLoading, isError, data: projectsData } = useProjects(
     ctx.state.userId
