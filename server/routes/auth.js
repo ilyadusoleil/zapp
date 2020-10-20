@@ -12,7 +12,7 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: `${process.env.CLIENT}/`,
+    successRedirect: (process.env.NODE_ENV === 'development') ? `${process.env.CLIENT}/` : '/',
     failureRedirect: `auth/login/failed`,
   })
 );
@@ -43,7 +43,7 @@ router.get('/login/failed', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(`${process.env.CLIENT}/`);
+  res.redirect((process.env.NODE_ENV === 'development') ? `${process.env.CLIENT}/` : '/');
 });
 
 module.exports = router;

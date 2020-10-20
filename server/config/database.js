@@ -20,7 +20,7 @@ module.exports = {
   production: {
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
-    database: 'zapp',
+    database: process.env.DB_NAME_DEV, // TODO: update this to an actual production database
     host: process.env.DB_HOST,
     dialect: 'postgres',
   },
