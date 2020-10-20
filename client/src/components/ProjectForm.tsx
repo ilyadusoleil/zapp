@@ -12,8 +12,14 @@ const defaultFormValues = {
   description: '',
   userId: 0,
   state: 0,
-  projectUsers: []
+  projectUsers: [],
 };
+
+const defaultChips: {
+  id?: number;
+  email: string;
+  picture?: string;
+}[] = [];
 
 const initialProjectUser: (string | number)[] = [];
 
@@ -30,6 +36,7 @@ const ProjectForm = ({
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
+  const [chips, setChips] = useState(defaultChips);
   const ctx = useContext(Context);
 
   const setValue = (field: string, value: string | number) =>
@@ -56,11 +63,13 @@ const ProjectForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProjectDetailsSubForm values={values} setValue={setValue}/>
+      <ProjectDetailsSubForm values={values} setValue={setValue} />
       <br />
       <EmailChips
         projectUsers={projectUsers}
         setProjectUsers={setProjectUsers}
+        chips={chips}
+        setChips={setChips}
       />
       <br />
       <button

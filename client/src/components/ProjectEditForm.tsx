@@ -3,12 +3,20 @@ import { MutateFunction } from 'react-query';
 import { Project } from '../types/Project';
 import { navigate } from '@reach/router';
 import Context from '../Context';
+import useUsers from '../hooks/useUsers';
+import { User } from '../types/User';
 
 import ProjectDetailsSubForm from './ProjectDetailsSubForm';
 import EmailChips from './EmailChips';
 import { BUTTON_STYLE } from '../constants';
 
 const initialProjectUser: (string | number)[] = [];
+
+const defaultChips: {
+  id?: number;
+  email: string;
+  picture?: string;
+}[] = [];
 
 const ProjectEditForm = ({
   onSubmit,
@@ -23,7 +31,9 @@ const ProjectEditForm = ({
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
+  const [chips, setChips] = useState(defaultChips);
   const ctx = useContext(Context);
+  const { data: userData } = useUsers(ctx.state.currentProjectId);
 
   const setValue = (field: string, value: string | number) =>
     setValues((old) => ({ ...old, [field]: value }));
@@ -53,17 +63,35 @@ const ProjectEditForm = ({
     }
   };
 
+  const handleUserData = (userData: User[] | undefined) => {
+    if (userData) {
+      const userIds = userData.map((user) => user.id);
+      setProjectUsers((oldProjectUsers) => [...oldProjectUsers, ...userIds]);
+      const userChips = userData.map((user) => {
+        return {
+          id: user.id,
+          email: user.email,
+          picture: user.image ? user.image : undefined,
+        };
+      });
+      setChips(userChips);
+    }
+  };
+
   useEffect(() => {
     setValues(initialValues);
-  }, [initialValues]);
+    handleUserData(userData);
+  }, [initialValues, userData]);
 
   return (
     <form id="edit-project-form" onSubmit={handleSubmit}>
-      <ProjectDetailsSubForm values={values} setValue={setValue}/>
+      <ProjectDetailsSubForm values={values} setValue={setValue} />
       <br />
       <EmailChips
         projectUsers={projectUsers}
         setProjectUsers={setProjectUsers}
+        chips={chips}
+        setChips={setChips}
       />
       <br />
       <div className="flex justify-between">

@@ -12,22 +12,31 @@ import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
 import fetchRequest from '../services/ApiService';
 import Context from '../Context';
 
-const defaultChips: {
-  id?: number;
-  email: string;
-  picture?: string;
-}[] = [];
-
 const EmailChips = ({
   projectUsers,
   setProjectUsers,
+  chips,
+  setChips,
 }: {
   projectUsers: (string | number)[];
   setProjectUsers: React.Dispatch<React.SetStateAction<(string | number)[]>>;
+  chips: {
+    id?: number;
+    email: string;
+    picture?: string;
+  }[];
+  setChips: React.Dispatch<
+    React.SetStateAction<
+      {
+        id?: number;
+        email: string;
+        picture?: string;
+      }[]
+    >
+  >;
 }) => {
   const [collaborator, setCollaborator] = useState('');
   const [error, setError] = useState('');
-  const [chips, setChips] = useState(defaultChips);
   const ctx = useContext(Context);
 
   const handleChangeCollaborator = (e: ChangeEvent<HTMLInputElement>) => {
