@@ -50,16 +50,17 @@ const BugForm = ({
   }, [initialValues]);
 
   return (
-    <div className="w-1/3 font-display">
-      <div className="flex mt-10">
+    <div className="w-1/3 mt-16 font-display shadow-2xl rounded">
+      <div className="flex mt-8">
         <FontAwesomeIcon
           icon={faBug}
           size={'3x'}
           className="text-gray-700 m-auto"
         />
       </div>
+      <h1 className="text-center font-display text-2xl mt-6">Add new bug...</h1>
       <form
-        className="m-10 border-2 border-indigo-200 rounded-lg bg-gray-100 p-10"
+        className="m-6 border-2 border-purple-600 rounded-lg bg-gray-100 p-8"
         onSubmit={handleSubmit}
       >
         <label
@@ -101,15 +102,17 @@ const BugForm = ({
         >
           Priority
         </label>
-        <PrioritySelect prioityValue={values.priority} setValue={setValue} />
-        <br />
-        <div className="flex">
-          <button
-            className="mt-10 ml-auto shadow bg-indigo-500 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            {submitText}
-          </button>
+        <div className="flex justify-between">
+          <PrioritySelect prioityValue={values.priority} setValue={setValue} />
+          <br />
+          <div>
+            <button
+              className="shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              type="submit"
+            >
+              {submitText}
+            </button>
+          </div>
         </div>
       </form>
     </div>

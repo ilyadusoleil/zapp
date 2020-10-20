@@ -16,7 +16,7 @@ type Props = {
 
 function Bugitem({ bug }: Props) {
   return (
-    <div className="w-full mt-4 mb-4 p-1 m-1 bg-gray-100  border b-gray-200 rounded-lg shadow-lg lg:w-md-container  xl:w-container  ">
+    <div className="w-full flex-grow mt-4 mb-4 p-1 m-1 bg-gray-100  border border-gray-200 rounded-lg shadow-lg lg:w-md-container  xl:w-container">
       <div
         role="button"
         tabIndex={0}
