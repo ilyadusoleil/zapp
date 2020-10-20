@@ -94,7 +94,7 @@ const FilterAndSort = ({
         
       </div>
       <Collapse isOpened={isOpen}>
-        <div className="flex ml-4 items-start divide-x">
+        <div className="flex ml-4 items-start divide-x mt-4">
             <div className='p-1'>
           <label className='font-bold' htmlFor="sort">Sort By:</label>
           <select
