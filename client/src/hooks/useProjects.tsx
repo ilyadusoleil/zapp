@@ -4,7 +4,7 @@ import { Project } from '../types/Project';
 
 // Get projects for a single user
 const useProjects = (userId: number): QueryResult<Project[]> => {
-  return useQuery(userId && ['project', userId], () =>
+  return useQuery(userId && ['projectsForUser', userId], () =>
     fetchRequest(`/projects?userId=${userId}`)
   );
 };
