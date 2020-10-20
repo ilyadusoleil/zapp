@@ -31,7 +31,8 @@ const PreDashboard = (_props: RouteComponentProps) => {
         projectsData.filter((el) => el.id == ctx.state.currentProjectId)
           .length > 0
       ) {
-        navigate(`/dashboard/${ctx.state.currentProjectId}`); //TODO: don't just go to the first created project, but the most recently used project?
+        navigate(`/dashboard/${ctx.state.currentProjectId}`);
+        
       } else if (
         ctx.state.user &&
         projectsData.filter((el) => el.id == ctx.state.user?.recentProject)
@@ -75,8 +76,6 @@ const PreDashboard = (_props: RouteComponentProps) => {
             ? 'Saved!'
             : 'Create your first project'
         }
-        //TODO this forces the page to reload and redirect to users first project. Eventually we want it to redivert to the last project worked on
-        submitRoute="/preDashboard"
       />
     </div>
   );
