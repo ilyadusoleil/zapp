@@ -56,21 +56,21 @@ const BugForm = ({
   }, [initialValues]);
 
   return (
-    <div className="font-display shadow-2xl rounded">
-      <div className="flex mt-8">
+    <div className="font-display rounded">
+      <div className="flex">
         <FontAwesomeIcon
           icon={faBug}
           size={'3x'}
-          className="text-gray-700 m-auto"
+          className="text-gray-700 m-auto mt-6"
         />
       </div>
-      <h1 className="text-center font-display text-2xl mt-6">{headerText}</h1>
+      <h1 className="text-center font-display text-2xl mt-4">{headerText}</h1>
       <form
-        className="m-6 border-2 border-purple-600 rounded-lg bg-gray-100 p-8"
+        className="rounded-lg p-6 mt-2"
         onSubmit={handleSubmit}
       >
         <label
-          className="mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold"
+          className="mt-0 mb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold"
           htmlFor="title"
         >
           Title
@@ -87,14 +87,14 @@ const BugForm = ({
         </div>
         <br />
         <label
-          className="mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          className="mt-0 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor="description"
         >
           Description
         </label>
         <div>
           <textarea
-            className="h-32 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="h-24 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             name="description"
             value={values.description}
             onChange={(e) => setValue('description', e.target.value)}
@@ -102,23 +102,37 @@ const BugForm = ({
           />
         </div>
 
-        <label htmlFor="userId">Assigned User</label>
+        <label className='mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold' htmlFor="userId">Assigned User</label>
+        
+        <div className='inline-block relative w-48'>
         <select
+        className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           name="userId"
           value={values.userId ? values.userId : -1}
           onBlur={(e) => setValue('userId', e.target.value)}
           onChange={(e) => setValue('userId', e.target.value)}
         >
-          <option value={-1}>Unassigned</option>
+          <option  value={-1}>Unassigned</option>
           {userData?.map((info, i) => (
             <option key={i} value={info.id}>
               {info.displayName || info.firstName || info.email}
             </option>
           ))}
         </select>
-
+        
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <svg
+          className="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+      </div>
+      </div>
+    
         <label
-          className="mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          className="mt-8 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor="priority"
         >
           Priority
@@ -128,7 +142,7 @@ const BugForm = ({
           <br />
           <div>
             <button
-              className="shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-body py-2 px-4 rounded"
               type="submit"
             >
               {submitText}
