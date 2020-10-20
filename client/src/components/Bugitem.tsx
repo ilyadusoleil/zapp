@@ -6,13 +6,15 @@ import { Bug } from '../types/Bug';
 
 import './Bugitem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faBug, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 import { PriorityTag } from '../components/Priority';
 
 type Props = {
   bug: Bug;
 };
+
+const bugCategoryIcons = [faBug, faLightbulb];
 
 function Bugitem({ bug }: Props) {
   return (
@@ -22,8 +24,12 @@ function Bugitem({ bug }: Props) {
         tabIndex={0}
         className="p-1 flex justify-items cursor-pointer"
       >
-        <div className="mt-1 ml-2 bg-gradient-to-r from-indigo-800 to-purple-500 rounded-full w-8 h-8">
-          <p className="p-1 text-center text-gray-100">{bug.id}</p>
+        <div className="flex items-center justify-center mt-1 ml-2 bg-gradient-to-r from-indigo-800 to-purple-500 rounded-full w-8 h-8">
+          <FontAwesomeIcon
+            className="text-center text-gray-100"
+            size={'lg'}
+            icon={bugCategoryIcons[bug.category]}
+          />
         </div>
 
         <div className="flex ml-auto">
