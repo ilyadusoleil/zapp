@@ -4,12 +4,15 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 import { navigate } from '@reach/router';
 
+import ProjectDetailsSubForm from './ProjectDetailsSubForm';
 import EmailChips from './EmailChips';
 
 const defaultFormValues = {
   name: '',
   description: '',
-  userId: 'nouser',
+  userId: 0,
+  state: 0,
+  projectUsers: []
 };
 
 const initialProjectUser: (string | number)[] = [];
@@ -29,8 +32,7 @@ const ProjectForm = ({
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
   const ctx = useContext(Context);
 
-  // const setValue = (field: string, value: string | (string | number)[]) =>
-  const setValue = (field: string, value: string) =>
+  const setValue = (field: string, value: string | number) =>
     setValues((old) => ({ ...old, [field]: value }));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,25 +56,7 @@ const ProjectForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <div>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="name"
-          value={values.name}
-          onChange={(e) => setValue('name', e.target.value)}
-          required
-        />
-      </div>
-      <label htmlFor="description">Description</label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
-        name="description"
-        value={values.description}
-        onChange={(e) => setValue('description', e.target.value)}
-      ></input>
+      <ProjectDetailsSubForm values={values} setValue={setValue}/>
       <br />
       <EmailChips
         projectUsers={projectUsers}

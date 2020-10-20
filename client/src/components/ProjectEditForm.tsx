@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { MutateFunction } from 'react-query';
-import { ProjectInput, Project } from '../types/Project';
+import { Project } from '../types/Project';
 import { navigate } from '@reach/router';
 import Context from '../Context';
 
+import ProjectDetailsSubForm from './ProjectDetailsSubForm';
 import EmailChips from './EmailChips';
 import { BUTTON_STYLE } from '../constants';
 
@@ -15,16 +16,15 @@ const ProjectEditForm = ({
   submitRoute,
   initialValues,
 }: {
-  onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
+  onSubmit: MutateFunction<Project, unknown, Project, unknown>;
   submitText: string;
   submitRoute?: string;
-  initialValues?: Omit<ProjectInput, 'projectUsers'>;
+  initialValues: Omit<Project, 'projectUsers'>;
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
   const ctx = useContext(Context);
 
-  // const setValue = (field: string, value: string | number) =>
   const setValue = (field: string, value: string | number) =>
     setValues((old) => ({ ...old, [field]: value }));
 
@@ -59,25 +59,7 @@ const ProjectEditForm = ({
 
   return (
     <form id="edit-project-form" onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <div>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="name"
-          value={values.name}
-          onChange={(e) => setValue('name', e.target.value)}
-          required
-        />
-      </div>
-      <label htmlFor="description">Description</label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
-        name="description"
-        value={values.description}
-        onChange={(e) => setValue('description', e.target.value)}
-      ></input>
+      <ProjectDetailsSubForm values={values} setValue={setValue}/>
       <br />
       <EmailChips
         projectUsers={projectUsers}

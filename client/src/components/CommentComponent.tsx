@@ -9,7 +9,7 @@ const convertDateToString = (input: Date): string => {
 };
 
 const CommentComponent = ({ comment }: { comment: Comment }) => {
-  const { data } = UseUser(parseInt(comment.userId));
+  const { data } = UseUser(comment.userId);
   return (
     <div className="flex mt-3 mb-5 p-3 bg-gray-100 rounded">
       <img
