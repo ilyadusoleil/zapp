@@ -16,8 +16,6 @@ import FilterAndSort, {
   SORT_INFO,
 } from '../components/FilterAndSort';
 
-import { BUTTON_STYLE } from '../constants';
-
 import Context from '../Context';
 
 interface DashboardProps extends RouteComponentProps {
