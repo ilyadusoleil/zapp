@@ -27,22 +27,27 @@ const PreDashboard = (_props: RouteComponentProps) => {
     if (projectsData && projectsData.filter((el) => el.state != 1).length > 0) {
       //navigate to the currently active project if it exists
       //First check global context, but if that isn't set, get from database
+      console.log('PREDASHBOARD PROJECTS ', projectsData)
       if (
         projectsData.filter((el) => el.id == ctx.state.currentProjectId)
           .length > 0
       ) {
-        navigate(`/dashboard/${ctx.state.currentProjectId}`); //TODO: don't just go to the first created project, but the most recently used project?
+        console.log('found matching project in context')
+        navigate(`/dashboard/${ctx.state.currentProjectId}`);
+        
       } else if (
         ctx.state.user &&
         projectsData.filter((el) => el.id == ctx.state.user?.recentProject)
           .length > 0
       ) {
+        console.log('found matching project in db recent project')
         ctx.dispatch({
           type: 'setCurrentProjectId',
           payload: ctx.state.user?.recentProject,
         });
         navigate(`/dashboard/${ctx.state.user.recentProject}`);
       } else {
+        console.log('unable to find project so will default to first')
         ctx.dispatch({
           type: 'setCurrentProjectId',
           payload: projectsData[0].id,
@@ -75,8 +80,6 @@ const PreDashboard = (_props: RouteComponentProps) => {
             ? 'Saved!'
             : 'Create your first project'
         }
-        //TODO this forces the page to reload and redirect to users first project. Eventually we want it to redivert to the last project worked on
-        submitRoute="/preDashboard"
       />
     </div>
   );

@@ -15,7 +15,6 @@ const ProjectCreate = (_props: RouteComponentProps) => {
       <h1>New Project</h1>
       <ProjectForm
         onSubmit={createProject}
-        submitRoute="/preDashboard"
         submitText={
           createProjectStatus === 'loading'
             ? 'Saving...'
