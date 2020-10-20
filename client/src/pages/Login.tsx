@@ -16,9 +16,9 @@ const Login = (_props: RouteComponentProps) => {
   return (
     <div>
       <div className="rounded-none bg-gradient-to-r from-indigo-800 to-purple-500 h-screen flex justify-center xl:rounded-tl-full xl:rounded-br-full">
-        <div className="mt-32">
+        <div className="self-center">
           <img
-            className="h-24 m-auto animate-pulse xl:mt-16 "
+            className="h-24 m-auto animate-pulse"
             alt="logo"
             src={Zapp}
           ></img>
