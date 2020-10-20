@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { MutateFunction } from 'react-query';
-import { BugInput, Bug, BugDetails } from '../types/Bug';
+import { BugInput, Bug } from '../types/Bug';
 import Context from '../Context';
 import { navigate } from '@reach/router';
 import { PrioritySelect } from './Priority';
