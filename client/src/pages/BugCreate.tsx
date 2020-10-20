@@ -13,6 +13,7 @@ const BugCreate = (_props: RouteComponentProps) => {
   return (
     <BugForm
       onSubmit={createBug}
+      headerText="Add New Bug..."
       submitRoute="/preDashboard"
       submitText={
         createBugStatus === 'loading'
