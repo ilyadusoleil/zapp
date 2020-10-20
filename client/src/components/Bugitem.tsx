@@ -6,8 +6,6 @@ import { navigate } from '@reach/router';
 import { Bug } from '../types/Bug';
 
 import './Bugitem.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { PriorityTag } from '../components/Priority';
 
