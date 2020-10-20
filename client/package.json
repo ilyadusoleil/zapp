@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "mockserver": "json-server --watch db.json",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
-    "lint": "eslint \"src/*/*.{js,jsx,ts,tsx}\""
+    "lint": "eslint \"src/*/*.{js,jsx,ts,tsx}\" --max-warnings=0"
   },
   "keywords": [],
   "author": "",

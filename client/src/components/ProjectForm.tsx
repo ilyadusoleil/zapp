@@ -4,6 +4,8 @@ import { ProjectInput, Project } from '../types/Project';
 import Context from '../Context';
 import { navigate } from '@reach/router';
 
+import useUpdateUserRecentProject from '../hooks/useUpdateUserRecentProject';
+
 import ProjectDetailsSubForm from './ProjectDetailsSubForm';
 import EmailChips from './EmailChips';
 
@@ -26,17 +28,16 @@ const initialProjectUser: (string | number)[] = [];
 const ProjectForm = ({
   onSubmit,
   submitText,
-  submitRoute,
   initialValues = defaultFormValues,
 }: {
   onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
   submitText: string;
-  submitRoute?: string;
   initialValues?: Omit<ProjectInput, 'projectUsers'>;
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
   const [chips, setChips] = useState(defaultChips);
+  const [updateUserRecentProject] = useUpdateUserRecentProject();
   const ctx = useContext(Context);
 
   const setValue = (field: string, value: string | number) =>
@@ -51,10 +52,19 @@ const ProjectForm = ({
       { projectUsers },
       { userId: ctx.state.userId }
     );
-    onSubmit(valuesCopy);
-    if (submitRoute) {
-      navigate(submitRoute);
-    }
+    onSubmit(valuesCopy).then((project) => {
+      if (project) {
+        ctx.dispatch({ type: 'setCurrentProjectId', payload: project.id });
+        if (ctx.state.user) {
+          updateUserRecentProject(
+            Object.assign({}, ctx.state.user, { recentProject: project.id })
+          );
+        }
+        navigate(`/dashboard/${project?.id}`);
+      } else {
+        navigate('/predashboard');
+      }
+    });
   };
 
   useEffect(() => {
