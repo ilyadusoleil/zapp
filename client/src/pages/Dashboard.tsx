@@ -104,10 +104,8 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
   return (
     <>
       <div>
-        <TopBar />
+        <TopBar text="Dashboard"/>
         <ProjectHeader projectId={parseInt(projectId)} />
-
-        <h1 className="mb-5">Dashboard</h1>
 
         <select
           className="mr-5"

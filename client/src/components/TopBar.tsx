@@ -12,7 +12,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { SERVER } from '../constants';
 
-const TopBar = () => {
+const TopBar = ({text} : {text: string}) => {
   const ctx = useContext(Context);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const TopBar = () => {
         alt="logo"
         src={Zapp}
       ></img>
-      <h1 className="font-display text-3xl text-gray-100">Dashboard</h1>
+      <h1 className="font-display text-3xl text-gray-100">{text}</h1>
 
       {ctx.state.user && ctx.state.user.image && (
         <div
