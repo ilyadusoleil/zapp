@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProjectInput } from '../types/Project';
+import { FORM_LABEL } from '../constants';
 
 const ProjectDetailsSubForm = ({
   values,
@@ -10,7 +11,7 @@ const ProjectDetailsSubForm = ({
 }) => {
   return (
     <>
-      <label htmlFor="name">Name</label>
+      <label className={`${FORM_LABEL}`} htmlFor="name">Name</label>
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
@@ -19,7 +20,7 @@ const ProjectDetailsSubForm = ({
         onChange={(e) => setValue('name', e.target.value)}
         required
       />
-      <label htmlFor="description">Description</label>
+      <label className={`${FORM_LABEL}`} htmlFor="description">Description</label>
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"

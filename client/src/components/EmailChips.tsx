@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
+import { FORM_LABEL } from '../constants';
 
 import fetchRequest from '../services/ApiService';
 import Context from '../Context';
@@ -146,7 +147,20 @@ const EmailChips = ({
 
   return (
     <div>
-      <div className="bg-gray-100 h-24 flex flex-wrap justify-center items-center overflow-y-scroll">
+      <label className={`${FORM_LABEL}`} htmlFor="projectUsers">
+        Collaborators
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        placeholder="Type or paste email addresses separate with a comma..."
+        value={collaborator}
+        onChange={handleChangeCollaborator}
+        onKeyDown={handleAddCollaborator}
+        onPaste={handlePaste}
+      />
+      {error && <p className="text-red-400">{error}</p>}
+      <div className="bg-gray-100 h-24 flex flex-wrap justify-center items-center overflow-y-scroll mt-2">
         {chips.map((chip) => {
           return (
             <div
@@ -182,17 +196,6 @@ const EmailChips = ({
           );
         })}
       </div>
-      <label htmlFor="projectUsers">Collaborators</label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
-        placeholder="Type or paste email addresses separate with a comma..."
-        value={collaborator}
-        onChange={handleChangeCollaborator}
-        onKeyDown={handleAddCollaborator}
-        onPaste={handlePaste}
-      />
-      {error && <p className="text-red-400">{error}</p>}
     </div>
   );
 };
