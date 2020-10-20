@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
-import { BUTTON_STYLE, FORM_LABEL } from '../constants';
+import { FORM_LABEL } from '../constants';
 
 import fetchRequest from '../services/ApiService';
 import Context from '../Context';
@@ -155,7 +155,7 @@ const EmailChips = ({
             <div
               key={chip.email}
               className={`${
-                chip.id ? 'bg-green-300' : 'bg-gray-300'
+                chip.id ? 'bg-teal-400' : 'bg-gray-300'
               } m-1 p-2 rounded-full inline-block`}
             >
               <div className="flex justify-around">

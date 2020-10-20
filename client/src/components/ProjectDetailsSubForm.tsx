@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProjectInput } from '../types/Project';
-import { BUTTON_STYLE, FORM_LABEL } from '../constants';
+import { FORM_LABEL } from '../constants';
 
 const ProjectDetailsSubForm = ({
   values,
