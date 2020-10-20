@@ -34,7 +34,7 @@ const TopBar = ({ text }: { text: string }) => {
   };
 
   return (
-    <div className="bg-teal-500 flex p-2">
+    <div className="bg-teal-500 flex p-3">
       <div
         onClick={navigateHome}
         onKeyDown={navigateHome}

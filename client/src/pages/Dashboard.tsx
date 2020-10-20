@@ -7,13 +7,14 @@ import useBugs from '../hooks/useBugs';
 import TopBar from '../components/TopBar';
 import Bugitem from '../components/Bugitem';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+
 import ProjectHeader from '../components/ProjectHeader';
 import FilterAndSort, {
   ASSIGNEE_FILTER_INFO,
   SORT_INFO,
 } from '../components/FilterAndSort';
-
-import { BUTTON_STYLE } from '../constants';
 
 import Context from '../Context';
 
@@ -62,10 +63,14 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         />
 
         <br />
-        <button onClick={createBug} className={`${BUTTON_STYLE} mx-6`}>
+        <button onClick={createBug} className='shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-body px-3 py-1 rounded-full mx-3'><FontAwesomeIcon
+                    icon={faPlusCircle}
+                    size={'sm'}
+                    className="mr-1"
+                  />
           Create Bug
         </button>
-        <div className="flex flex-wrap mx-6">
+        <div className="flex flex-wrap mx-3">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
             .filter((bug) => ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func(bug, ctx.state.userId))

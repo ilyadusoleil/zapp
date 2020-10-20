@@ -79,22 +79,24 @@ const FilterAndSort = ({
 
   return (
     <>
+    <div className='bg-gray-100'>
       <div
-        className="mt-3 m-2 cursor-pointer"
+        className="cursor-pointer p-2 ml-2"
         onClick={toggleCollapse}
         onKeyDown={toggleCollapse}
         role="button"
         tabIndex={0}
-      >
+      >Filter and Sort
         <FontAwesomeIcon
           icon={isOpen ? faChevronUp : faChevronDown}
           className="mx-4"
-        />
-        Filter and Sort
+        /></div>
+        
       </div>
       <Collapse isOpened={isOpen}>
-        <div className="flex flex-col ml-4 items-start">
-          <label htmlFor="sort">Sort By:</label>
+        <div className="flex ml-4 items-start divide-x">
+            <div className='p-1'>
+          <label className='font-bold' htmlFor="sort">Sort By:</label>
           <select
             name="sort"
             className="mr-5"
@@ -107,7 +109,8 @@ const FilterAndSort = ({
               </option>
             ))}
           </select>
-
+          </div>
+          <div className='p-1 font-bold'>
           <label htmlFor="assignee">Assigned to:</label>
           <select
             name="assignee"
@@ -121,7 +124,9 @@ const FilterAndSort = ({
               </option>
             ))}
           </select>
+          </div>
 
+        <div className='p-1 font-bold'>
           <label htmlFor="showCompleted">
             Show Completed
             <input
@@ -131,6 +136,7 @@ const FilterAndSort = ({
               onChange={(e) => setIsShowCompleted(e.target.checked)}
             />
           </label>
+        </div>
         </div>
       </Collapse>
     </>
