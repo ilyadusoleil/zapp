@@ -17,7 +17,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { BUTTON_STYLE } from '../constants';
-import Dashboard from './Dashboard';
 
 interface BugDetailsProps extends RouteComponentProps {
   id?: string;
