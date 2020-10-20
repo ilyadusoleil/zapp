@@ -91,7 +91,7 @@ const App = () => {
           </Location>
         </Context.Provider>
       </React.StrictMode>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right"/>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </>
   );
 };

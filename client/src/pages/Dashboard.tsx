@@ -13,7 +13,7 @@ import ProjectHeader from '../components/ProjectHeader';
 import Context from '../Context';
 
 interface DashboardProps extends RouteComponentProps {
-id?: string;
+  id?: string;
 }
 
 type selectInfo = {
@@ -50,7 +50,7 @@ type selectFilterInfo = {
 };
 
 const Dashboard = ({ id: projectId }: DashboardProps) => {
-if (!projectId) projectId = '0';
+  if (!projectId) projectId = '0';
 
   const ctx = useContext(Context);
   const { isLoading, isError, data } = useBugs(parseInt(projectId));
@@ -81,23 +81,23 @@ if (!projectId) projectId = '0';
     setAssigneeFilterIdx(parseInt(e.target.value));
   };
 
-
-useEffect(() => {
+  useEffect(() => {
     ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
-}, []);
+  }, []);
 
-if (isLoading) {
+  if (isLoading) {
     return <span>Loading...</span>;
-}
+  }
 
   if (isError || !data) {
     return <span>Error: </span>;
   }
 
-return (
+  return (
     <>
-    <Sidebar currentPath="/dashboard" />
-      <div className="mx-16">
+      <Sidebar currentPath="/dashboard" />
+
+      <div className="ml-16">
           <div className='bg-teal-500 flex p-2'>
           <img
             className="h-12 mr-8 "
@@ -109,6 +109,18 @@ return (
         <ProjectHeader projectId={parseInt(projectId)} />
 
         <h1 className="mb-5">Dashboard</h1>
+
+        <select
+          className="mr-5"
+          onChange={updateSortSelect}
+          onBlur={updateSortSelect}
+        >
+          {SORT_INFO.map((el, i) => (
+            <option value={i} key={i}>
+              {el.label}
+            </option>
+          ))}
+        </select>
 
         <select
           className="mr-5"
@@ -131,7 +143,7 @@ return (
           />
         </label>
 
-        <div className='flex flex-wrap lg:justify-around xl:justify-between'>
+        <div className="flex flex-wrap justify-between">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
             .filter(ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func)
@@ -140,16 +152,9 @@ return (
               <Bugitem key={index} bug={bug} />
             ))}
         </div>
-        </div>
+      </div>
     </>
   );
 };
 
 export default Dashboard;
-
-// TODO: add back into Bug Item
-{
-  /* onClick={() => {
-              navigate(`/details/${bug.id}`);
-            }} */
-}
