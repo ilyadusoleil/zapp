@@ -26,7 +26,7 @@ export default function useEditProject() {
     onSuccess: async (_values) => {
       // FIXME: revert to commented code once server returns new value
       queryCache.refetchQueries(['project']);
-      await queryCache.refetchQueries(['projects']);
+      await queryCache.refetchQueries(['projectsForUser']);
       // queryCache.refetchQueries(['projectbugs', values.projectId]);
       // await queryCache.refetchQueries(['bug', values.id]);
     },
