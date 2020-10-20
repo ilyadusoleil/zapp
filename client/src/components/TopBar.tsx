@@ -44,7 +44,7 @@ const TopBar = ({ text }: { text: string }) => {
       >
         <img className="h-12 cursor-pointer" alt="logo" src={Zapp} />
       </div>
-      <h1 className="font-display text-3xl text-gray-100">{text}</h1>
+      <h1 className="font-display font-bold text-4xl text-gray-100">{text}</h1>
       {ctx.state.user && ctx.state.user.image && (
         <div
           className="ml-auto mr-3 h-8 self-center ignore-onclickoutside"

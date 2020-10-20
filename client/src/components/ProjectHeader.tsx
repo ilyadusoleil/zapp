@@ -63,7 +63,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
   return (
     <>
       <div className="bg-gray-100 p-3 flex justify-items">
-        <div className="text-lg">{data[getIndexFromId(projectId)].name}</div>
+        <div className="text-2xl font-bold font-display">{data[getIndexFromId(projectId)].name}</div>
         <FontAwesomeIcon
           onClick={toggleIsOpen}
           onKeyDown={toggleIsOpen}
