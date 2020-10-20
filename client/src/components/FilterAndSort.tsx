@@ -125,7 +125,7 @@ const FilterAndSort = ({
           <label htmlFor="showCompleted">
             Show Completed
             <input
-              name="showCmpleted"
+              name="showCompleted"
               className="ml-3"
               type="checkbox"
               onChange={(e) => setIsShowCompleted(e.target.checked)}
