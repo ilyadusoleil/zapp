@@ -27,12 +27,10 @@ const PreDashboard = (_props: RouteComponentProps) => {
     if (projectsData && projectsData.filter((el) => el.state != 1).length > 0) {
       //navigate to the currently active project if it exists
       //First check global context, but if that isn't set, get from database
-      console.log('PREDASHBOARD PROJECTS ', projectsData)
       if (
         projectsData.filter((el) => el.id == ctx.state.currentProjectId)
           .length > 0
       ) {
-        console.log('found matching project in context')
         navigate(`/dashboard/${ctx.state.currentProjectId}`);
         
       } else if (
@@ -40,14 +38,12 @@ const PreDashboard = (_props: RouteComponentProps) => {
         projectsData.filter((el) => el.id == ctx.state.user?.recentProject)
           .length > 0
       ) {
-        console.log('found matching project in db recent project')
         ctx.dispatch({
           type: 'setCurrentProjectId',
           payload: ctx.state.user?.recentProject,
         });
         navigate(`/dashboard/${ctx.state.user.recentProject}`);
       } else {
-        console.log('unable to find project so will default to first')
         ctx.dispatch({
           type: 'setCurrentProjectId',
           payload: projectsData[0].id,

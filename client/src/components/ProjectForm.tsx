@@ -22,12 +22,10 @@ const initialProjectUser: (string | number)[] = [];
 const ProjectForm = ({
   onSubmit,
   submitText,
-  submitRoute,
   initialValues = defaultFormValues,
 }: {
   onSubmit: MutateFunction<Project, unknown, ProjectInput, unknown>;
   submitText: string;
-  submitRoute: string;
   initialValues?: Omit<ProjectInput, 'projectUsers'>;
 }) => {
   const [values, setValues] = useState(initialValues);
@@ -48,8 +46,6 @@ const ProjectForm = ({
       { userId: ctx.state.userId }
     );
     onSubmit(valuesCopy).then((project) => {
-      console.log('Newly created project', project, submitRoute);
-
       if (project) {
         ctx.dispatch({ type: 'setCurrentProjectId', payload: project.id });
         if (ctx.state.user) {
