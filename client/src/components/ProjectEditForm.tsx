@@ -47,7 +47,7 @@ const ProjectEditForm = ({
   ) => {
     e.preventDefault();
     await setValue('state', 1);
-    const form = document.getElementById('edit-project-form');
+    const form = document.querySelector('form');
     if (form) {
       form.requestSubmit();
     }
