@@ -78,7 +78,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
       {isOpen && (
         <div
           ref={ref}
-          className={`absolute top-0 right-0 mt-20 mr-1 bg-white shadow-md`}
+          className={`absolute top-0 right-0 mt-32 mr-1 bg-white shadow-md`}
         >
           <div
             onClick={openEditForm}

@@ -1,14 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
 
+import TopBar from '../components/TopBar';
 import Bugitem from '../components/Bugitem';
-import Sidebar from '../components/Sidebar';
-import Zapp from '../assets/zappcopy.png';
 
 import ProjectHeader from '../components/ProjectHeader';
+
+import { BUTTON_STYLE } from '../constants';
 
 import Context from '../Context';
 
@@ -75,10 +76,17 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
   const updateSortSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortIdx(parseInt(e.target.value));
   };
+
   const updateAssigneeFilterSelect = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setAssigneeFilterIdx(parseInt(e.target.value));
+  };
+
+  const createBug = () => {
+    navigate('/new', {
+      state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+    });
   };
 
   useEffect(() => {
@@ -95,18 +103,9 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
 
   return (
     <>
-      <Sidebar currentPath="/dashboard" />
-
-      <div className="ml-16">
-        <div className="bg-teal-500 flex p-2">
-          <img className="h-12 mr-8 " alt="logo" src={Zapp}></img>
-          <h1 className="font-display text-3xl text-gray-100">
-            Bugs Dashboard
-          </h1>
-        </div>
+      <div>
+        <TopBar text="Dashboard"/>
         <ProjectHeader projectId={parseInt(projectId)} />
-
-        <h1 className="mb-5">Dashboard</h1>
 
         <select
           className="mr-5"
@@ -140,7 +139,10 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
             onChange={(e) => setIsShowCompleted(e.target.checked)}
           />
         </label>
-
+        <br />
+        <button onClick={createBug} className={`${BUTTON_STYLE}`}>
+          Create Bug
+        </button>
         <div className="flex flex-wrap justify-between">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
