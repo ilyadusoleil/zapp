@@ -4,7 +4,7 @@ import { RouteComponentProps } from '@reach/router';
 
 import useCreateBug from '../hooks/useCreateBug';
 
-import BugForm from '../components/BugForm';
+import BugForm from '../components/BugCreateForm';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const BugCreate = (_props: RouteComponentProps) => {
