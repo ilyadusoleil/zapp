@@ -6,7 +6,7 @@ import useBug from '../hooks/useBug';
 import useEditBug from '../hooks/useEditBug';
 import useCreateComment from '../hooks/useCreateComment';
 
-import Sidebar from '../components/Sidebar';
+import TopBar from '../components/TopBar';
 import CommentForm from '../components/CommentForm';
 import CommentComponent from '../components/CommentComponent';
 
@@ -44,8 +44,8 @@ const BugDetails = ({ id }: BugDetailsProps) => {
   }
   return (
     <>
-      <Sidebar />
-      <div className="ml-20 m-5">
+      <div>
+        <TopBar text="Details"/>
         <div className="flex justify-between">
           <div className="text-lg font-bold mb-4">{data.title}</div>
           <FontAwesomeIcon
