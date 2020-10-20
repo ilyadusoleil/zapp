@@ -1,5 +1,7 @@
 const express = require('express');
-const router = require('./routes');
+const apiRouter = require('./routes/api');
+const authRouter = require('./routes/auth');
+
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
@@ -45,7 +47,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', router);
+app.use('/auth', authRouter);
+app.use('/api', apiRouter);
 
 const PORT = process.env.PORT || 3000;
 
