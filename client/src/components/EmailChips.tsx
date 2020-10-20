@@ -143,8 +143,8 @@ const EmailChips = ({
             <div
               key={chip.email}
               className={`${
-                chip.id ? 'bg-green-300' : 'bg-gray-300'
-              } m-1 p-2 rounded-full inline-block`}
+                chip.id ? 'bg-teal-400' : 'bg-gray-300'
+              } m-1 p-2 rounded-full inline-block shadow-md`}
             >
               <div className="flex justify-around">
                 {chip.picture ? (
