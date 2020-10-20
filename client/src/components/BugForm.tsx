@@ -6,6 +6,7 @@ import { navigate } from '@reach/router';
 import { PrioritySelect } from './Priority';
 
 import useUsers from '../hooks/useUsers';
+import { BUTTON_STYLE } from '../constants';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug } from '@fortawesome/free-solid-svg-icons';
@@ -142,7 +143,7 @@ const BugForm = ({
           <br />
           <div>
             <button
-              className="shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-body py-2 px-4 rounded"
+              className={`${BUTTON_STYLE}`}
               type="submit"
             >
               {submitText}

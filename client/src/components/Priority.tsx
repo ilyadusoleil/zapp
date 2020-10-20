@@ -6,9 +6,9 @@ type priorityDataType = {
 };
 
 const PRIORITY_DATA: priorityDataType[] = [
-  { label: 'High', color: 'bg-teal-500' },
-  { label: 'Medium', color: 'bg-teal-400' },
-  { label: 'Low', color: 'bg-teal-200' },
+  { label: 'High', color: 'bg-teal-600' },
+  { label: 'Medium', color: 'bg-teal-500' },
+  { label: 'Low', color: 'bg-teal-400' },
 ];
 
 function priorityColor(level: number) {

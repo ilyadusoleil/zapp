@@ -79,7 +79,7 @@ const FilterAndSort = ({
 
   return (
     <>
-    <div className='bg-gray-100'>
+    <div className='bg-gray-200'>
       <div
         className="cursor-pointer p-2 ml-2"
         onClick={toggleCollapse}

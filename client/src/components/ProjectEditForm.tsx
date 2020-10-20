@@ -74,7 +74,7 @@ const ProjectEditForm = ({
         </button>
         <button
           name="archive"
-          className="shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          className="shadow font-body bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           type="button"
           onClick={archiveProject}
         >
