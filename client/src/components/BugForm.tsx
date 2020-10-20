@@ -50,7 +50,7 @@ const BugForm = ({
   }, [initialValues]);
 
   return (
-    <div className="w-1/3 mt-16 font-display shadow-2xl rounded">
+    <div className="font-display shadow-2xl rounded">
       <div className="flex mt-8">
         <FontAwesomeIcon
           icon={faBug}

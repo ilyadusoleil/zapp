@@ -1,15 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
 
 import TopBar from '../components/TopBar';
 import Bugitem from '../components/Bugitem';
-import Sidebar from '../components/Sidebar';
-
 
 import ProjectHeader from '../components/ProjectHeader';
+
+import { BUTTON_STYLE } from '../constants';
 
 import Context from '../Context';
 
@@ -76,10 +76,17 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
   const updateSortSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortIdx(parseInt(e.target.value));
   };
+
   const updateAssigneeFilterSelect = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setAssigneeFilterIdx(parseInt(e.target.value));
+  };
+
+  const createBug = () => {
+    navigate('/new', {
+      state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+    });
   };
 
   useEffect(() => {
@@ -134,7 +141,10 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
             onChange={(e) => setIsShowCompleted(e.target.checked)}
           />
         </label>
-
+        <br />
+        <button onClick={createBug} className={`${BUTTON_STYLE}`}>
+          Create Bug
+        </button>
         <div className="flex flex-wrap justify-between">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
