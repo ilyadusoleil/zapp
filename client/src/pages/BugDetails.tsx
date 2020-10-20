@@ -29,8 +29,15 @@ const BugDetails = ({ id }: BugDetailsProps) => {
 
   const [editBug] = useEditBug();
 
-  const completeBug = () => {
-    const editedBugs = Object.assign({}, data, { state: 1 });
+  const toggleBugState = () => {
+    if (!data) return
+
+    let newState = 1;
+    if (data.state == 1) {
+      // Reopen bug
+      newState = 0;
+    }
+    const editedBugs = Object.assign({}, data, { state: newState });
     editBug(editedBugs);
     navigate('/preDashboard');
   };
@@ -77,8 +84,8 @@ const BugDetails = ({ id }: BugDetailsProps) => {
           </div>
         </div>
 
-        <button className={`${BUTTON_STYLE} mb-3`} onClick={completeBug}>
-          Mark as Complete
+        <button className={`${BUTTON_STYLE} mb-3`} onClick={toggleBugState}>
+          {data.state === 1 ? "Reopen Bug" : "Mark as Complete"}
         </button>
 
         {data.comments &&
