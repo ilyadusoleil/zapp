@@ -95,21 +95,21 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
           {[...data]
             .filter((el) => el.state != 1)
             .map(
-            (project) =>
-              project.id != projectId && (
-                <div
-                  key={project.id}
-                  className="h-10 flex items-center hover:bg-gray-200 "
-                  onClick={navigateToProject(project.id)}
-                  onKeyDown={navigateToProject(project.id)}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
-                  <p>{project.name}</p>
-                </div>
-              )
-          )}
+              (project) =>
+                project.id != projectId && (
+                  <div
+                    key={project.id}
+                    className="h-10 flex items-center hover:bg-gray-200 "
+                    onClick={navigateToProject(project.id)}
+                    onKeyDown={navigateToProject(project.id)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
+                    <p>{project.name}</p>
+                  </div>
+                )
+            )}
           <div
             className="h-10 flex items-center hover:bg-gray-200 "
             onClick={navigateToNewProject}

@@ -98,13 +98,11 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
       <Sidebar currentPath="/dashboard" />
 
       <div className="ml-16">
-          <div className='bg-teal-500 flex p-2'>
-          <img
-            className="h-12 mr-8 "
-            alt="logo"
-            src={Zapp}
-          ></img>
-        <h1 className='font-display text-3xl text-gray-100'>Bugs Dashboard</h1>
+        <div className="bg-teal-500 flex p-2">
+          <img className="h-12 mr-8 " alt="logo" src={Zapp}></img>
+          <h1 className="font-display text-3xl text-gray-100">
+            Bugs Dashboard
+          </h1>
         </div>
         <ProjectHeader projectId={parseInt(projectId)} />
 
