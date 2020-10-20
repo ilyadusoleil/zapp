@@ -60,11 +60,14 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
 
   if (!data || !Array.isArray(data) || data.length < 1) return <h1>Oh no</h1>;
 
+
   return (
     <>
+
       <div className="bg-gray-300 p-3 flex justify-items">
 
         <div className="text-2xl font-bold font-display">{data[getIndexFromId(projectId)].name}</div>
+
 
         <FontAwesomeIcon
           onClick={toggleIsOpen}
@@ -107,7 +110,11 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
                     role="button"
                     tabIndex={0}
                   >
-                    <FontAwesomeIcon icon={icon} size={'lg'} className="m-3 font-thin" />
+                    <FontAwesomeIcon
+                      icon={icon}
+                      size={'lg'}
+                      className="m-3 font-thin"
+                    />
                     <p>{project.name}</p>
                   </div>
                 )
