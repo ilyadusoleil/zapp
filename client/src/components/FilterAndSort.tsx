@@ -53,20 +53,14 @@ export const ASSIGNEE_FILTER_INFO: selectFilterInfo[] = [
 ];
 
 type FilterAndSortType = {
-  sortIdx: number;
   setSortIdx: React.Dispatch<React.SetStateAction<number>>;
-  assigneeFilterIdx: number;
   setAssigneeFilterIdx: React.Dispatch<React.SetStateAction<number>>;
-  isShowCompleted: boolean;
   setIsShowCompleted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const FilterAndSort = ({
-  sortIdx,
   setSortIdx,
-  assigneeFilterIdx,
   setAssigneeFilterIdx,
-  isShowCompleted,
   setIsShowCompleted,
 }: FilterAndSortType) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,13 +79,24 @@ const FilterAndSort = ({
 
   return (
     <>
-      <div className="mt-3 m-2 cursor-pointer" onClick={toggleCollapse}>
-        <FontAwesomeIcon icon={isOpen ? faChevronUp : faChevronDown} className="mx-4"/>
+      <div
+        className="mt-3 m-2 cursor-pointer"
+        onClick={toggleCollapse}
+        onKeyDown={toggleCollapse}
+        role="button"
+        tabIndex={0}
+      >
+        <FontAwesomeIcon
+          icon={isOpen ? faChevronUp : faChevronDown}
+          className="mx-4"
+        />
         Filter and Sort
       </div>
       <Collapse isOpened={isOpen}>
-        <div className="flex ml-4">
+        <div className="flex flex-col ml-4 items-start">
+          <label htmlFor="sort">Sort By:</label>
           <select
+            name="sort"
             className="mr-5"
             onChange={updateSortSelect}
             onBlur={updateSortSelect}
@@ -103,7 +108,9 @@ const FilterAndSort = ({
             ))}
           </select>
 
+          <label htmlFor="assignee">Assigned to:</label>
           <select
+            name="assignee"
             className="mr-5"
             onChange={updateAssigneeFilterSelect}
             onBlur={updateAssigneeFilterSelect}
@@ -115,9 +122,10 @@ const FilterAndSort = ({
             ))}
           </select>
 
-          <label>
+          <label htmlFor="showCompleted">
             Show Completed
             <input
+              name="showCmpleted"
               className="ml-3"
               type="checkbox"
               onChange={(e) => setIsShowCompleted(e.target.checked)}

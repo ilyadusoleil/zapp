@@ -56,11 +56,8 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         <ProjectHeader projectId={parseInt(projectId)} />
 
         <FilterAndSort
-          sortIdx={sortIdx}
           setSortIdx={setSortIdx}
-          assigneeFilterIdx={assigneeFilterIdx}
           setAssigneeFilterIdx={setAssigneeFilterIdx}
-          isShowCompleted={isShowCompleted}
           setIsShowCompleted={setIsShowCompleted}
         />
 
