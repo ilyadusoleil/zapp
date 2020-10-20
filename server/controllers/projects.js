@@ -1,5 +1,6 @@
 const db = require('../db/models/index');
 const sendInvitationEmail = require('../email/invitationEmail');
+const sendSignUpEmail = require('../email/signupEmail');
 
 // GET projects that belong to a particular userId
 const getProjects = async function (req, res) {
@@ -72,6 +73,12 @@ const createProject = async function (req, res) {
               id: projectUsers[i],
             },
           });
+          await sendInvitationEmail(
+            user.email,
+            invitedByName,
+            name,
+            newProject.dataValues.id
+          );
         } else if (typeof projectUsers[i] === 'string') {
           //user doesn't exist in db yet
           user = await db.user.create({
@@ -79,7 +86,7 @@ const createProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
-          await sendInvitationEmail(user.email, invitedByName, name);
+          await sendSignUpEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
@@ -134,6 +141,12 @@ const editProject = async function (req, res) {
               id: projectUsers[i],
             },
           });
+          await sendInvitationEmail(
+            user.email,
+            invitedByName,
+            name,
+            req.body.id
+          );
         } else if (typeof projectUsers[i] === 'string') {
           //user doesn't exist in db yet
           user = await db.user.create({
@@ -141,7 +154,7 @@ const editProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
-          await sendInvitationEmail(user.email, invitedByName, name);
+          await sendSignUpEmail(user.email, invitedByName, name);
         } else {
           //TODO throw error
         }
