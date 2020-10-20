@@ -58,7 +58,9 @@ const ProjectEditForm = ({
   }, [initialValues]);
 
   return (
-    <form id="edit-project-form" onSubmit={handleSubmit}>
+      <div>
+          <h1 className='text-center font-display text-2xl mt-4'>Edit your project...</h1>
+    <form className='mt-8' id="edit-project-form" onSubmit={handleSubmit}>
       <ProjectDetailsSubForm values={values} setValue={setValue}/>
       <br />
       <EmailChips
@@ -72,7 +74,7 @@ const ProjectEditForm = ({
         </button>
         <button
           name="archive"
-          className="mt-5 shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          className="shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           type="button"
           onClick={archiveProject}
         >
@@ -80,6 +82,7 @@ const ProjectEditForm = ({
         </button>
       </div>
     </form>
+    </div>
   );
 };
 

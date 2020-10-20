@@ -63,7 +63,9 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
   return (
     <>
       <div className="bg-gray-100 p-3 flex justify-items">
+
         <div className="text-2xl font-bold font-display">{data[getIndexFromId(projectId)].name}</div>
+
         <FontAwesomeIcon
           onClick={toggleIsOpen}
           onKeyDown={toggleIsOpen}
@@ -105,7 +107,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
                     role="button"
                     tabIndex={0}
                   >
-                    <FontAwesomeIcon icon={icon} size={'lg'} className="m-3" />
+                    <FontAwesomeIcon icon={icon} size={'lg'} className="m-3 font-thin" />
                     <p>{project.name}</p>
                   </div>
                 )
