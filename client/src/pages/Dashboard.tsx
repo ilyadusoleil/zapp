@@ -65,7 +65,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         <button onClick={createBug} className={`${BUTTON_STYLE}`}>
           Create Bug
         </button>
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
             .filter((bug) => ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func(bug, ctx.state.userId))
