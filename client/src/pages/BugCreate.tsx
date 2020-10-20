@@ -4,7 +4,7 @@ import { RouteComponentProps } from '@reach/router';
 
 import useCreateBug from '../hooks/useCreateBug';
 
-import BugForm from '../components/BugCreateForm';
+import BugForm from '../components/BugForm';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const BugCreate = (_props: RouteComponentProps) => {
@@ -13,6 +13,7 @@ const BugCreate = (_props: RouteComponentProps) => {
   return (
     <BugForm
       onSubmit={createBug}
+      headerText="Add New Bug..."
       submitRoute="/preDashboard"
       submitText={
         createBugStatus === 'loading'

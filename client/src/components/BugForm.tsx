@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { MutateFunction } from 'react-query';
-import { BugInput, Bug } from '../types/Bug';
+import { BugInput, Bug, BugDetails } from '../types/Bug';
 import Context from '../Context';
 import { navigate } from '@reach/router';
 import { PrioritySelect } from './Priority';
+
+import useUsers from '../hooks/useUsers';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug } from '@fortawesome/free-solid-svg-icons';
@@ -18,17 +20,21 @@ const defaultFormValues = {
 
 const BugForm = ({
   onSubmit,
+  headerText,
   submitText,
   submitRoute,
   initialValues = defaultFormValues,
 }: {
-  onSubmit: MutateFunction<Bug, unknown, BugInput, unknown>;
+  onSubmit: MutateFunction<Bug, unknown, any, unknown>;
+  headerText: string;
   submitText: string;
-  submitRoute?: string;
+  submitRoute: string;
   initialValues?: BugInput;
 }) => {
   const ctx = useContext(Context);
   const [values, setValues] = useState(initialValues);
+
+  const { data: userData } = useUsers(ctx.state.currentProjectId);
 
   const setValue = (field: string, value: string) =>
     setValues((old) => ({ ...old, [field]: value }));
@@ -58,7 +64,7 @@ const BugForm = ({
           className="text-gray-700 m-auto"
         />
       </div>
-      <h1 className="text-center font-display text-2xl mt-6">Add new bug...</h1>
+      <h1 className="text-center font-display text-2xl mt-6">{headerText}</h1>
       <form
         className="m-6 border-2 border-purple-600 rounded-lg bg-gray-100 p-8"
         onSubmit={handleSubmit}
@@ -95,6 +101,21 @@ const BugForm = ({
             required
           />
         </div>
+
+        <label htmlFor="userId">Assigned User</label>
+        <select
+          name="userId"
+          value={values.userId ? values.userId : -1}
+          onBlur={(e) => setValue('userId', e.target.value)}
+          onChange={(e) => setValue('userId', e.target.value)}
+        >
+          <option value={-1}>Unassigned</option>
+          {userData?.map((info, i) => (
+            <option key={i} value={info.id}>
+              {info.displayName || info.firstName || info.email}
+            </option>
+          ))}
+        </select>
 
         <label
           className="mt-10 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

@@ -6,7 +6,7 @@ import useBug from '../hooks/useBug';
 
 import useEditBug from '../hooks/useEditBug';
 
-import BugEditForm from '../components/BugEditForm';
+import BugForm from '../components/BugForm';
 
 interface BugEditProps extends RouteComponentProps {
   id?: string;
@@ -29,8 +29,9 @@ const BugEdit = ({ id }: BugEditProps) => {
 
   return (
     <>
-      <BugEditForm
+      <BugForm
         onSubmit={editBug}
+        headerText="Edit"
         submitRoute={`/details/${id}`}
         submitText={
           editBugStatus === 'loading'

@@ -108,7 +108,7 @@ const editProject = async function (req, res) {
     const updatedProject = {
       name: name,
       description: req.body.description,
-      state: req.body.state,
+      state: req.body.state || 0,
       createdAt: req.body.createdAt,
       updatedAt: new Date(),
     };
@@ -172,6 +172,7 @@ const editProject = async function (req, res) {
       res.send({ message: 'error editing project in database' });
     }
   } catch (err) {
+    console.log('EDIT PROJECT USER', err)
     res.status(500);
     res.send({ message: 'error editing project in database' });
   }
