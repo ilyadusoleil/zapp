@@ -8,15 +8,15 @@ const sendSignUpEmail = (recipient, inviterName, projectName) => {
     attachments: [
       {
         filename: 'zappcopy.png',
-        path: '../assets/zappcopy.png',
+        path: `${__dirname}/../assets/zappcopy.png`,
         cid: 'logo',
       },
     ],
     html: ` <div>
     <div
       style="
-        width: 100vw;
-        height: 100vh;
+        width: 1000px;
+        height: 700px;
         background-color: #ffffff;
         position: absolute;
         top: 50%;
@@ -64,33 +64,29 @@ const sendSignUpEmail = (recipient, inviterName, projectName) => {
         style="
           height: 100vh;
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
           padding-left: 30px;
           margin-top: 60px;
           font-family: Verdana;
-          text-align: center;
         "
       >
+      <div>
         <h1>Hello!</h1>
         <h1>You have been invited to a project on Zapp</h1>
-        <div>
-          <p style="padding-top: 20px">
-            Zapp is an app for managing issues in the software development
-            lifecycle.
-          </p>
-          <p style="padding-top: 20px">
-            Zapp is designed with small teams in mind and aims to make issue
-            tracking simple and straightforward.
-          </p>
-          <h3 style="padding-top: 60px">
-            You've been invited to the project ${projectName} by
-            ${inviterName}
-          </h3>
-          <h3 style="padding-top: 20px">
-            Click <a href="https://localhost:1234/">here</a> to Sign Up.
-          </h3>
+        <p style="padding-top: 20px">
+        Zapp is an app for managing issues in the software development
+        lifecycle.
+        </p>
+        <p style="padding-top: 20px">
+        Zapp is designed with small teams in mind and aims to make issue
+        tracking simple and straightforward.
+        </p>
+        <h3 style="padding-top: 60px">
+        You've been invited to the project ${projectName} by
+        ${inviterName}
+        </h3>
+        <h3 style="padding-top: 20px">
+          Click <a href="https://localhost:1234/">here</a> to Sign Up.
+        </h3>
         </div>
       </div>
     </div>

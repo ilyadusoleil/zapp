@@ -13,15 +13,15 @@ const sendInvitationEmail = (
     attachments: [
       {
         filename: 'zappcopy.png',
-        path: '../assets/zappcopy.png',
+        path: `${__dirname}/../assets/zappcopy.png`,
         cid: 'logo',
       },
     ],
     html: ` <div>
     <div
       style="
-        width: 100vw;
-        height: 100vh;
+        width: 1000px;
+        height: 700px;
         background-color: #ffffff;
         position: absolute;
         top: 50%;
@@ -69,18 +69,14 @@ const sendInvitationEmail = (
         style="
           height: 100vh;
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
           padding-left: 30px;
           margin-top: 60px;
           font-family: Verdana;
-          text-align: center;
         "
       >
-        <h1>Hello!</h1>
-        <h1>You have been invited to a project on Zapp</h1>
-        <div>
+      <div>
+      <h1>Hello!</h1>
+      <h1>You have been invited to a project on Zapp</h1>
           <p style="padding-top: 20px">
             Zapp is an app for managing issues in the software development
             lifecycle.
