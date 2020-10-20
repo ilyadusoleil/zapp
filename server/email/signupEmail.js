@@ -1,15 +1,10 @@
 const email = require('./transporter');
 
-const sendInvitationEmail = (
-  recipient,
-  inviterName,
-  projectName,
-  projectId
-) => {
+const sendSignUpEmail = (recipient, inviterName, projectName) => {
   const mailOptions = {
     from: process.env.EMAIL_ADD,
     to: recipient,
-    subject: `You've been invited to a new project!`,
+    subject: `You've been invited to Zapp!`,
     attachments: [
       {
         filename: 'zappcopy.png',
@@ -94,7 +89,7 @@ const sendInvitationEmail = (
             ${inviterName}
           </h3>
           <h3 style="padding-top: 20px">
-            Click <a href="https://localhost:1234/dashboard/${projectId}">here</a> to view the project.
+            Click <a href="https://localhost:1234/">here</a> to Sign Up.
           </h3>
         </div>
       </div>
@@ -115,4 +110,4 @@ const sendInvitationEmail = (
   });
 };
 
-module.exports = sendInvitationEmail;
+module.exports = sendSignUpEmail;
