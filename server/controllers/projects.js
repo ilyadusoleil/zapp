@@ -141,12 +141,6 @@ const editProject = async function (req, res) {
               id: projectUsers[i],
             },
           });
-          await sendInvitationEmail(
-            user.email,
-            invitedByName,
-            name,
-            req.body.id
-          );
         } else if (typeof projectUsers[i] === 'string') {
           //user doesn't exist in db yet
           user = await db.user.create({
@@ -174,6 +168,12 @@ const editProject = async function (req, res) {
             createdAt: new Date(),
             updatedAt: new Date(),
           });
+          await sendInvitationEmail(
+            user.email,
+            invitedByName,
+            name,
+            req.body.id
+          );
         }
       }
     }
@@ -185,7 +185,7 @@ const editProject = async function (req, res) {
       res.send({ message: 'error editing project in database' });
     }
   } catch (err) {
-    console.log('EDIT PROJECT USER', err)
+    console.log('EDIT PROJECT USER', err);
     res.status(500);
     res.send({ message: 'error editing project in database' });
   }
