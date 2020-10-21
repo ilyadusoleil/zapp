@@ -12,7 +12,9 @@ const ProjectCreate = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <h1 className='text-center font-display text-3xl mt-4'>Add new project...</h1>
+      <h1 className="text-center font-display text-3xl mt-4">
+        Add new project...
+      </h1>
       <ProjectForm
         onSubmit={createProject}
         submitText={

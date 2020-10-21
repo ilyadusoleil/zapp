@@ -180,10 +180,7 @@ const BugForm = ({
           <PrioritySelect prioityValue={values.priority} setValue={setValue} />
           <br />
           <div>
-            <button
-              className={`${BUTTON_STYLE}`}
-              type="submit"
-            >
+            <button className={`${BUTTON_STYLE}`} type="submit">
               {submitText}
             </button>
           </div>

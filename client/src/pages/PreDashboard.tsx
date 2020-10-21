@@ -32,7 +32,6 @@ const PreDashboard = (_props: RouteComponentProps) => {
           .length > 0
       ) {
         navigate(`/dashboard/${ctx.state.currentProjectId}`);
-        
       } else if (
         ctx.state.user &&
         projectsData.filter((el) => el.id == ctx.state.user?.recentProject)
