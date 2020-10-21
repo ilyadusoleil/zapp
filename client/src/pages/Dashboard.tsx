@@ -18,6 +18,7 @@ import FilterAndSort, {
 } from '../components/FilterAndSort';
 
 import Context from '../Context';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface DashboardProps extends RouteComponentProps {
   id?: string;
@@ -43,13 +44,9 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
     ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
   }, []);
 
-  if (isLoading) {
-    return <Loading/>;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
+  if (isError || !data) return <ErrorComponent />;
 
   return (
     <>

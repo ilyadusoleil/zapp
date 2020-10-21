@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { BUTTON_STYLE } from '../constants';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface BugDetailsProps extends RouteComponentProps {
   id?: string;
@@ -42,13 +43,10 @@ const BugDetails = ({ id }: BugDetailsProps) => {
     navigate('/preDashboard');
   };
 
-  if (isLoading) {
-    return <Loading/>;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
+  if (isError || !data) return <ErrorComponent />;
+
   return (
     <>
       <div>

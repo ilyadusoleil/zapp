@@ -114,7 +114,9 @@ const FilterAndSort = ({
             </select>
           </div>
           <div className="p-1 pl-5 font-bold">
-            <label className="mr-3" htmlFor="assignee">Assigned to:</label>
+            <label className="mr-3" htmlFor="assignee">
+              Assigned to:
+            </label>
             <select
               name="assignee"
               className="mr-5"

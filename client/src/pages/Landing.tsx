@@ -39,7 +39,7 @@ const Landing = (_props: RouteComponentProps) => {
       });
   }, []);
 
-  return <Loading/>;;
+  return <Loading />;
 };
 
 export default Landing;

@@ -3,7 +3,7 @@
   it will automatically redirect to Dashboard.tsx
 */
 
-import React, { useEffect,useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import { RouteComponentProps, navigate } from '@reach/router';
 
@@ -14,6 +14,7 @@ import ProjectForm from '../components/ProjectForm';
 import Loading from '../components/Loading';
 
 import Context from '../Context';
+import ErrorComponent from '../components/ErrorComponent';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PreDashboard = (_props: RouteComponentProps) => {
@@ -51,17 +52,13 @@ const PreDashboard = (_props: RouteComponentProps) => {
         });
         navigate(`/dashboard/${projectsData[0].id}`); //TODO: don't just go to the first created project, but the most recently used project?
       }
-      setIsEffect(true)
+      setIsEffect(true);
     }
   }, [projectsData]);
 
-  if (isLoading || !isEffect) {
-    return <Loading/>;
-  }
+  if (isLoading || !isEffect) return <Loading />;
 
-  if (isError || !projectsData) {
-    return <span>Predashboard Error: </span>;
-  }
+  if (isError || !projectsData) return <ErrorComponent />;
 
   return (
     <div className="m-20">

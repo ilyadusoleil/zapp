@@ -82,7 +82,7 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
         <div
           ref={ref}
           className={`absolute top-0 right-0 mr-1 bg-white shadow-md`}
-          style={{'marginTop': '8.6rem'}}
+          style={{ marginTop: '8.6rem' }}
         >
           <div
             onClick={openEditForm}
