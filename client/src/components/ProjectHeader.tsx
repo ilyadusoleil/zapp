@@ -3,11 +3,12 @@ import React, { useState, useContext } from 'react';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBuilding as icon,
   faPlus as plus,
   faEdit as edit,
   faEllipsisH as menu,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { faFolder as icon } from '@fortawesome/free-regular-svg-icons';
 
 import Context from '../Context';
 
