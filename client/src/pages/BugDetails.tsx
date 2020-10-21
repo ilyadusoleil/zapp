@@ -15,7 +15,6 @@ import UserChip from '../components/UserChip';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faEdit,
   faArrowLeft,
   faBug,
   faLightbulb,
