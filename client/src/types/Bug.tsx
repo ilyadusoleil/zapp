@@ -6,6 +6,7 @@ export type BugDetails = {
   title: string;
   description: string;
   priority: number;
+  category: number;
   createdAt: Date;
   state: number; // TODO update this once finalised on server
   comments: Comment[];

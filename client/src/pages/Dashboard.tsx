@@ -63,7 +63,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         />
 
         <br />
-        <button onClick={createBug} className='shadow bg-purple-600  focus:shadow-outline focus:outline-none text-white font-body px-3 py-1 rounded-full ml-3'><FontAwesomeIcon
+        <button onClick={createBug} className='shadow bg-purple-600 focus:shadow-outline focus:outline-none text-white font-body px-3 py-1 rounded-full ml-3'><FontAwesomeIcon
                     icon={faPlusCircle}
                     size={'sm'}
                     className="mr-1"

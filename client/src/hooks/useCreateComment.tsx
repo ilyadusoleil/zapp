@@ -5,7 +5,7 @@ import { Comment, CommentInput } from '../types/Comment';
 
 function useCreateBug() {
   const createBug = async (bug: CommentInput): Promise<Comment> => {
-    return fetchRequest('/comments', {
+    return fetchRequest('/api/comments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bug),

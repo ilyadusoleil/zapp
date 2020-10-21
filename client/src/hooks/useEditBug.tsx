@@ -7,7 +7,7 @@ type rollbackType = () => void;
 
 export default function useSaveBug() {
   const editBug = async (bug: Bug): Promise<Bug> => {
-    return fetchRequest(`/bugs`, {
+    return fetchRequest(`/api/bugs`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bug),
