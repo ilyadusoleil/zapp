@@ -14,13 +14,20 @@ import { PriorityTag } from '../components/Priority';
 import UserChip from '../components/UserChip';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEdit,
+  faArrowLeft,
+  faBug,
+  faLightbulb,
+} from '@fortawesome/free-solid-svg-icons';
 
 import { BUTTON_STYLE } from '../constants';
 
 interface BugDetailsProps extends RouteComponentProps {
   id?: string;
 }
+
+const bugCategoryIcons = [faBug, faLightbulb];
 
 const BugDetails = ({ id }: BugDetailsProps) => {
   if (!id) id = '0';
@@ -53,7 +60,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
     <>
       <div>
         <TopBar text="Details" />
-        <div className="flex flex-col my-6 mr-48">
+        <div className="flex flex-col mt-12 mb-4">
           <div className="flex">
             <div className="flex justify-center align-center w-48">
               <FontAwesomeIcon
@@ -77,6 +84,15 @@ const BugDetails = ({ id }: BugDetailsProps) => {
                   });
                 }}
               />
+            </div>
+            <div className="flex justify-center align-center w-48">
+              <div className="flex items-center justify-center bg-gradient-to-r from-indigo-800 to-purple-500 rounded-full w-20 h-20">
+                <FontAwesomeIcon
+                  className="text-center text-gray-100"
+                  size={'3x'}
+                  icon={bugCategoryIcons[data.category]}
+                />
+              </div>
             </div>
           </div>
         </div>
