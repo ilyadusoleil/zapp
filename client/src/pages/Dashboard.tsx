@@ -19,6 +19,7 @@ import FilterAndSort, {
 
 import Context from '../Context';
 import ErrorComponent from '../components/ErrorComponent';
+import NothingHere from '../components/NothingHere';
 
 interface DashboardProps extends RouteComponentProps {
   id?: string;
@@ -82,6 +83,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
               <Bugitem key={index} bug={bug} />
             ))}
         </div>
+        {data.length === 0 && <NothingHere />}
       </div>
     </>
   );
