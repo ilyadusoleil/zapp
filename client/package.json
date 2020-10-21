@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html --open",
-    "build": "parcel build src/index.html",
+    "start": "cross-env NODE_ENV=local parcel src/index.html --open",
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --out-dir ../server/build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
     "mockserver": "json-server --watch db.json",

@@ -5,7 +5,7 @@ import { BugDetails } from '../types/Bug';
 // Get details about one bug (in the edit/details screen)
 const useBug = (bugId: number): QueryResult<BugDetails> => {
   return useQuery(bugId && ['bug', bugId], () =>
-    fetchRequest(`/details?bugId=${bugId}`)
+    fetchRequest(`/api/details?bugId=${bugId}`)
   );
 };
 

@@ -1,8 +1,11 @@
 const express = require('express');
-const router = require('./routes');
+const apiRouter = require('./routes/api');
+const authRouter = require('./routes/auth');
+
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 
 var Sequelize = require('sequelize');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -35,17 +38,25 @@ myStore.sync();
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: process.env.CLIENT, // allow to server to accept request from different origin
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // allow session cookie from browser to pass through
-  })
-);
+if (process.env.NODE_ENV === 'development') {
+  app.use(
+    cors({
+      origin: process.env.CLIENT, // allow to server to accept request from different origin
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true, // allow session cookie from browser to pass through
+    })
+  );
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'build')));
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', router);
+app.use('/auth', authRouter);
+app.use('/api', apiRouter);
 
 const PORT = process.env.PORT || 3000;
 

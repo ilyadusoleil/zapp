@@ -7,7 +7,7 @@ type rollbackType = () => void;
 
 export default function useUpdateUserRecentProject() {
   const updateUser = async (user: User): Promise<User> => {
-    return fetchRequest(`/user/recentProject`, {
+    return fetchRequest(`/api/user/recentProject`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),

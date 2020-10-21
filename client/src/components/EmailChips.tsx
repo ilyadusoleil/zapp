@@ -13,22 +13,31 @@ import { FORM_LABEL } from '../constants';
 import fetchRequest from '../services/ApiService';
 import Context from '../Context';
 
-const defaultChips: {
-  id?: number;
-  email: string;
-  picture?: string;
-}[] = [];
-
 const EmailChips = ({
   projectUsers,
   setProjectUsers,
+  chips,
+  setChips,
 }: {
   projectUsers: (string | number)[];
   setProjectUsers: React.Dispatch<React.SetStateAction<(string | number)[]>>;
+  chips: {
+    id?: number;
+    email: string;
+    picture?: string;
+  }[];
+  setChips: React.Dispatch<
+    React.SetStateAction<
+      {
+        id?: number;
+        email: string;
+        picture?: string;
+      }[]
+    >
+  >;
 }) => {
   const [collaborator, setCollaborator] = useState('');
   const [error, setError] = useState('');
-  const [chips, setChips] = useState(defaultChips);
   const ctx = useContext(Context);
 
   const handleChangeCollaborator = (e: ChangeEvent<HTMLInputElement>) => {
@@ -138,7 +147,9 @@ const EmailChips = ({
 
   return (
     <div>
-        <label className={`${FORM_LABEL}`} htmlFor="projectUsers">Collaborators</label>
+      <label className={`${FORM_LABEL}`} htmlFor="projectUsers">
+        Collaborators
+      </label>
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
@@ -156,7 +167,7 @@ const EmailChips = ({
               key={chip.email}
               className={`${
                 chip.id ? 'bg-teal-400' : 'bg-gray-300'
-              } m-1 p-2 rounded-full inline-block`}
+              } m-1 p-2 rounded-full inline-block shadow-md`}
             >
               <div className="flex justify-around">
                 {chip.picture ? (
