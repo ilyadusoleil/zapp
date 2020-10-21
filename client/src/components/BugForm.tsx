@@ -8,8 +8,7 @@ import { PrioritySelect } from './Priority';
 import useUsers from '../hooks/useUsers';
 import { BUTTON_STYLE } from '../constants';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBug } from '@fortawesome/free-solid-svg-icons';
+import Zapp from '../assets/zappcopy.png';
 
 const defaultFormValues = {
   title: '',
@@ -61,12 +60,10 @@ const BugForm = ({
 
   return (
     <div className="font-display rounded">
-      <div className="flex">
-        <FontAwesomeIcon
-          icon={faBug}
-          size={'3x'}
-          className="text-gray-700 m-auto mt-6"
-        />
+      <div className="flex items-center justify-center">
+        <div className="items-center rounded-full bg-gray-700">
+          <img className="h-20 m-auto" alt="logo" src={Zapp}></img>
+        </div>
       </div>
       <h1 className="text-center font-display text-2xl mt-4">{headerText}</h1>
       <form className="rounded-lg p-6 mt-2" onSubmit={handleSubmit}>
@@ -102,7 +99,8 @@ const BugForm = ({
             required
           />
         </div>
-
+        <div className='flex flex-wrap justify-between'>
+        <div >
         <label
           className="mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold"
           htmlFor="issueCategory"
@@ -123,7 +121,6 @@ const BugForm = ({
               </option>
             ))}
           </select>
-
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg
               className="fill-current h-4 w-4"
@@ -134,7 +131,9 @@ const BugForm = ({
             </svg>
           </div>
         </div>
+        </div>
 
+        <div>
         <label
           className="mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold"
           htmlFor="userId"
@@ -168,24 +167,30 @@ const BugForm = ({
             </svg>
           </div>
         </div>
+        </div>
+        
+     
 
+        <div>
         <label
           className="mt-8 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor="priority"
         >
           Priority
         </label>
-        <div className="flex justify-between">
+        <div>
           <PrioritySelect prioityValue={values.priority} setValue={setValue} />
-          <br />
-          <div>
-            <button className={`${BUTTON_STYLE}`} type="submit">
+        </div>
+        </div>
+        </div>
+        <div className='flex'>
+        <button className={`${BUTTON_STYLE} mt-6 ml-auto`} type="submit">
               {submitText}
             </button>
-          </div>
-        </div>
+            </div>
       </form>
     </div>
+    
   );
 };
 

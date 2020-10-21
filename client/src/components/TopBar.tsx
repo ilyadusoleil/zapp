@@ -34,13 +34,13 @@ const TopBar = ({ text }: { text: string }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-teal-500 to-teal-300 flex p-3">
+    <div className="bg-gradient-to-r from-teal-700 to-teal-400 flex p-3">
       <div
         onClick={navigateHome}
         onKeyDown={navigateHome}
         role="button"
         tabIndex={0}
-        className="mr-8"
+        className="mr-8 focus:outline-none"
       >
         <img className="h-12 cursor-pointer" alt="logo" src={Zapp} />
       </div>
@@ -73,7 +73,7 @@ const TopBar = ({ text }: { text: string }) => {
             role="button"
             tabIndex={0}
           >
-            <FontAwesomeIcon icon={faSignOutAlt} size={'lg'} className="m-3" />
+            <FontAwesomeIcon icon={faSignOutAlt} size={'lg'} className="m-3 focus:outline-none" />
             <div className="self-center mr-4">Logout</div>
           </div>
         </div>
