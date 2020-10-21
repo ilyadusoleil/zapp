@@ -11,7 +11,7 @@ const convertDateToString = (input: Date): string => {
 const CommentComponent = ({ comment }: { comment: Comment }) => {
   const { data } = UseUser(comment.userId);
   return (
-    <div className="flex mt-3 mb-5 p-3 bg-gray-100 rounded">
+    <div className="flex mt-3 mb-5 p-3 bg-gray-100 rounded shadow-lg">
       <img
         className="h-12 mr-4"
         style={{ borderRadius: '1.5rem' }}

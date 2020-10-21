@@ -64,7 +64,7 @@ const TopBar = ({ text }: { text: string }) => {
       {isUserMenuOpen && (
         <div
           ref={ref}
-          className="absolute right-0 top-0 mt-16 h-12 z-10 shadow-md bg-white flex flex-col cursor-pointer"
+          className="absolute right-0 top-0 mt-20 h-12 z-10 shadow-md bg-white flex flex-col cursor-pointer"
         >
           <div
             className="flex self-center hover:bg-gray-200"
