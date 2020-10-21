@@ -7,7 +7,7 @@ import React, {
   ClipboardEvent,
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { FORM_LABEL } from '../constants';
 
 import fetchRequest from '../services/ApiService';
@@ -61,7 +61,7 @@ const EmailChips = ({
   };
 
   const addCollaborator = async (email: string) => {
-    const userDetails = await fetchRequest(`/user/email?email=${email}`);
+    const userDetails = await fetchRequest(`/api/user/email?email=${email}`);
     if (!userDetails) {
       setChips((oldChips) => [
         ...oldChips,
@@ -177,11 +177,7 @@ const EmailChips = ({
                     alt="user avatar"
                   />
                 ) : (
-                  <FontAwesomeIcon
-                    icon={faGrinAlt}
-                    size={'lg'}
-                    className="mx-1"
-                  />
+                  <FontAwesomeIcon icon={faUser} size={'lg'} className="mx-1" />
                 )}
                 <div className="font-bold mx-2 flex-grow">{chip.email}</div>
                 <button
