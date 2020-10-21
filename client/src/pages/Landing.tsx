@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import { SERVER } from '../constants';
 
 import { navigate, RouteComponentProps } from '@reach/router';
-
+import Loading from '../components/Loading';
 import Context from '../Context';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,8 +26,6 @@ const Landing = (_props: RouteComponentProps) => {
       })
       .then((responseJson) => {
         // Login
-        //  TODO: remove this console log once login more stable
-        console.log('login with userid: ', responseJson.user.id); // eslint-disable-line no-console
         ctx.dispatch({ type: 'login', payload: responseJson.user.id }); // TODO: check .id is the right key
         ctx.dispatch({ type: 'updateUser', payload: responseJson.user }); // TODO: check .id is the right key
         // TODO: also update to store ful user information
@@ -41,7 +39,7 @@ const Landing = (_props: RouteComponentProps) => {
       });
   }, []);
 
-  return <div>Please Wait...</div>;
+  return <Loading />;
 };
 
 export default Landing;

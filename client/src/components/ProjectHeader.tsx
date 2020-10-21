@@ -82,7 +82,8 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
       {isOpen && (
         <div
           ref={ref}
-          className={`absolute top-0 right-0 mt-32 mr-1 bg-white shadow-md`}
+          className={`absolute top-0 right-0 mr-1 bg-white shadow-md`}
+          style={{ marginTop: '8.6rem' }}
         >
           <div
             onClick={openEditForm}
@@ -93,6 +94,17 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
           >
             <FontAwesomeIcon icon={edit} className="mx-3" size={'lg'} />
             Edit Project
+          </div>
+
+          <div
+            className="h-10 flex items-center hover:bg-gray-200 "
+            onClick={navigateToNewProject}
+            onKeyDown={navigateToNewProject}
+            role="button"
+            tabIndex={0}
+          >
+            <FontAwesomeIcon icon={plus} size={'lg'} className="m-3 mr-4" />
+            <p>New Project</p>
           </div>
 
           <div className="mt-2 pt-1 ml-2 border-t-2">Switch Project</div>
@@ -118,16 +130,6 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
                   </div>
                 )
             )}
-          <div
-            className="h-10 flex items-center hover:bg-gray-200 "
-            onClick={navigateToNewProject}
-            onKeyDown={navigateToNewProject}
-            role="button"
-            tabIndex={0}
-          >
-            <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
-            <p>New Project</p>
-          </div>
         </div>
       )}
     </>
