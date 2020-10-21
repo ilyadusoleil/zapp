@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 
 import { navigate } from '@reach/router';
 
@@ -30,8 +29,12 @@ function Bugitem({ bug }: Props) {
         return (bug.state !== 0) ? 'opacity-50' : '';
     }
 
+   const goToBugDetails = () => {
+        return navigate(`/details/${bug.id}`)
+    }
+
   return (
-    <div onClick={() => navigate(`/details/${bug.id}`)} className={`w-full flex-grow ${bugItemComplete()} cursor-pointer mt-4 mb-4 m-1 ml-3 bg-gray-100 shadow-lg hover:shadow-2xl hover:cursor-pointer md:w-md-container md:flex-grow-0 xl:w-container`}>
+    <div onClick={goToBugDetails} onKeyDown={goToBugDetails} tabIndex={0}  className={`w-full flex-grow ${bugItemComplete()} cursor-pointer mt-4 mb-4 m-1 ml-3 bg-gray-100 shadow-lg hover:shadow-2xl hover:cursor-pointer md:w-md-container md:flex-grow-0 xl:w-container`}>
       <div className={`${topBar()} h-1`}></div>
       <div
         className="p-1 flex justify-items"
