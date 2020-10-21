@@ -1,4 +1,5 @@
 import React from 'react';
+import dayjs from 'dayjs'
 
 import { navigate } from '@reach/router';
 
@@ -70,7 +71,11 @@ function Bugitem({ bug }: Props) {
         </div>
       </div>
       <div className="flex p-1 mb-1">
-        <div className="ml-auto p-1 bg-gradient-to-r from-gray-200  to-gray-300 rounded-full">
+          <div className='flex mt-2'>
+          <h1 className='font-bold font-body ml-2 text-center'>Date created:</h1>
+          <p className='ml-2 font-body space'>{dayjs(bug.createdAt).format('DD/MM/YYYY')}</p>
+          </div>
+        <div className="ml-auto mb-1 p-1 bg-gradient-to-r from-gray-200  to-gray-300 rounded-full">
           <UserChip userId={bug.userId} />
         </div>
       </div>

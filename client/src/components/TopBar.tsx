@@ -34,7 +34,7 @@ const TopBar = ({ text }: { text: string }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-teal-500 to-teal-300 flex p-3">
+    <div className="bg-gradient-to-r from-teal-700 to-teal-400 flex p-3">
       <div
         onClick={navigateHome}
         onKeyDown={navigateHome}
