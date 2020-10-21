@@ -60,6 +60,9 @@ const ProjectEditForm = ({
     const form = document.querySelector('form');
     if (form) {
       form.requestSubmit();
+
+      ctx.dispatch({ type: 'setCurrentProjectId', payload: 0 });
+      navigate('/preDashboard');
     }
   };
 
