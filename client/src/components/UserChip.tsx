@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGrinAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 import useUser from '../hooks/useUser';
 
@@ -23,7 +23,7 @@ const UserChip = ({ userId }: { userId?: number }) => {
           alt="user avatar"
         />
       ) : (
-        <FontAwesomeIcon icon={faGrinAlt} size={'lg'} className="mx-1" />
+        <FontAwesomeIcon icon={faUser} size={'lg'} className="mx-1" />
       )}
       <div className="font-body mx-2">{data.displayName || data.email}</div>
     </div>
