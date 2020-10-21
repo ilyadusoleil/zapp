@@ -3,7 +3,7 @@
   it will automatically redirect to Dashboard.tsx
 */
 
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect,useState, useContext } from 'react';
 
 import { RouteComponentProps, navigate } from '@reach/router';
 
@@ -11,6 +11,7 @@ import useProjects from '../hooks/useProjects';
 import useCreateProject from '../hooks/useCreateProject';
 
 import ProjectForm from '../components/ProjectForm';
+import Loading from '../components/Loading';
 
 import Context from '../Context';
 
@@ -20,6 +21,7 @@ const PreDashboard = (_props: RouteComponentProps) => {
   const { isLoading, isError, data: projectsData } = useProjects(
     ctx.state.userId
   );
+  const [isEffect, setIsEffect] = useState(false); // for if the componentDidMount useEffect hook has completed
 
   const [createProject, { status: createProjectStatus }] = useCreateProject();
 
@@ -49,11 +51,12 @@ const PreDashboard = (_props: RouteComponentProps) => {
         });
         navigate(`/dashboard/${projectsData[0].id}`); //TODO: don't just go to the first created project, but the most recently used project?
       }
+      setIsEffect(true)
     }
   }, [projectsData]);
 
-  if (isLoading) {
-    return <span>Loading...</span>;
+  if (isLoading || !isEffect) {
+    return <Loading/>;
   }
 
   if (isError || !projectsData) {

@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import { SERVER } from '../constants';
 
 import { navigate, RouteComponentProps } from '@reach/router';
-
+import Loading from '../components/Loading';
 import Context from '../Context';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,7 +39,7 @@ const Landing = (_props: RouteComponentProps) => {
       });
   }, []);
 
-  return <div>Please Wait...</div>;
+  return <Loading/>;;
 };
 
 export default Landing;

@@ -9,7 +9,7 @@ import useCreateComment from '../hooks/useCreateComment';
 import TopBar from '../components/TopBar';
 import CommentForm from '../components/CommentForm';
 import CommentComponent from '../components/CommentComponent';
-
+import Loading from '../components/Loading';
 import { PriorityTag } from '../components/Priority';
 import UserChip from '../components/UserChip';
 
@@ -43,7 +43,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
   };
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <Loading/>;
   }
 
   if (isError || !data) {
