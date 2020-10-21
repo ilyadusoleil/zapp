@@ -59,21 +59,30 @@ const BugDetails = ({ id }: BugDetailsProps) => {
       <div>
         <TopBar text="Details" />
         <div className="flex flex-col mt-12 mb-4">
-          <div className="flex">
+          <div className="flex mr-48">
             <div className="flex justify-center align-center w-48">
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 size={'2x'}
-                className="cursor-pointer"
+                className="cursor-pointer transition duration-200 transform hover:scale-125"
                 onClick={() => navigate(`/dashboard/${data.projectId}`)}
               />
             </div>
+            <div className="flex justify-center align-center">
+              <div className="flex items-center justify-center bg-gradient-to-r from-indigo-800 to-purple-500 rounded-full w-8 h-8">
+                <FontAwesomeIcon
+                  className="text-center text-gray-100"
+                  size={'lg'}
+                  icon={bugCategoryIcons[data.category]}
+                />
+              </div>
+            </div>
             <div className="flex flex-grow justify-between">
-              <div className="text-lg font-bold">{data.title}</div>
-              <FontAwesomeIcon
-                icon={faEdit}
-                size={'lg'}
-                className="m-3 cursor-pointer transition duration-200 transform hover:scale-125"
+              <div className="text-lg leading-relaxed font-bold ml-5">
+                {data.title}
+              </div>
+              <button
+                className={`${BUTTON_STYLE} mb-3`}
                 onClick={() => {
                   navigate(`/details/edit/${id}`, {
                     state: {
@@ -81,16 +90,9 @@ const BugDetails = ({ id }: BugDetailsProps) => {
                     },
                   });
                 }}
-              />
-            </div>
-            <div className="flex justify-center align-center w-48">
-              <div className="flex items-center justify-center bg-gradient-to-r from-indigo-800 to-purple-500 rounded-full w-20 h-20">
-                <FontAwesomeIcon
-                  className="text-center text-gray-100"
-                  size={'3x'}
-                  icon={bugCategoryIcons[data.category]}
-                />
-              </div>
+              >
+                Edit Issue
+              </button>
             </div>
           </div>
         </div>
