@@ -18,6 +18,12 @@ const defaultFormValues = {
   projectUsers: [],
 };
 
+const defaultChips: {
+  id?: number;
+  email: string;
+  picture?: string;
+}[] = [];
+
 const initialProjectUser: (string | number)[] = [];
 
 const ProjectForm = ({
@@ -31,6 +37,7 @@ const ProjectForm = ({
 }) => {
   const [values, setValues] = useState(initialValues);
   const [projectUsers, setProjectUsers] = useState(initialProjectUser);
+  const [chips, setChips] = useState(defaultChips);
   const [updateUserRecentProject] = useUpdateUserRecentProject();
   const ctx = useContext(Context);
 
@@ -72,6 +79,8 @@ const ProjectForm = ({
       <EmailChips
         projectUsers={projectUsers}
         setProjectUsers={setProjectUsers}
+        chips={chips}
+        setChips={setChips}
       />
       <br />
       <button
