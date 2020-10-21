@@ -26,8 +26,6 @@ const Landing = (_props: RouteComponentProps) => {
       })
       .then((responseJson) => {
         // Login
-        //  TODO: remove this console log once login more stable
-        console.log('login with userid: ', responseJson.user.id); // eslint-disable-line no-console
         ctx.dispatch({ type: 'login', payload: responseJson.user.id }); // TODO: check .id is the right key
         ctx.dispatch({ type: 'updateUser', payload: responseJson.user }); // TODO: check .id is the right key
         // TODO: also update to store ful user information
