@@ -23,7 +23,7 @@ const CommentForm = ({
 
   return (
     <form
-      className="border-2 border-indigo-200 rounded-lg bg-gray-100 p-10"
+      className="border-2 border-purple-100 rounded-lg p-10 shadow-lg"
       onSubmit={handleSubmit}
     >
       <div>
@@ -39,7 +39,7 @@ const CommentForm = ({
       </div>
 
       <div className="flex">
-        <button className={`${BUTTON_STYLE} ml-auto`} type="submit">
+        <button className={`${BUTTON_STYLE} mt-3 ml-auto`} type="submit">
           SUBMIT
         </button>
       </div>
