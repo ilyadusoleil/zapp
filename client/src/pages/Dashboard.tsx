@@ -66,7 +66,7 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
           className="shadow bg-purple-600 text-white font-body px-3 py-1 rounded-full ml-3 hover:bg-purple-400 focus:outline-none"
         >
           <FontAwesomeIcon icon={faPlusCircle} size={'sm'} className="mr-1" />
-          Create Bug
+          Create Issue
         </button>
         <div className="m-2 flex flex-wrap mt-4 space md:ml-12">
           {[...data]

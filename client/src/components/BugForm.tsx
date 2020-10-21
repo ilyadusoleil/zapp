@@ -8,8 +8,7 @@ import { PrioritySelect } from './Priority';
 import useUsers from '../hooks/useUsers';
 import { BUTTON_STYLE } from '../constants';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBug } from '@fortawesome/free-solid-svg-icons';
+import Zapp from '../assets/zappcopy.png';
 
 const defaultFormValues = {
   title: '',
@@ -61,12 +60,10 @@ const BugForm = ({
 
   return (
     <div className="font-display rounded">
-      <div className="flex">
-        <FontAwesomeIcon
-          icon={faBug}
-          size={'3x'}
-          className="text-gray-700 m-auto mt-6"
-        />
+      <div className="flex items-center justify-center">
+        <div className="items-center rounded-full bg-gray-700">
+          <img className="h-20 m-auto" alt="logo" src={Zapp}></img>
+        </div>
       </div>
       <h1 className="text-center font-display text-2xl mt-4">{headerText}</h1>
       <form className="rounded-lg p-6 mt-2" onSubmit={handleSubmit}>
