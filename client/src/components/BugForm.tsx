@@ -99,7 +99,8 @@ const BugForm = ({
             required
           />
         </div>
-
+        <div className='flex flex-wrap justify-between'>
+        <div >
         <label
           className="mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold"
           htmlFor="issueCategory"
@@ -120,7 +121,6 @@ const BugForm = ({
               </option>
             ))}
           </select>
-
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg
               className="fill-current h-4 w-4"
@@ -131,7 +131,9 @@ const BugForm = ({
             </svg>
           </div>
         </div>
+        </div>
 
+        <div>
         <label
           className="mt-8 pb-2 block uppercase tracking-wide text-gray-700 text-xs font-bold"
           htmlFor="userId"
@@ -165,24 +167,30 @@ const BugForm = ({
             </svg>
           </div>
         </div>
+        </div>
+        
+     
 
+        <div>
         <label
           className="mt-8 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor="priority"
         >
           Priority
         </label>
-        <div className="flex justify-between">
+        <div>
           <PrioritySelect prioityValue={values.priority} setValue={setValue} />
-          <br />
-          <div>
-            <button className={`${BUTTON_STYLE}`} type="submit">
+        </div>
+        </div>
+        </div>
+        <div className='flex'>
+        <button className={`${BUTTON_STYLE} mt-6 ml-auto`} type="submit">
               {submitText}
             </button>
-          </div>
-        </div>
+            </div>
       </form>
     </div>
+    
   );
 };
 

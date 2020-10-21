@@ -81,7 +81,7 @@ const FilterAndSort = ({
     <>
       <div className="bg-gray-200">
         <div
-          className="cursor-pointer p-2 ml-2"
+          className="cursor-pointer p-2 ml-2 focus:outline-none"
           onClick={toggleCollapse}
           onKeyDown={toggleCollapse}
           role="button"
