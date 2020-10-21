@@ -63,12 +63,12 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         <br />
         <button
           onClick={createBug}
-          className="shadow bg-purple-600 focus:shadow-outline focus:outline-none text-white font-body px-3 py-1 rounded-full ml-3"
+          className="shadow bg-purple-600 text-white font-body px-3 py-1 rounded-full ml-3 hover:bg-purple-400"
         >
           <FontAwesomeIcon icon={faPlusCircle} size={'sm'} className="mr-1" />
           Create Issue
         </button>
-        <div className="flex flex-wrap ml-3 space">
+        <div className="m-2 flex flex-wrap mt-4 space md:ml-12">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
             .filter((bug) =>

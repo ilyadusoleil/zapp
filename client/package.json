@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=local parcel src/index.html --open",
-    "build": "cross-env NODE_ENV=production parcel build src/index.html --out-dir ../server/build",
+    "build": "parcel build src/index.html --out-dir ../server/build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
     "mockserver": "json-server --watch db.json",
@@ -18,6 +18,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.35",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@reach/dialog": "^0.11.2",
@@ -25,6 +26,7 @@
     "@types/react-onclickoutside": "^6.7.3",
     "http-proxy-middleware": "^1.0.6",
     "moment": "^2.29.1",
+    "parcel-bundler": "^1.12.4",
     "react": "^16.14.0",
     "react-collapse": "^5.0.1",
     "react-cool-onclickoutside": "^1.5.7",
@@ -58,7 +60,6 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
     "json-server": "^0.16.2",
-    "parcel-bundler": "^1.12.4",
     "postcss-import": "^12.0.1",
     "postcss-modules": "^3.2.2",
     "prettier": "^2.1.2",

@@ -9,7 +9,9 @@
     "lint": "npm run lint:client",
     "lint:client": "cd client && npm i && npm run lint",
     "checkts": "cd client && npm i && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "heroku-prebuild": "npm run build:client"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
   "homepage": "https://github.com/ilyadusoleil/zapp#readme",
   "devDependencies": {
     "eslint": "^7.11.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }

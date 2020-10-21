@@ -1,5 +1,5 @@
 /*
-  Will always redirect to this page, and if there are open projects, 
+  Will always redirect to this page, and if there are open projects,
   it will automatically redirect to Dashboard.tsx
 */
 
@@ -52,8 +52,8 @@ const PreDashboard = (_props: RouteComponentProps) => {
         });
         navigate(`/dashboard/${projectsData[0].id}`); //TODO: don't just go to the first created project, but the most recently used project?
       }
-      setIsEffect(true);
     }
+    setIsEffect(true);
   }, [projectsData]);
 
   if (isLoading || !isEffect) return <Loading />;
@@ -61,9 +61,11 @@ const PreDashboard = (_props: RouteComponentProps) => {
   if (isError || !projectsData) return <ErrorComponent />;
 
   return (
-    <div className="m-20">
-      <div>Welcome to Zap!</div>
-      <div>Create your first project below</div>
+    <div className="my-20 mx-48">
+      <div className="font-display font-bold text-3xl">Welcome to Zapp!</div>
+      <div className="font-display font-bold text-2xl">
+        Create your first project below
+      </div>
       <ProjectForm
         onSubmit={createProject}
         submitText={

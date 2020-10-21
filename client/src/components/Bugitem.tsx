@@ -1,11 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 
 import { navigate } from '@reach/router';
 
 import { Bug } from '../types/Bug';
 
 import './Bugitem.css';
+import UserChip from './UserChip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,13 +18,30 @@ type Props = {
 const bugCategoryIcons = [faBug, faLightbulb];
 
 function Bugitem({ bug }: Props) {
+  const topBorderStyle = () => {
+    return bug.state === 0
+      ? 'bg-gradient-to-r from-teal-500  to-teal-400'
+      : 'bg-gradient-to-r from-gray-500  to-gray-400';
+  };
+
+  const bugItemComplete = () => {
+    return bug.state !== 0 ? 'opacity-50' : '';
+  };
+
+  const goToBugDetails = () => {
+    return navigate(`/details/${bug.id}`);
+  };
+
   return (
-    <div className="flex-grow mt-4 mb-4 p-1 m-1 bg-gray-100  border border-gray-200 rounded-lg shadow-lg md:w-md-container md:flex-grow-0 xl:w-container">
-      <div
-        role="button"
-        tabIndex={0}
-        className="p-1 flex justify-items cursor-pointer"
-      >
+    <div
+      onClick={goToBugDetails}
+      onKeyDown={goToBugDetails}
+      role="button"
+      tabIndex={0}
+      className={`w-full flex-grow ${bugItemComplete()} cursor-pointer mt-4 mb-4 m-1 ml-3 bg-gray-100 shadow-lg hover:shadow-2xl hover:cursor-pointer md:w-md-container md:flex-grow-0 xl:w-container`}
+    >
+      <div className={`${topBorderStyle()} h-1`}></div>
+      <div className="p-1 flex justify-items">
         <div className="flex items-center justify-center mt-1 ml-2 bg-gradient-to-r from-indigo-800 to-purple-500 rounded-full w-8 h-8">
           <FontAwesomeIcon
             className="text-center text-gray-100"
@@ -40,28 +57,21 @@ function Bugitem({ bug }: Props) {
         </div>
       </div>
 
-      <div className="p-5 divide-y divide-gray-400 text-gray-800">
+      <div className="p-3 divide-y divide-gray-400 text-gray-800">
         <div className="flex align-middle text-base font-bold font-display capitalize mb-4">
           <h1 className="capitalize">Title</h1>
           <span className="ml-4 font-medium">{bug.title}</span>
-          <p className="ml-auto">Created date</p>
-          <span className="ml-4 font-normal">
-            {moment(bug.createdAt).format('MM/DD/YYYY')}
-          </span>
         </div>
         <div className="">
-          <h1 className="text-base font-bold font-display mt-6">Description</h1>
-          <p className="py-2 tracking-wider font-body">{bug.description}</p>
+          <h1 className="text-base font-bold font-display mt-4">Description</h1>
+          <p className="py-2 tracking-wider font-body h-16 overflow-y-auto">
+            {bug.description}
+          </p>
         </div>
       </div>
-      <div className="flex">
-        <div className="p-4 ml-auto">
-          <button
-            onClick={() => navigate(`/details/${bug.id}`)}
-            className="shadow text-black border-purple-500 border-2 bg-gray-200 hover:bg-purple-500 hover:text-white focus:shadow-outline focus:outline-none  font-body px-2 rounded-full"
-          >
-            Open
-          </button>
+      <div className="flex p-1 mb-1">
+        <div className="ml-auto p-1 bg-gradient-to-r from-gray-200  to-gray-300 rounded-full">
+          <UserChip userId={bug.userId} />
         </div>
       </div>
     </div>
