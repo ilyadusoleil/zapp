@@ -94,6 +94,17 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
             Edit Project
           </div>
 
+          <div
+            className="h-10 flex items-center hover:bg-gray-200 "
+            onClick={navigateToNewProject}
+            onKeyDown={navigateToNewProject}
+            role="button"
+            tabIndex={0}
+          >
+            <FontAwesomeIcon icon={plus} size={'lg'} className="m-3 mr-4" />
+            <p>New Project</p>
+          </div>
+
           <div className="mt-2 pt-1 ml-2 border-t-2">Switch Project</div>
           {[...data]
             .filter((el) => el.state != 1)
@@ -117,16 +128,6 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
                   </div>
                 )
             )}
-          <div
-            className="h-10 flex items-center hover:bg-gray-200 "
-            onClick={navigateToNewProject}
-            onKeyDown={navigateToNewProject}
-            role="button"
-            tabIndex={0}
-          >
-            <FontAwesomeIcon icon={plus} size={'lg'} className="m-3" />
-            <p>New Project</p>
-          </div>
         </div>
       )}
     </>
