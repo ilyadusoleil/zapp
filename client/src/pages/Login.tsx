@@ -15,7 +15,7 @@ const Login = (_props: RouteComponentProps) => {
 
   return (
     <div>
-      <div className="rounded-none bg-gradient-to-r from-indigo-800 to-purple-500 h-screen flex justify-center xl:rounded-tl-full xl:rounded-br-full">
+      <div className="rounded-none bg-gradient-to-r from-teal-700 to-teal-400 h-screen flex justify-center xl:rounded-tl-full xl:rounded-br-full">
         <div className="self-center">
           <img
             className="h-24 m-auto animate-pulse"
