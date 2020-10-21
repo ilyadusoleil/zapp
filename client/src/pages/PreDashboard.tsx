@@ -27,30 +27,33 @@ const PreDashboard = (_props: RouteComponentProps) => {
   const [createProject, { status: createProjectStatus }] = useCreateProject();
 
   useEffect(() => {
-    if (projectsData && projectsData.filter((el) => el.state != 1).length > 0) {
-      //navigate to the currently active project if it exists
-      //First check global context, but if that isn't set, get from database
-      if (
-        projectsData.filter((el) => el.id == ctx.state.currentProjectId)
-          .length > 0
-      ) {
-        navigate(`/dashboard/${ctx.state.currentProjectId}`);
-      } else if (
-        ctx.state.user &&
-        projectsData.filter((el) => el.id == ctx.state.user?.recentProject)
-          .length > 0
-      ) {
-        ctx.dispatch({
-          type: 'setCurrentProjectId',
-          payload: ctx.state.user?.recentProject,
-        });
-        navigate(`/dashboard/${ctx.state.user.recentProject}`);
-      } else {
-        ctx.dispatch({
-          type: 'setCurrentProjectId',
-          payload: projectsData[0].id,
-        });
-        navigate(`/dashboard/${projectsData[0].id}`); //TODO: don't just go to the first created project, but the most recently used project?
+    if (projectsData) {
+      const filteredData = projectsData.filter((el) => el.state != 1);
+      if (filteredData.length > 0) {
+        //navigate to the currently active project if it exists
+        //First check global context, but if that isn't set, get from database
+        if (
+          filteredData.filter((el) => el.id == ctx.state.currentProjectId)
+            .length > 0
+        ) {
+          navigate(`/dashboard/${ctx.state.currentProjectId}`);
+        } else if (
+          ctx.state.user &&
+          filteredData.filter((el) => el.id == ctx.state.user?.recentProject)
+            .length > 0
+        ) {
+          ctx.dispatch({
+            type: 'setCurrentProjectId',
+            payload: ctx.state.user?.recentProject,
+          });
+          navigate(`/dashboard/${ctx.state.user.recentProject}`);
+        } else if (filteredData.length > 0) {
+          ctx.dispatch({
+            type: 'setCurrentProjectId',
+            payload: filteredData[0].id,
+          });
+          navigate(`/dashboard/${filteredData[0].id}`);
+        }
       }
     }
     setIsEffect(true);
