@@ -61,7 +61,7 @@ const EmailChips = ({
   };
 
   const addCollaborator = async (email: string) => {
-    const userDetails = await fetchRequest(`/user/email?email=${email}`);
+    const userDetails = await fetchRequest(`/api/user/email?email=${email}`);
     if (!userDetails) {
       setChips((oldChips) => [
         ...oldChips,

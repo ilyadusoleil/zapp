@@ -9,7 +9,8 @@
     "lint": "npm run lint:client",
     "lint:client": "cd client && npm i && npm run lint",
     "checkts": "cd client && npm i && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
