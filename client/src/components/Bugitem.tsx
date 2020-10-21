@@ -34,7 +34,7 @@ function Bugitem({ bug }: Props) {
     }
 
   return (
-    <div onClick={goToBugDetails} onKeyDown={goToBugDetails} tabIndex={0}  className={`w-full flex-grow ${bugItemComplete()} cursor-pointer mt-4 mb-4 m-1 ml-3 bg-gray-100 shadow-lg hover:shadow-2xl hover:cursor-pointer md:w-md-container md:flex-grow-0 xl:w-container`}>
+    <div onClick={goToBugDetails} onKeyDown={goToBugDetails} role="button" tabIndex={0} className={`w-full flex-grow ${bugItemComplete()} cursor-pointer mt-4 mb-4 m-1 ml-3 bg-gray-100 shadow-lg hover:shadow-2xl hover:cursor-pointer md:w-md-container md:flex-grow-0 xl:w-container`}>
       <div className={`${topBar()} h-1`}></div>
       <div
         className="p-1 flex justify-items"
