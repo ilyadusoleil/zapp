@@ -63,6 +63,21 @@ const ProjectEditForm = ({
     }
   };
 
+  const handleUserData = (userData: User[] | undefined) => {
+    if (userData) {
+      const userIds = userData.map((user) => user.id);
+      setProjectUsers((oldProjectUsers) => [...oldProjectUsers, ...userIds]);
+      const userChips = userData.map((user) => {
+        return {
+          id: user.id,
+          email: user.email,
+          picture: user.image ? user.image : undefined,
+        };
+      });
+      setChips(userChips);
+    }
+  };
+
   useEffect(() => {
     setValues(initialValues);
     handleUserData(userData);
