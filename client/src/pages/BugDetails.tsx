@@ -115,7 +115,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
 
         <div className="mx-48">
           <button className={`${BUTTON_STYLE} mb-3`} onClick={toggleBugState}>
-            {data.state === 1 ? 'Reopen Bug' : 'Mark as Complete'}
+            {data.state === 1 ? 'Reopen Issue' : 'Mark as Complete'}
           </button>
 
           {data.comments &&
