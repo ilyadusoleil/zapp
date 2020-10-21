@@ -63,14 +63,14 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
         />
 
         <br />
-        <button onClick={createBug} className='shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-body px-3 py-1 rounded-full ml-3'><FontAwesomeIcon
+        <button onClick={createBug} className='shadow bg-purple-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-body px-3 py-1 rounded-full mx-3'><FontAwesomeIcon
                     icon={faPlusCircle}
                     size={'sm'}
                     className="mr-1"
                   />
           Create Bug
         </button>
-        <div className="flex flex-wrap ml-3">
+        <div className="flex flex-wrap mx-3">
           {[...data]
             .filter((bug) => (isShowCompleted ? true : bug.state == 0))
             .filter((bug) => ASSIGNEE_FILTER_INFO[assigneeFilterIdx].func(bug, ctx.state.userId))

@@ -7,7 +7,7 @@ type rollbackType = () => void;
 
 export default function useEditProject() {
   const editProject = async (project: Project): Promise<Project> => {
-    return fetchRequest(`/projects`, {
+    return fetchRequest(`/api/projects`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(project),

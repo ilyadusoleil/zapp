@@ -5,7 +5,7 @@ import { Bug, BugInput } from '../types/Bug';
 
 function useCreateBug() {
   const createBug = async (bug: BugInput): Promise<Bug> => {
-    return fetchRequest('/bugs', {
+    return fetchRequest('/api/bugs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bug),
