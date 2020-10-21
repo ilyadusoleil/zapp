@@ -4,19 +4,21 @@ import { RouteComponentProps, navigate } from '@reach/router';
 import { Bug } from '../types/Bug';
 import useBugs from '../hooks/useBugs';
 
+import ProjectHeader from '../components/ProjectHeader';
 import TopBar from '../components/TopBar';
 import Bugitem from '../components/Bugitem';
+import Loading from '../components/Loading';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import ProjectHeader from '../components/ProjectHeader';
 import FilterAndSort, {
   ASSIGNEE_FILTER_INFO,
   SORT_INFO,
 } from '../components/FilterAndSort';
 
 import Context from '../Context';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface DashboardProps extends RouteComponentProps {
   id?: string;
@@ -42,13 +44,9 @@ const Dashboard = ({ id: projectId }: DashboardProps) => {
     ctx.dispatch({ type: 'setCurrentProjectId', payload: projectId });
   }, []);
 
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
+  if (isError || !data) return <ErrorComponent />;
 
   return (
     <>

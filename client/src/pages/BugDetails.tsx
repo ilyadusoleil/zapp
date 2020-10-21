@@ -9,7 +9,7 @@ import useCreateComment from '../hooks/useCreateComment';
 import TopBar from '../components/TopBar';
 import CommentForm from '../components/CommentForm';
 import CommentComponent from '../components/CommentComponent';
-
+import Loading from '../components/Loading';
 import { PriorityTag } from '../components/Priority';
 import UserChip from '../components/UserChip';
 
@@ -22,6 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { BUTTON_STYLE } from '../constants';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface BugDetailsProps extends RouteComponentProps {
   id?: string;
@@ -49,13 +50,10 @@ const BugDetails = ({ id }: BugDetailsProps) => {
     navigate('/preDashboard');
   };
 
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
+  if (isError || !data) return <ErrorComponent />;
+
   return (
     <>
       <div>

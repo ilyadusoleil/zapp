@@ -6,6 +6,8 @@ import useProject from '../hooks/useProject';
 import useEditProject from '../hooks/useEditProject'; // TODO write this
 
 import ProjectEditForm from '../components/ProjectEditForm';
+import Loading from '../components/Loading';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface ProjectEditProps extends RouteComponentProps {
   id?: string;
@@ -18,13 +20,9 @@ const ProjectEdit = ({ id }: ProjectEditProps) => {
 
   const [editProject, { status: editProjectStatus }] = useEditProject();
 
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
+  if (isError || !data) return <ErrorComponent />;
 
   return (
     <>

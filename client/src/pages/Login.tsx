@@ -26,7 +26,7 @@ const Login = (_props: RouteComponentProps) => {
             Zapp
           </h1>
           <h3 className="text-2xl text-gray-300 text-center p-4 font-body">
-            Lorem ipsum dolor sit amet, adhuc singulis sadipscing eu mei,
+            Streamlined and simple issue tracking for small teams
           </h3>
           <div className="mt-12">
             <GoogleButton

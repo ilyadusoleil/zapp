@@ -97,7 +97,7 @@ const FilterAndSort = ({
       <Collapse isOpened={isOpen}>
         <div className="flex ml-4 items-start divide-x mt-4">
           <div className="p-1">
-            <label className="font-bold" htmlFor="sort">
+            <label className="font-bold mr-3" htmlFor="sort">
               Sort By:
             </label>
             <select
@@ -113,8 +113,10 @@ const FilterAndSort = ({
               ))}
             </select>
           </div>
-          <div className="p-1 font-bold">
-            <label htmlFor="assignee">Assigned to:</label>
+          <div className="p-1 pl-5 font-bold">
+            <label className="mr-3" htmlFor="assignee">
+              Assigned to:
+            </label>
             <select
               name="assignee"
               className="mr-5"
@@ -129,12 +131,12 @@ const FilterAndSort = ({
             </select>
           </div>
 
-          <div className="p-1 font-bold">
+          <div className="p-1 pl-5 font-bold">
             <label htmlFor="showCompleted">
               Show Completed
               <input
                 name="showCompleted"
-                className="ml-3"
+                className="ml-3 mt-2"
                 type="checkbox"
                 onChange={(e) => setIsShowCompleted(e.target.checked)}
               />

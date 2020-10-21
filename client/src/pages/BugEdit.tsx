@@ -7,6 +7,8 @@ import useBug from '../hooks/useBug';
 import useEditBug from '../hooks/useEditBug';
 
 import BugForm from '../components/BugForm';
+import Loading from '../components/Loading';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface BugEditProps extends RouteComponentProps {
   id?: string;
@@ -19,13 +21,9 @@ const BugEdit = ({ id }: BugEditProps) => {
 
   const [editBug, { status: editBugStatus }] = useEditBug();
 
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError || !data) {
-    return <span>Error: </span>;
-  }
+  if (isError || !data) return <ErrorComponent />;
 
   return (
     <>
