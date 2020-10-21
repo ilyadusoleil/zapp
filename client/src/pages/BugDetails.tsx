@@ -53,21 +53,25 @@ const BugDetails = ({ id }: BugDetailsProps) => {
     <>
       <div>
         <TopBar text="Details" />
-        <div className="flex justify-between">
-          <div className="text-lg font-bold mb-4">{data.title}</div>
-          <FontAwesomeIcon
-            icon={faEdit}
-            size={'lg'}
-            className="m-3 cursor-pointer transition duration-200 transform hover:scale-125"
-            onClick={() => {
-              navigate(`/details/edit/${id}`, {
-                state: { oldLocation: JSON.parse(JSON.stringify(location)) },
-              });
-            }}
-          />
+        <div className="flex flex-col my-4 mx-32">
+          <div className="flex flex-grow justify-between">
+            <div className="text-lg font-bold">{data.title}</div>
+            <FontAwesomeIcon
+              icon={faEdit}
+              size={'lg'}
+              className="m-3 cursor-pointer transition duration-200 transform hover:scale-125"
+              onClick={() => {
+                navigate(`/details/edit/${id}`, {
+                  state: {
+                    oldLocation: JSON.parse(JSON.stringify(location)),
+                  },
+                });
+              }}
+            />
+          </div>
         </div>
-        <div className="mb-10">{data.description}</div>
-        <div className="flex mb-10">
+        <div className="mx-32">{data.description}</div>
+        <div className="flex my-10 mx-32">
           <div className="mr-5 flex-grow divide-y divide-gray-400">
             <div className="p-5"></div>
             <div className="flex pt-3">
@@ -84,15 +88,17 @@ const BugDetails = ({ id }: BugDetailsProps) => {
           </div>
         </div>
 
-        <button className={`${BUTTON_STYLE} mb-3`} onClick={toggleBugState}>
-          {data.state === 1 ? 'Reopen Bug' : 'Mark as Complete'}
-        </button>
+        <div className="mx-32">
+          <button className={`${BUTTON_STYLE} mb-3`} onClick={toggleBugState}>
+            {data.state === 1 ? 'Reopen Bug' : 'Mark as Complete'}
+          </button>
 
-        {data.comments &&
-          data.comments.map((el) => (
-            <CommentComponent key={el.id} comment={el} />
-          ))}
-        <CommentForm onSubmit={createComment} bugId={parseInt(id)} />
+          {data.comments &&
+            data.comments.map((el) => (
+              <CommentComponent key={el.id} comment={el} />
+            ))}
+          <CommentForm onSubmit={createComment} bugId={parseInt(id)} />
+        </div>
       </div>
     </>
   );
