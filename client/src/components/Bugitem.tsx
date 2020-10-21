@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import { navigate } from '@reach/router';
 
@@ -6,7 +7,7 @@ import { Bug } from '../types/Bug';
 
 import './Bugitem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faBug, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faBug, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 import { PriorityTag } from '../components/Priority';
 
@@ -43,21 +44,25 @@ function Bugitem({ bug }: Props) {
         <div className="flex align-middle text-base font-bold font-display capitalize mb-4">
           <h1 className="capitalize">Title</h1>
           <span className="ml-4 font-medium">{bug.title}</span>
-          <p className="ml-auto">Due date</p>
-          <span className="ml-4 font-normal">placeholder</span>
+          <p className="ml-auto">Created date</p>
+          <span className="ml-4 font-normal">
+            {moment(bug.createdAt).format('MM/DD/YYYY')}
+          </span>
         </div>
         <div className="">
-          <h1 className="text-base font-bold font-display mt-8">Description</h1>
+          <h1 className="text-base font-bold font-display mt-6">Description</h1>
           <p className="py-2 tracking-wider font-body">{bug.description}</p>
         </div>
       </div>
-      <div className="p-4">
-        <FontAwesomeIcon
-          onClick={() => navigate(`/details/${bug.id}`)}
-          icon={faEdit}
-          size={'lg'}
-          className="text-gray-700 flex ml-auto"
-        />
+      <div className="flex">
+        <div className="p-4 ml-auto">
+          <button
+            onClick={() => navigate(`/details/${bug.id}`)}
+            className="shadow text-black border-purple-500 border-2 bg-gray-200 hover:bg-purple-500 hover:text-white focus:shadow-outline focus:outline-none  font-body px-2 rounded-full"
+          >
+            Open
+          </button>
+        </div>
       </div>
     </div>
   );

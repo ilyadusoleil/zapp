@@ -79,64 +79,67 @@ const FilterAndSort = ({
 
   return (
     <>
-    <div className='bg-gray-100'>
-      <div
-        className="cursor-pointer p-2 ml-2"
-        onClick={toggleCollapse}
-        onKeyDown={toggleCollapse}
-        role="button"
-        tabIndex={0}
-      >Filter and Sort
-        <FontAwesomeIcon
-          icon={isOpen ? faChevronUp : faChevronDown}
-          className="mx-4"
-        /></div>
-        
+      <div className="bg-gray-200">
+        <div
+          className="cursor-pointer p-2 ml-2"
+          onClick={toggleCollapse}
+          onKeyDown={toggleCollapse}
+          role="button"
+          tabIndex={0}
+        >
+          Filter and Sort
+          <FontAwesomeIcon
+            icon={isOpen ? faChevronUp : faChevronDown}
+            className="mx-4"
+          />
+        </div>
       </div>
       <Collapse isOpened={isOpen}>
-        <div className="flex ml-4 items-start divide-x">
-            <div className='p-1'>
-          <label className='font-bold' htmlFor="sort">Sort By:</label>
-          <select
-            name="sort"
-            className="mr-5"
-            onChange={updateSortSelect}
-            onBlur={updateSortSelect}
-          >
-            {SORT_INFO.map((el, i) => (
-              <option value={i} key={i}>
-                {el.label}
-              </option>
-            ))}
-          </select>
+        <div className="flex ml-4 items-start divide-x mt-4">
+          <div className="p-1">
+            <label className="font-bold" htmlFor="sort">
+              Sort By:
+            </label>
+            <select
+              name="sort"
+              className="mr-5"
+              onChange={updateSortSelect}
+              onBlur={updateSortSelect}
+            >
+              {SORT_INFO.map((el, i) => (
+                <option value={i} key={i}>
+                  {el.label}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className='p-1 font-bold'>
-          <label htmlFor="assignee">Assigned to:</label>
-          <select
-            name="assignee"
-            className="mr-5"
-            onChange={updateAssigneeFilterSelect}
-            onBlur={updateAssigneeFilterSelect}
-          >
-            {ASSIGNEE_FILTER_INFO.map((el, i) => (
-              <option value={i} key={i}>
-                {el.label}
-              </option>
-            ))}
-          </select>
+          <div className="p-1 font-bold">
+            <label htmlFor="assignee">Assigned to:</label>
+            <select
+              name="assignee"
+              className="mr-5"
+              onChange={updateAssigneeFilterSelect}
+              onBlur={updateAssigneeFilterSelect}
+            >
+              {ASSIGNEE_FILTER_INFO.map((el, i) => (
+                <option value={i} key={i}>
+                  {el.label}
+                </option>
+              ))}
+            </select>
           </div>
 
-        <div className='p-1 font-bold'>
-          <label htmlFor="showCompleted">
-            Show Completed
-            <input
-              name="showCompleted"
-              className="ml-3"
-              type="checkbox"
-              onChange={(e) => setIsShowCompleted(e.target.checked)}
-            />
-          </label>
-        </div>
+          <div className="p-1 font-bold">
+            <label htmlFor="showCompleted">
+              Show Completed
+              <input
+                name="showCompleted"
+                className="ml-3"
+                type="checkbox"
+                onChange={(e) => setIsShowCompleted(e.target.checked)}
+              />
+            </label>
+          </div>
         </div>
       </Collapse>
     </>

@@ -30,7 +30,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
   const [editBug] = useEditBug();
 
   const toggleBugState = () => {
-    if (!data) return
+    if (!data) return;
 
     let newState = 1;
     if (data.state == 1) {
@@ -52,7 +52,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
   return (
     <>
       <div>
-        <TopBar text="Details"/>
+        <TopBar text="Details" />
         <div className="flex justify-between">
           <div className="text-lg font-bold mb-4">{data.title}</div>
           <FontAwesomeIcon
@@ -85,7 +85,7 @@ const BugDetails = ({ id }: BugDetailsProps) => {
         </div>
 
         <button className={`${BUTTON_STYLE} mb-3`} onClick={toggleBugState}>
-          {data.state === 1 ? "Reopen Bug" : "Mark as Complete"}
+          {data.state === 1 ? 'Reopen Bug' : 'Mark as Complete'}
         </button>
 
         {data.comments &&

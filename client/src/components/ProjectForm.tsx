@@ -83,11 +83,7 @@ const ProjectForm = ({
         setChips={setChips}
       />
       <br />
-      <button
-        className={`${BUTTON_STYLE}`}
-      >
-        {submitText}
-      </button>
+      <button className={`${BUTTON_STYLE}`}>{submitText}</button>
     </form>
   );
 };

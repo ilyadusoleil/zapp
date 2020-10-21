@@ -60,14 +60,12 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
 
   if (!data || !Array.isArray(data) || data.length < 1) return <h1>Oh no</h1>;
 
-
   return (
     <>
-
       <div className="bg-gray-300 p-3 flex justify-items">
-
-        <div className="text-2xl font-bold font-display">{data[getIndexFromId(projectId)].name}</div>
-
+        <div className="text-2xl font-bold font-display">
+          {data[getIndexFromId(projectId)].name}
+        </div>
 
         <FontAwesomeIcon
           onClick={toggleIsOpen}
