@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
       });
       user.hasMany(models.bug, {
-        foreignKey: 'userId', //TODO verify userId is correct column
+        foreignKey: 'userId', //TODO: verify userId is correct column
       });
       user.hasMany(models.comment, {
         foreignKey: 'id',

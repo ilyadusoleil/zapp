@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-// TODO add options to specify database port and reflect that in the docs
+// TODO: add options to specify database port and reflect that in the docs
 
 module.exports = {
   development: {

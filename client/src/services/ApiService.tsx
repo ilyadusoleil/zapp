@@ -6,7 +6,7 @@ const fetchRequest = (path: string, options?: RequestInit) => {
     .then((res) => (res.status === 204 ? res : res.json()))
     .catch(
       // eslint-disable-next-line no-console
-      (error) => console.log('---> Error fetching data from Server', error) // TODO write a proper catch
+      (error) => console.log('---> Error fetching data from Server', error) // TODO: write a proper catch
     );
 };
 
