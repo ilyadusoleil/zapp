@@ -11,7 +11,7 @@ const ArchivedProjectList = ({
 }: {
   archivedProjects: Project[];
 }) => {
-  const [editProject, { status: editProjectStatus }] = useEditProject();
+  const [editProject] = useEditProject();
 
   const unarchiveProject = (project: Project) => {
     const updatedProject = {

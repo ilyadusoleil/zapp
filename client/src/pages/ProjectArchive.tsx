@@ -6,9 +6,13 @@ import { Project } from '../types/Project';
 
 import ArchivedProjectList from '../components/ArchivedProjectList';
 
+const defaultArchivedProject: Project[] = [];
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ProjectArchive = (_props: RouteComponentProps) => {
-  const [archivedProjects, setArchivedProjects] = useState([] as Project[]);
+  const [archivedProjects, setArchivedProjects] = useState(
+    defaultArchivedProject
+  );
   const ctx = useContext(Context);
   const { data } = useProjects(ctx.state.userId);
 
