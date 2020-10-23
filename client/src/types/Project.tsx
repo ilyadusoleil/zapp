@@ -5,6 +5,7 @@ export type Project = {
   state: number;
   userId: number;
   projectUsers: (string | number)[];
+  createdAt: Date;
 };
 
-export type ProjectInput = Omit<Project, 'id'>;
+export type ProjectInput = Omit<Project, 'id, createdAt'>;
