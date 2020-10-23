@@ -12,10 +12,9 @@ const ProjectArchive = (_props: RouteComponentProps) => {
   const ctx = useContext(Context);
   const { data } = useProjects(ctx.state.userId);
 
-  const handleData = (data: Project[]) => {
+  const handleData = (data: Project[] | undefined) => {
     if (data) {
       const archivedProjects = data?.filter((project) => project.state === 1);
-      console.log('archivedProjects', archivedProjects);
       return archivedProjects;
     } else {
       return [];

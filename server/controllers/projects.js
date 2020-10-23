@@ -126,7 +126,7 @@ const editProject = async function (req, res) {
     });
 
     // If any users have been invited to this project
-    if (projectUsers.length > 0) {
+    if (projectUsers && projectUsers.length > 0) {
       //Get name of the person who invited user
       const invitedBy = await db.user.findOne({
         where: { id: userId },

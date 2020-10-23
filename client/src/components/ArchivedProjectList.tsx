@@ -4,11 +4,24 @@ import dayjs from 'dayjs';
 import { Project } from '../types/Project';
 import { BUTTON_STYLE } from '../constants';
 
+import useEditProject from '../hooks/useEditProject';
+
 const ArchivedProjectList = ({
   archivedProjects,
 }: {
   archivedProjects: Project[];
 }) => {
+  const [editProject, { status: editProjectStatus }] = useEditProject();
+
+  const unarchiveProject = (project: Project) => {
+    const updatedProject = {
+      ...project,
+      state: 0,
+    };
+
+    editProject(updatedProject);
+  };
+
   return archivedProjects.map((project) => (
     <div
       key={project.id}
@@ -23,7 +36,12 @@ const ArchivedProjectList = ({
       <div className="p-3 divide-y divide-gray-400 text-gray-800">
         <div className="flex align-middle justify-between text-base font-bold font-display capitalize mb-4">
           <span className="capitalize">{project.name}</span>
-          <button className={`${BUTTON_STYLE}`}>Unarchive</button>
+          <button
+            className={`${BUTTON_STYLE}`}
+            onClick={() => unarchiveProject(project)}
+          >
+            Unarchive
+          </button>
         </div>
         <div className="">
           <h1 className="text-base font-bold font-display mt-4">Description</h1>
