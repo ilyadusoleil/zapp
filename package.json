@@ -4,14 +4,16 @@
   "description": "Zapp is an app to manage issues during the software development lifecycle",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build:client",
-    "build:client": "cd client && npm i && npm run build",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "build:client": "cd client && npm run build",
     "lint": "npm run lint:client",
     "lint:client": "cd client && npm i && npm run lint",
     "checkts": "cd client && npm i && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
-    "heroku-postbuild": "npm run build:client"
+    "heroku-prebuild": "cd client && npm i --only=dev",
+    "heroku-postbuild": "npm run install:client && npm run install:server && npm run build:client"
   },
   "repository": {
     "type": "git",
