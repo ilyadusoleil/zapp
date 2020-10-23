@@ -73,7 +73,7 @@ const sendSignUpEmail = (recipient, inviterName, projectName) => {
         ${inviterName}
         </h3>
         <h3 style="padding-top: 20px">
-          Click <a href="https://localhost:1234/">here</a> to Sign Up.
+          Click <a href="http://localhost:1234/">here</a> to Sign Up.
         </h3>
         </div>
       </div>
