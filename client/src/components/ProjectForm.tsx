@@ -16,6 +16,7 @@ const defaultFormValues = {
   userId: 0,
   state: 0,
   projectUsers: [],
+  createdAt: new Date(),
 };
 
 const defaultChips: {
