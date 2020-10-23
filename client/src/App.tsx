@@ -20,6 +20,7 @@ import PreDashboard from './pages/PreDashboard';
 import Dashboard from './pages/Dashboard';
 import BugCreate from './pages/BugCreate';
 import ProjectCreate from './pages/ProjectCreate';
+import ProjectArchive from './pages/ProjectArchive';
 import ProjectEdit from './pages/ProjectEdit';
 import BugDetails from './pages/BugDetails';
 import BugEdit from './pages/BugEdit';
@@ -39,6 +40,7 @@ function Routes(props: RouterProps) {
           <Dashboard path="/dashboard/:id" />
           <BugCreate path="/new" />
           <ProjectCreate path="/newProject" />
+          <ProjectArchive path="archivedProjects" />
           <ProjectEdit path="/project/edit/:id" />
 
           <BugDetails path="/details/:id" />
