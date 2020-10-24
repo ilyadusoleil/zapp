@@ -23,11 +23,9 @@ var forceSsl = function (req, res, next) {
   return next();
 };
 
-app.configure(function () {
-  if (env === 'production') {
-    app.use(forceSsl);
-  }
-});
+if (env === 'production') {
+  app.use(forceSsl);
+}
 
 // create database, ensure 'sqlite3' in your package.json
 var sequelize = new Sequelize('database', 'username', 'password', {
