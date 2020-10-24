@@ -59,7 +59,9 @@ Zapp was developed as a Thesis Project for the coding boot camp [Codeworks](http
 
 You can watch the presentation of the project below:
 
-<iframe width="1009" height="568" src="https://www.youtube.com/embed/yVB-is1jW9c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p align="center">
+<a href="https://www.youtube.com/watch?v=yVB-is1jW9c"><img src="https://img.youtube.com/vi/yVB-is1jW9c/0.jpg" alt="Zapp Video Thumbnail"/></a>
+</p>
 
 ## Getting Started
 
