@@ -8,4 +8,4 @@ export type Project = {
   createdAt: Date;
 };
 
-export type ProjectInput = Omit<Project, 'id, createdAt'>;
+export type ProjectInput = Omit<Project, 'id' | 'createdAt'>;
