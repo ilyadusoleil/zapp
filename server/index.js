@@ -62,5 +62,5 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server Listening 👂 on at http://localhost:${PORT}`);
+  console.log(`Server Listening 👂 on at port ${PORT}`);
 });
