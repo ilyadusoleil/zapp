@@ -14,6 +14,19 @@ const app = express();
 
 require('./config/passport')(passport);
 
+const env = process.env.NODE_ENV || 'development';
+
+var forceSsl = function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  return next();
+};
+
+if (env === 'production') {
+  app.use(forceSsl);
+}
+
 // create database, ensure 'sqlite3' in your package.json
 var sequelize = new Sequelize('database', 'username', 'password', {
   dialect: 'sqlite',
@@ -38,7 +51,7 @@ myStore.sync();
 
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'development') {
+if (env === 'development') {
   app.use(
     cors({
       origin: process.env.CLIENT, // allow to server to accept request from different origin
@@ -48,7 +61,7 @@ if (process.env.NODE_ENV === 'development') {
   );
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (env === 'production') {
   app.use(express.static(path.join(__dirname, 'build')));
 }
 
@@ -62,5 +75,5 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server Listening 👂 on at http://localhost:${PORT}`);
+  console.log(`Server Listening 👂 on at port ${PORT}`);
 });

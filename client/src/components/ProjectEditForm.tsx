@@ -60,14 +60,15 @@ const ProjectEditForm = ({
     const form = document.querySelector('form');
     if (form) {
       form.requestSubmit();
-
       ctx.dispatch({ type: 'setCurrentProjectId', payload: 0 });
       navigate('/preDashboard');
     }
   };
 
   const handleUserData = (userData: User[] | undefined) => {
-    if (userData) {
+    /*REVIEW: check for array here to fix bug
+    where archiving projects would crash the app. Requires review*/
+    if (userData && Array.isArray(userData)) {
       const userIds = userData.map((user) => user.id);
       setProjectUsers((oldProjectUsers) => [...oldProjectUsers, ...userIds]);
       const userChips = userData.map((user) => {

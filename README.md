@@ -1,26 +1,85 @@
 # Zapp
 
-## Easy to use issue tracking
+<!-- Remember to reflect any changes to the readme in the Table of Contents-->
 
-Zapp is an app for managing issues in the software development lifecycle. Zapp is designed with small teams in mind and aims to make issue tracking simple and straightforward.
+## Streamlined and simple issue tracking for small teams
 
 ![Node.js CI](https://github.com/ilyadusoleil/zapp/workflows/Node.js%20CI/badge.svg)
 
-# Live Demo
+<p align="center">
+  <img src="./Images/ZappReadmeHeader.png">
+</p>
 
-TBC
+Zapp is an app for managing issues in the software development lifecycle. Zapp is designed with small teams in mind and aims to make issue tracking simple and straightforward.
+
+## Table of Contents
+
+- [Live Demo](#Live-Demo)
+
+- [Features](#Features)
+
+- [Project Presentation](#Project-Presentation)
+
+- [Getting Started](#Getting-Started)
+
+  - [Setup Prerequisites](#Setup-Prerequisites)
+
+  - [Server & Database Setup](#Server-&-Database-Setup)
+
+  - [Start the App](#Start-the-App)
+
+- [Tech Stack](#Tech-Stack)
+
+  - [Front End](#Front-End)
+
+  - [Back End](#Back-End)
+
+- [Contributors](#Contributors)
+
+- [License](#License)
+
+## Live Demo
+
+You can find a deployed version of the App [here.](https://zappbugtracker.herokuapp.com/)
+
+Client and Server are hosted on [Heroku.](https://www.heroku.com/home)
+Database is hosted on [ElephantSQL.](https://www.elephantsql.com/)
 
 ## Features
 
+Make issue tracking easy with Zapp. With a minimalist and highly focused UI we have aimed to solve issues for the user rather than creating them.
+
+Zapp allows users to login through Google Authentication, create projects, log and filter issues, add user comments and receive email notifications when they have been invited to a project.
+
+Easily invite collaborators to your projects, assign them to issues and clearly track their progress.
+
 ## Project Presentation
+
+Zapp was developed as a Thesis Project for the coding boot camp [Codeworks](https://codeworks.me/) by [Hamish Chan](https://github.com/ilyadusoleil), [Rupert Bright](https://github.com/rupertbright-hub) and [Stephen Head-Rapson](https://github.com/SteHeRa).
+
+You can watch the presentation of the project below:
+
+<iframe width="1009" height="568" src="https://www.youtube.com/embed/yVB-is1jW9c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Getting Started
 
-These instruction will help you setup a local development instance of the app.
+These instructions will help you setup a local development instance of the app.
 
-Clone the repo: `git clone https://github.com/ilyadusoleil/zapp.git`
+#### clone the repo
 
-Install dependencies: `npm install`
+`git clone https://github.com/ilyadusoleil/zapp.git`
+
+#### install dependencies
+
+`npm install`
+
+### Setup prerequisites
+
+For an example how to fill `/server/.env` see `/server/.env.example`
+
+For an example how to fill `/client/.env` see `/client/.env.example`
+
+In order to set up authentication you will need to register an app with [Google](https://developers.google.com/) and then provide your google client ID and Google Client Secret in your .env file as GOOGLE_CLIENT_ID & GOOGLE_CLIENT_SECRET respectively.
 
 ### Server & Database Setup
 
@@ -38,8 +97,32 @@ Install dependencies: `npm install`
 
 - For more information on **Sequelize** migrations read the docs [here.](https://sequelize.org/master/manual/migrations.html)
 
-### Setup prerequisites
+### Start the App
 
-For an example how to fill `/server/.env` see `/server/.env.example`
+- In the client directory run `npm start`
+- In the server directory run `npm run dev`
 
-For an example how to fill `/client/.env.local` see `/client/.env.local.example`
+## Tech Stack
+
+### Front End
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [React Query](https://react-query.tanstack.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+### Back End
+
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Passport](http://www.passportjs.org/)
+
+## Contributors
+
+Hamish Chan - [Github](https://github.com/ilyadusoleil) - [LinkedIn](https://www.linkedin.com/in/hamish-chan-322378167/)
+Rupert Bright - [Github](https://github.com/rupertbright-hub) - [LinkedIn](https://www.linkedin.com/in/rbrightb/)
+Stephen Head-Rapson - [Github](https://github.com/SteHeRa) - [LinkedIn](https://www.linkedin.com/in/stephen-head-rapson/)
+
+## License
+
+This project is licensed under the MIT License.
