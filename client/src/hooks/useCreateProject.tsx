@@ -14,7 +14,7 @@ function useCreateProject() {
 
   return useMutation(createProject, {
     onSuccess: () => {
-      queryCache.refetchQueries(['project']); //TODO compare with invalidateQueries(['project', bug.id]);
+      queryCache.refetchQueries(['project']); //TODO: compare with invalidateQueries(['project', bug.id]);
     },
   });
 }

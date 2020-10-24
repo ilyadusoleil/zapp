@@ -20,7 +20,7 @@ export default function useSaveBug() {
     },
     onError: (_error, _values, rollback: rollbackType) => rollback(),
 
-    // TODO remove this (est line removal below) once below code is updated
+    // TODO: remove this (est line removal below) once below code is updated
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onSuccess: async (_values) => {
       // FIXME: revert to commented code once server returns new value
