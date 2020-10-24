@@ -78,7 +78,7 @@ const sendInvitationEmail = (
                   ${inviterName}
                 </h3>
                 <h3 style="padding-top: 20px">
-                  Click <a href="http://localhost:1234/dashboard/${projectId}">here</a> to view the project.
+                  Click <a href="${process.env.HOMEPAGE}/${projectId}">here</a> to view the project.
                 </h3>
             </div>
           </div>
