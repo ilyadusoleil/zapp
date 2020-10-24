@@ -1,4 +1,6 @@
-const SERVER_URL = 'http://localhost:3000';
+import { SERVER } from '../constants'
+
+const SERVER_URL = SERVER;
 
 const fetchRequest = (path: string, options?: RequestInit) => {
   return fetch(`${SERVER_URL}${path}`, options)

@@ -10,7 +10,11 @@ import Zapp from '../assets/zappcopy.png';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Login = (_props: RouteComponentProps) => {
   const handleLogin = () => {
-    window.open(`${SERVER}/auth/google`, '_self'); // TODO: change this when oauth implementation
+    if (SERVER) {
+      window.open(`${SERVER}/auth/google`, '_self');
+    } else {
+      window.open(`/auth/google`, '_self');
+    }
   };
 
   return (
