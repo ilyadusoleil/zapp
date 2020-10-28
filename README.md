@@ -121,9 +121,9 @@ In order to set up authentication you will need to register an app with [Google]
 
 ## Contributors
 
-Hamish Chan - [Github](https://github.com/ilyadusoleil) - [LinkedIn](https://www.linkedin.com/in/hamish-chan-322378167/)
-Rupert Bright - [Github](https://github.com/rupertbright-hub) - [LinkedIn](https://www.linkedin.com/in/rbrightb/)
-Stephen Head-Rapson - [Github](https://github.com/SteHeRa) - [LinkedIn](https://www.linkedin.com/in/stephen-head-rapson/)
+Hamish Chan - [Github](https://github.com/ilyadusoleil) - [LinkedIn](https://www.linkedin.com/in/hamish-chan-322378167/) <br>
+Rupert Bright - [Github](https://github.com/rupertbright-hub) - [LinkedIn](https://www.linkedin.com/in/rbrightb/) <br>
+Stephen Head-Rapson - [Github](https://github.com/SteHeRa) - [LinkedIn](https://www.linkedin.com/in/stephen-head-rapson/) <br>
 
 ## License
 
