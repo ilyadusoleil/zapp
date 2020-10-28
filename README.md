@@ -24,7 +24,7 @@ Zapp is an app for managing issues in the software development lifecycle. Zapp i
 
   - [Setup Prerequisites](#Setup-Prerequisites)
 
-  - [Server & Database Setup](#Server-&-Database-Setup)
+  - [Server & Database Setup](#Server--Database-Setup)
 
   - [Start the App](#Start-the-App)
 
