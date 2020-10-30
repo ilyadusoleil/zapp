@@ -24,8 +24,6 @@ import ProjectEdit from './pages/ProjectEdit';
 import BugDetails from './pages/BugDetails';
 import BugEdit from './pages/BugEdit';
 
-import '@reach/dialog/styles.css';
-
 function Routes(props: RouterProps) {
   const ctx = useContext(Context);
   return (
