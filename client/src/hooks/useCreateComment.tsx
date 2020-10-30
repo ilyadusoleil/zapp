@@ -14,7 +14,7 @@ function useCreateBug() {
 
   return useMutation(createBug, {
     onSuccess: (/*bug*/) => {
-      queryCache.refetchQueries(['bug']); // TODO update to be more specific instead of refetching all
+      queryCache.refetchQueries(['bug']); // TODO: update to be more specific instead of refetching all
     },
   });
 }

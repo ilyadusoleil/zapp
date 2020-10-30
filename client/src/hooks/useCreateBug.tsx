@@ -15,7 +15,7 @@ function useCreateBug() {
   return useMutation(createBug, {
     onSuccess: (/*bug*/) => {
       queryCache.refetchQueries(['projectbugs']); // FIXME: Update to line below once server returns newly created object upon completion
-      // queryCache.refetchQueries(['projectbugs', bug.projectId]); //TODO compare with invalidateQueries(['project', bug.id]);
+      // queryCache.refetchQueries(['projectbugs', bug.projectId]); //TODO: compare with invalidateQueries(['project', bug.id]);
     },
   });
 }

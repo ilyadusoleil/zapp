@@ -8,7 +8,10 @@ import {
   faEllipsisH as menu,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faFolder as icon } from '@fortawesome/free-regular-svg-icons';
+import {
+  faFolder as icon,
+  faTrashAlt as trash,
+} from '@fortawesome/free-regular-svg-icons';
 
 import Context from '../Context';
 
@@ -59,6 +62,12 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
     });
   };
 
+  const navigateToArchivedProjects = () => {
+    navigate(`/archivedProjects`, {
+      state: { oldLocation: JSON.parse(JSON.stringify(location)) },
+    });
+  };
+
   if (!data || !Array.isArray(data) || data.length < 1) return <h1>Oh no</h1>;
 
   return (
@@ -105,6 +114,17 @@ const ProjectHeader = ({ projectId }: { projectId: number }) => {
           >
             <FontAwesomeIcon icon={plus} size={'lg'} className="m-3 mr-4" />
             <p>New Project</p>
+          </div>
+
+          <div
+            className="h-10 flex items-center hover:bg-gray-200 "
+            onClick={navigateToArchivedProjects}
+            onKeyDown={navigateToArchivedProjects}
+            role="button"
+            tabIndex={0}
+          >
+            <FontAwesomeIcon icon={trash} size={'lg'} className="m-3 mr-4" />
+            <p>Project Archive</p>
           </div>
 
           <div className="mt-2 pt-1 ml-2 border-t-2">Switch Project</div>

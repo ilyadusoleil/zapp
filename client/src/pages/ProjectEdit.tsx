@@ -3,7 +3,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 
 import useProject from '../hooks/useProject';
-import useEditProject from '../hooks/useEditProject'; // TODO write this
+import useEditProject from '../hooks/useEditProject'; // TODO: write this
 
 import ProjectEditForm from '../components/ProjectEditForm';
 import Loading from '../components/Loading';

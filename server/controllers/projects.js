@@ -7,7 +7,7 @@ const getProjects = async function (req, res) {
   try {
     if (req.query.userId) {
       const projects = await db.projectuser.findAll({
-        //TODO improve this query
+        //TODO: improve this query
         attributes: [],
         where: {
           userId: req.query.userId,
@@ -88,7 +88,7 @@ const createProject = async function (req, res) {
           });
           await sendSignUpEmail(user.email, invitedByName, name);
         } else {
-          //TODO throw error
+          //TODO: throw error
         }
         await db.projectuser.create({
           //assign user to project
@@ -126,7 +126,7 @@ const editProject = async function (req, res) {
     });
 
     // If any users have been invited to this project
-    if (projectUsers.length > 0) {
+    if (projectUsers && projectUsers.length > 0) {
       //Get name of the person who invited user
       const invitedBy = await db.user.findOne({
         where: { id: userId },
@@ -150,7 +150,7 @@ const editProject = async function (req, res) {
           });
           await sendSignUpEmail(user.email, invitedByName, name);
         } else {
-          //TODO throw error
+          //TODO: throw error
         }
         // Check if the user is already on the project
         let userOnProject = await db.projectuser.findOne({
@@ -191,8 +191,15 @@ const editProject = async function (req, res) {
   }
 };
 
+/*REVIEW: conditions to return empty array were put in place to fix bug
+where archiving projects would crash the app. Requires review*/
 const getProjectUsers = async function (req, res) {
   try {
+    if (req.query.projectId == '0') {
+      res.status(200);
+      res.send([]);
+    }
+
     const users = await db.projectuser.findAll({
       attributes: ['userId'],
       where: {
@@ -201,14 +208,16 @@ const getProjectUsers = async function (req, res) {
     });
     const processedUsers = users.map((el) => el.userId);
 
-    const userInfo = await db.user.findAll({
-      where: {
-        id: processedUsers,
-      },
-    });
-
-    res.status(200);
-    res.send(userInfo);
+    let userInfo = [];
+    if (processedUsers.length !== 0) {
+      userInfo = await db.user.findAll({
+        where: {
+          id: processedUsers, //This is an array, sequelize will get all users with id's that match the elements of the array
+        },
+      });
+      res.status(200);
+      res.send(userInfo);
+    }
   } catch (err) {
     res.status(500);
     res.send({
